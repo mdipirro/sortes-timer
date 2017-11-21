@@ -9,9 +9,19 @@
 #include "Include/LCDBlocking.h"
 #include "Include/TCPIP_Stack/Delay.h"
 
-#define LOW(a)     (a & 0xFF)
-#define HIGH(a)    ((a>>8) & 0xFF)
+#define LOW(a)      (a & 0xFF)
+#define HIGH(a)     ((a>>8) & 0xFF)
+#define MAX_HOURS   23
+#define MAX_MINUTES 59
+#define MAX_SECONDS 59
 
+void update_time_value(int* const, int, int);
+void complete_hours_setting();
+void handle_button1_pressure();
+void update_proper_time_value(int* const, int* const);
+void handle_button2_pressure();
+void assign_default_values();
+void update_clock();
 void DisplayString(BYTE pos, char* text);
 void DisplayWORD(BYTE pos, WORD w);
 void DisplayIPValue(DWORD IPdw);
@@ -22,100 +32,121 @@ enum setting_values {
     MINUTES
 } in_setting;
 
-int clock_hours = 0, clock_minutes = 0, clock_seconds = 0, // displayed time
-    awake_hours = 0, awake_minutes = 0, // awake time
-    setting_hours = 0, setting_minutes = 0, // values used during the setting procedure
-    time_setting_procedure = 1, awake_setting_procedure = 0, set = 0; 
-char time_value[6]; // string used to display the time
+struct flags {
+    int time_setting_procedure;
+    int awake_setting_procedure;
+    int set;
+    int lcd_updated;
+} flags;
 
-void update_setting_hours() {
-    if (setting_hours == 23) {
-        setting_hours = 0;
+struct clock_time {
+    int hours;
+    int minutes;
+    int seconds;
+} clock;
+
+struct awake_time {
+    int hours;
+    int minutes;
+} timer;
+
+struct setting_values {
+    int hours;
+    int minutes;
+} setting;
+
+char time_value[9]; // string used to display the time
+
+void update_time_value(int* const value, int limit, int pos) {
+    if (*value == limit) {
+        *value = 0;
     } else {
-        setting_hours++;
+        (*value)++;
     }
-    sprintf(&time_value[0], "%02d", setting_hours);
+    sprintf(&time_value[pos], "%02d", *value);
+}
+
+void complete_hours_setting() {
+    in_setting = MINUTES;
     time_value[2] = ':';
-    //DisplayString(16, int_value);
-}
-
-void update_setting_minutes() {
-    if (setting_minutes == 59) {
-        setting_minutes = 0;
-    } else {
-        setting_minutes++;
-    }
-    sprintf(time_value + 3, "%02d", setting_minutes);
-    //DisplayString(19, &time_value[3]);
-}
-
-void update_awake_hours() {
-    if (awake_hours == 23) {
-        awake_hours = 0;
-    } else {
-        awake_hours++;
-    }
-    sprintf(&time_value[0], "%02d", awake_hours);
-    time_value[2] = ':';
-    //DisplayString(16, int_value);
-}
-
-void update_awake_minutes() {
-    if (awake_minutes == 59) {
-        awake_minutes = 0;
-    } else {
-        awake_minutes++;
-    }
-    sprintf(&time_value[3], "%02d", awake_minutes);
-//    DisplayString(0, &time_value[0]);
-}
-
-void update_time(char* timeValue, int hour, int min) {
-    sprintf(&timeValue[0], "%02d", hour);
-    timeValue[2] = ':';
-    sprintf(&timeValue[3], "%02d", min);
-    DisplayString(16, timeValue);
-    LCDUpdate();
 }
 
 void handle_button1_pressure() {
-    if (time_setting_procedure) {
+    if (flags.time_setting_procedure) {
         if (in_setting == HOURS) {
-            in_setting = MINUTES;
+            complete_hours_setting();
         } else {
             // init the clock
-            clock_hours = setting_hours;
-            clock_minutes = setting_minutes;
-            clock_seconds = 0;
-            time_setting_procedure = 0; // end the time setting
-            awake_setting_procedure = 1; // start the awake time setting
+            clock.hours = setting.hours;
+            clock.minutes = setting.minutes;
+            clock.seconds = 0;
+            flags.time_setting_procedure = 0; // end the time setting
+            flags.awake_setting_procedure = 1; // start the awake time setting
             time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
             in_setting = HOURS;
         }
-    } else if (awake_setting_procedure) {
+    } else if (flags.awake_setting_procedure) {
         if (in_setting == HOURS) {
-            in_setting = MINUTES;
+            complete_hours_setting();
         } else {
-            awake_setting_procedure = 0;
-            set = 1;
-            // TODO Update time_value with clock values
+            flags.awake_setting_procedure = 0;
+            flags.set = 1;
+            sprintf(&time_value[0], "%02d", clock.hours);
+            time_value[2] = ':';
+            sprintf(&time_value[3], "%02d", clock.minutes);
+            time_value[5] = ':';
+            sprintf(&time_value[6], "%02d", clock.seconds);
         }
+    }
+}
+
+void update_proper_time_value(int* const hours, int* const minutes) {
+    if (in_setting == HOURS) {
+        update_time_value(hours, MAX_HOURS, 0);
+    } else {
+        update_time_value(minutes, MAX_MINUTES, 3);
     }
 }
 
 void handle_button2_pressure() {
-    if (time_setting_procedure) {
-        if (in_setting == HOURS) {
-            update_setting_hours();
-        } else {
-            update_setting_minutes();
-        }
-    } else if (awake_setting_procedure) {
-        if (in_setting == HOURS) {
-            update_awake_hours();
-        } else {
-            update_awake_minutes();
-        }
+    if (flags.time_setting_procedure) {
+        update_proper_time_value(&setting.hours, &setting.minutes);
+    } else if (flags.awake_setting_procedure) {
+        update_proper_time_value(&timer.hours, &timer.minutes);
+    }
+}
+
+void assign_default_values() {
+    // setting initial string values
+    time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
+    time_value[2] = ':';
+    time_value[5] = '\0';
+    in_setting = HOURS; // start from setting the hours
+    // init the flags
+    flags.time_setting_procedure = 1;
+    flags.awake_setting_procedure = 0;
+    flags.set = 0;
+    flags.lcd_updated = 0;
+    // init the timer
+    timer.hours = 0;
+    timer.minutes = 0;
+    // init the setting time
+    setting.hours = 0;
+    setting.minutes = 0;
+    // no need to assign 0 to the clock's fields since they will be init for sure
+    // after the setting procedure
+}
+
+void update_clock() {
+    clock.seconds = (clock.seconds == MAX_SECONDS) ? 0 : clock.seconds + 1;
+    sprintf(&time_value[6], "%02d", clock.seconds);
+    if (clock.seconds == 0) { // new minute
+        update_time_value(&clock.minutes, MAX_MINUTES, 3);
+        time_value[5] = ':';
+    }
+    if (clock.minutes == 0) { // new hour
+        update_time_value(&clock.hours, MAX_HOURS, 0);
+        time_value[3] = ':';
     }
 }
 
@@ -130,11 +161,31 @@ void high_isr(void) __interrupt (1) {
     }
 }
 
-void main(void) {
-    time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
-    time_value[2] = ':';
-    time_value[5] = '\0';
-   
+// FIXME
+// wait for approx 1ms
+#define CLOCK_FREQ 40000000 // 40 Mhz
+#define EXEC_FREQ CLOCK_FREQ/4 // 4 clock cycles to execute an instruction
+void delay_1ms(void) {
+	TMR0H=(0x10000-EXEC_FREQ/1000)>>8;
+	TMR0L=(0x10000-EXEC_FREQ/1000)&0xff;
+	T0CONbits.TMR0ON=0; // disable timer0
+	T0CONbits.T08BIT=0; // use timer0 16-bit counter
+	T0CONbits.T0CS=0; // use timer0 instruction cycle clock
+	T0CONbits.PSA=1; // disable timer0 prescaler
+	INTCONbits.T0IF=0; // clear timer0 overflow bit
+	T0CONbits.TMR0ON=1; // enable timer0
+	while (!INTCONbits.T0IF) {} // wait for timer0 overflow
+	INTCONbits.T0IF=0; // clear timer0 overflow bit
+	T0CONbits.TMR0ON=0; // disable timer0
+}
+
+void delay_ms(unsigned int ms) {
+	while (ms--) {
+		delay_1ms();
+	}
+}
+
+void main(void) { 
     LCDInit();
     DelayMs(100);
 
@@ -151,17 +202,24 @@ void main(void) {
 
     DisplayString(0,"Enter the time:");
     DisplayString(16, "00:00");
-    LCDUpdate();
 
-    in_setting = HOURS;
+    assign_default_values();
 
     while(1) {
-        if (awake_setting_procedure && awake_hours == 0 && awake_minutes == 0) {
-            DisplayString(0, "Enter the wake:");
-        } else if (set) {
-            DisplayString(0, "               ");
+        DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
+        if (flags.awake_setting_procedure && timer.hours == 0 && timer.minutes == 0) {
+            DisplayString(0, "Enter the wake ");
+            DisplayString(16, "time: ");
+        } else if (flags.set) {
+            if (!flags.lcd_updated) {
+                DisplayString(0, "               ");
+                DisplayString(16 + 6, "         ");
+                DisplayString(16, &time_value[0]);
+                flags.lcd_updated = 1;
+            }
+            delay_ms(1000);
+            update_clock();
         }
-        DisplayString(16, &time_value[0]);
     }
 }
  

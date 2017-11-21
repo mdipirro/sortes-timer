@@ -1,7 +1,8 @@
 ## Output files produced by program's make
-src/*.cod
-src/*.hex
-src/*.lst
+*.cod
+*.hex
+*.lst
+*.asm
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
