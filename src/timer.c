@@ -11,9 +11,9 @@
 
 #define LOW(a)      (a & 0xFF)
 #define HIGH(a)     ((a>>8) & 0xFF)
-#define MAX_HOURS   23
-#define MAX_MINUTES 59
-#define MAX_SECONDS 59
+#define MAX_HOURS   23 // max allowed value for hours
+#define MAX_MINUTES 59 // max allowed value for minutes
+#define MAX_SECONDS 59 // max allowed value for seconds
 
 void update_time_value(int* const, int, int);
 void complete_hours_setting();
@@ -27,29 +27,34 @@ void DisplayWORD(BYTE pos, WORD w);
 void DisplayIPValue(DWORD IPdw);
 size_t strlcpy(char *dst, const char *src, size_t siz);
 
+// enum representing which value the user is currently setting
 enum setting_values {
     HOURS,
     MINUTES
 } in_setting;
 
+// various flags used to communicate from interrupts to the main
 struct flags {
-    int time_setting_procedure;
-    int awake_setting_procedure;
-    int set;
-    int lcd_updated;
+    int time_setting_procedure; // the user is setting the clock's time
+    int awake_setting_procedure; // the user is setting the awake time
+    int set; // initial set up completed
+    int lcd_updated; // complete time (hh:mm:ss) displayed 
 } flags;
 
+// struct representing the clock's time
 struct clock_time {
     int hours;
     int minutes;
     int seconds;
 } clock;
 
+// struct representing the awake time
 struct awake_time {
     int hours;
     int minutes;
 } timer;
 
+// struct representing the new clock time's values
 struct setting_values {
     int hours;
     int minutes;
@@ -57,6 +62,15 @@ struct setting_values {
 
 char time_value[9]; // string used to display the time
 
+/**
+ * Update an arbitrary time value (it may represent either minutes or hours).
+ * The function takes as an argument a pointer to the value, a limit beyond 
+ * which an overflow is issued and a position. The position is meant to 
+ * update the string representing the complete time.
+ * @param value Pointer to the value to be changed
+ * @param limit Limit beyond which an overflow is issued
+ * @param pos Position of the corresponding time value in time_value
+ */
 void update_time_value(int* const value, int limit, int pos) {
     if (*value == limit) {
         *value = 0;
@@ -66,15 +80,24 @@ void update_time_value(int* const value, int limit, int pos) {
     sprintf(&time_value[pos], "%02d", *value);
 }
 
+/**
+ * Complete the hour's setting procedure and start the minutes' one. This 
+ * function set the `in_setting` flag to `MINUTES`.
+ */
 void complete_hours_setting() {
     in_setting = MINUTES;
     time_value[2] = ':';
 }
 
+/**
+ * Handle the pressure of BUT1. This button is used to confirm the time 
+ * values entered during the setting (or changing) procedure. It is also 
+ * used to issue a clock's time modification.
+ */
 void handle_button1_pressure() {
-    if (flags.time_setting_procedure) {
+    if (flags.time_setting_procedure) { // setting clock's time
         if (in_setting == HOURS) {
-            complete_hours_setting();
+            complete_hours_setting(); // start minutes setting
         } else {
             // init the clock
             clock.hours = setting.hours;
@@ -85,12 +108,14 @@ void handle_button1_pressure() {
             time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
             in_setting = HOURS;
         }
-    } else if (flags.awake_setting_procedure) {
+    } else if (flags.awake_setting_procedure) { // setting the awake time
         if (in_setting == HOURS) {
             complete_hours_setting();
         } else {
-            flags.awake_setting_procedure = 0;
-            flags.set = 1;
+            // end the procedure
+            flags.awake_setting_procedure = 0; 
+            flags.set = 1; 
+            // display the complete time
             sprintf(&time_value[0], "%02d", clock.hours);
             time_value[2] = ':';
             sprintf(&time_value[3], "%02d", clock.minutes);
@@ -100,6 +125,17 @@ void handle_button1_pressure() {
     }
 }
 
+/**
+ * Update the corrrect time value according to the actual `in_setting`
+ * value and to the values pointed to by the parameters. The two 
+ * arguments refer to the hours and minutes values. The function updates
+ * only one out of two values, according to `in_setting`:
+ * -) in_setting = HOURS -> hours
+ * -) in_setting = MINUTES -> minutes
+ * This function uses `update_time_value`.
+ * @param hours A pointer to an int corresponding to an hour value
+ * @param hours A pointer to an int corresponding to an minute value
+ */
 void update_proper_time_value(int* const hours, int* const minutes) {
     if (in_setting == HOURS) {
         update_time_value(hours, MAX_HOURS, 0);
@@ -108,14 +144,25 @@ void update_proper_time_value(int* const hours, int* const minutes) {
     }
 }
 
+/**
+ * Handle the pressure of BUT2. This button is used to set the actual values
+ * of both hours and minutes during the setting and the changing procedures.
+ * It is also used to issue a modification of the awake time.
+ */
 void handle_button2_pressure() {
-    if (flags.time_setting_procedure) {
-        update_proper_time_value(&setting.hours, &setting.minutes);
-    } else if (flags.awake_setting_procedure) {
+    if (flags.time_setting_procedure) { // setting the clock's time
+        // update the values in the `setting` struct
+        update_proper_time_value(&setting.hours, &setting.minutes); 
+    } else if (flags.awake_setting_procedure) { // setting the awake time
+        // update the values in the `timer` struct
         update_proper_time_value(&timer.hours, &timer.minutes);
     }
 }
 
+/**
+ * This function is meant as an initial setup. It sets every flag value used
+ * later on by the program. 
+ */
 void assign_default_values() {
     // setting initial string values
     time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
@@ -137,6 +184,14 @@ void assign_default_values() {
     // after the setting procedure
 }
 
+/**
+ * This function represents a tick and should be called every time the clock
+ * ticks. It updates the values in the `clock` structure according to the 
+ * conventional time rules:
+ * -) seconds go from 0 to 59
+ * -) minutes go from 0 to 59
+ * -) hours go from 0 to 23
+ */
 void update_clock() {
     clock.seconds = (clock.seconds == MAX_SECONDS) ? 0 : clock.seconds + 1;
     sprintf(&time_value[6], "%02d", clock.seconds);
@@ -150,6 +205,12 @@ void update_clock() {
     }
 }
 
+/**
+ * Handle a high priority interrupt. This function actually handles two
+ * interrupts:
+ * -) INT1F, issued by a pressure on BUT2
+ * -) INT3F, issued by  apressure on BUT1
+ */
 void high_isr(void) __interrupt (1) {
     if(INTCON3bits.INT1F == 1) { // Button 2
         handle_button2_pressure();
