@@ -9,8 +9,8 @@
 #include "Include/LCDBlocking.h"
 #include "Include/TCPIP_Stack/Delay.h"
 
-void timers_config(void);
-void timers_reset(void);
+void TimersConfig(void);
+void TimersReset(void);
 void DisplayString(BYTE pos, char* text);
 void DisplayWORD(BYTE pos, WORD w);
 void DisplayIPValue(DWORD IPdw);
@@ -25,7 +25,7 @@ int16_t rounds;
 /**
  *  Registers configuration for timer0 and timer1
  */
-void timers_config(void) {
+void TimersConfig(void) {
 	
 	/**
 	 *  timer0 (exec clock) configuration
@@ -62,7 +62,7 @@ void timers_config(void) {
 /**
  *  Set initial value (zero) for timer0 and timer1
  */
-void timers_reset(void) {
+void TimersReset(void) {
 
 	TMR0L			=	0x00;		// timer0 initial value
 	TMR0H			=	0x00;
@@ -74,7 +74,7 @@ void timers_reset(void) {
 /**
  *  Handle a high priority interrupt.
  */
-void high_isr(void) __interrupt (1) {
+void HighISR(void) __interrupt (1) {
 	
 	if(INTCONbits.TMR0IF == 1) {	// timer0 overflow
 		rounds++;
@@ -90,13 +90,13 @@ void main(void) {
 	DisplayString(0, "T0 Overflows:");
 	DisplayString(16, "<please wait>");
 	
-    timers_config();
+    TimersConfig();
 	
     RCONbits.IPEN      = 1;   //enable interrupts priority levels
     INTCONbits.GIE     = 1;   //enable high priority interrupts
 	
     while(1) {
-		timers_reset();
+		TimersReset();
 		rounds = 0;
 		
 		T1CONbits.TMR1ON	=	1;	// enable timer1
