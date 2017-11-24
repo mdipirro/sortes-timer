@@ -9,9 +9,6 @@
 #include "Include/LCDBlocking.h"
 #include "Include/TCPIP_Stack/Delay.h"
 
-#define LOW(a)      (a & 0xFF)
-#define HIGH(a)     ((a>>8) & 0xFF)
-
 void timers_config(void);
 void timers_reset(void);
 void DisplayString(BYTE pos, char* text);
@@ -19,18 +16,23 @@ void DisplayWORD(BYTE pos, WORD w);
 void DisplayIPValue(DWORD IPdw);
 size_t strlcpy(char *dst, const char *src, size_t siz);
 
-/** Each time the timer0 counter generates an    *
- *  overflow this variable is incremented by one *
- *  -------------------------------------------- */  
+/**
+ *  Each time the timer0 counter generates an
+ *  overflow this variable is incremented by one
+ */  
 int16_t rounds;
 
+/**
+ *  Registers configuration for timer0 and timer1
+ */
 void timers_config(void) {
 	
-	/** Timer 0 (exec clock) configuration *
-	 *  8-bit, few us to overflow          *
-	 *  Maximum meas. frequency ~= 32 MHz  *
-         *  (using a 16-bit overflow counter)  *
-	 *  ---------------------------------- */
+	/**
+	 *  timer0 (exec clock) configuration
+	 *  8-bit counter, few us to overflow
+	 *  Maximum measurable frequency ~= 33 MHz
+	 *  (using a 16-bit overflow counter)
+	 */
 	T0CONbits.TMR0ON	=	0;		// disable timer0
 	T0CONbits.T08BIT	=	1;		// use timer0 8-bit counter
 	T0CONbits.PSA		=	1;		// disable timer0 prescaler
@@ -41,9 +43,10 @@ void timers_config(void) {
 	TMR0L			=	0x00;		// timer0 initial value
 	TMR0H			=	0x00;
 	
-	/** Timer 1 (32.760 kHz) configuration *
-	 *  16-bit, 2 seconds to overflow      *
-	 *  ---------------------------------- */
+	/**
+	 *  timer1 (32.760 kHz) configuration
+	 *  16-bit counter, 2 seconds to overflow
+	 */
 	T1CONbits.TMR1ON	=	0;		// disable timer1
 	T1CONbits.RD16		=	1;		// use timer1 16-bit counter
 	T1CONbits.T1CKPS0	=	0;		// prescaler set to 1:1
@@ -53,11 +56,14 @@ void timers_config(void) {
 	PIR1bits.TMR1IF		=	0;		// clear timer1 overflow bit
 	TMR1L			=	0x00;		// timer1 initial value
 	TMR1H			=	0x00;
-	
+
 }
 
+/**
+ *  Set initial value (zero) for timer0 and timer1
+ */
 void timers_reset(void) {
-	
+
 	TMR0L			=	0x00;		// timer0 initial value
 	TMR0H			=	0x00;
 	TMR1L			=	0x00;		// timer1 initial value
@@ -66,14 +72,14 @@ void timers_reset(void) {
 }
 
 /**
- * Handle a high priority interrupt.
+ *  Handle a high priority interrupt.
  */
 void high_isr(void) __interrupt (1) {
 	
-    if(INTCONbits.TMR0IF == 1) {	// timer0 overflow
+	if(INTCONbits.TMR0IF == 1) {	// timer0 overflow
 		rounds++;
-        INTCONbits.TMR0IF = 0;
-    }
+		INTCONbits.TMR0IF = 0;
+	}
 	
 }
 
@@ -81,6 +87,9 @@ void main(void) {
     LCDInit();
     DelayMs(100);
 
+	DisplayString(0, "T0 Overflows:");
+	DisplayString(16, "<please wait>");
+	
     timers_config();
 	
     RCONbits.IPEN      = 1;   //enable interrupts priority levels
@@ -93,13 +102,13 @@ void main(void) {
 		T1CONbits.TMR1ON	=	1;	// enable timer1
 		T0CONbits.TMR0ON	=	1;	// enable timer0
 		
-		while (!PIR1bits.TMR1IF) {} // wait for timer1 overflow
+		while (!PIR1bits.TMR1IF) {}		// wait for timer1 overflow
 
 		T0CONbits.TMR0ON	=	0;	// disable timer0
 		T1CONbits.TMR1ON	=	0;	// disable timer1
 		PIR1bits.TMR1IF		=	0; 	// clear timer1 overflow bit
 		
-		DisplayWORD(0, (WORD)rounds);
+		DisplayWORD(16, (WORD)rounds);
 		LCDUpdate();
     }
 }
