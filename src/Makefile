@@ -25,9 +25,16 @@ APP_HEADERS=Include/GenericTypeDefs.h \
    Include/Compiler.h \
    Include/HardwareProfile.h 
 
+clkfreq : Objects/clkfreq.o $(OBJECTS)
+	$(LD) $(LDFLAGS) Objects/clkfreq.o $(OBJECTS)
+
 timer : Objects/timer.o $(OBJECTS)
 	$(LD) $(LDFLAGS) Objects/timer.o $(OBJECTS)
 
+Objects/clkfreq.o : clkfreq.c $(SDCC_HEADERS) $(SDCC_PIC16_HEADERS) \
+   $(APP_HEADERS) $(TCPIP_HEADERS)
+	$(CC) $(CFLAGS) clkfreq.c
+	
 Objects/timer.o : timer.c $(SDCC_HEADERS) $(SDCC_PIC16_HEADERS) \
    $(APP_HEADERS) $(TCPIP_HEADERS)
 	$(CC) $(CFLAGS) timer.c
