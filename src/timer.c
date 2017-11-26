@@ -14,18 +14,7 @@
 #define MAX_HOURS   23 // max allowed value for hours
 #define MAX_MINUTES 59 // max allowed value for minutes
 #define MAX_SECONDS 59 // max allowed value for seconds
-
-void update_time_value(int* const, int, int);
-void complete_hours_setting();
-void handle_button1_pressure();
-void update_proper_time_value(int* const, int* const);
-void handle_button2_pressure();
-void assign_default_values();
-void update_clock();
-void DisplayString(BYTE pos, char* text);
-void DisplayWORD(BYTE pos, WORD w);
-void DisplayIPValue(DWORD IPdw);
-size_t strlcpy(char *dst, const char *src, size_t siz);
+#define BASE        10 // radix for ultoa
 
 // enum representing which value the user is currently setting
 enum setting_values {
@@ -36,16 +25,14 @@ enum setting_values {
 enum display_states {
     CLOCK_SETTING,
     TIMER_SETTING,
-    TIME_FLOWING,
-    STABLE
-} display_state;
+    TIME_FLOWING
+};
 
 // various flags used to communicate from interrupts to the main
 struct flags {
     int time_setting_procedure; // the user is setting the clock's time
     int awake_setting_procedure; // the user is setting the awake time
     int set; // initial set up completed
-    int lcd_updated; // complete time (hh:mm:ss) displayed 
 } flags;
 
 // struct representing the clock's time
@@ -67,7 +54,25 @@ struct setting_values {
     int minutes;
 } setting;
 
+struct interrupts {
+    int button1;
+    int button2;
+} ints;
+
 char time_value[9]; // string used to display the time
+
+void update_time_value(int* const, int, int);
+void complete_hours_setting();
+void handle_button1_pressure();
+void update_proper_time_value(int* const, int* const);
+void handle_button2_pressure();
+void update_display(enum display_states);
+void assign_default_values();
+void update_clock();
+void DisplayString(BYTE pos, char* text);
+void DisplayWORD(BYTE pos, WORD w);
+void DisplayIPValue(DWORD IPdw);
+size_t strlcpy(char *dst, const char *src, size_t siz);
 
 /**
  * Update an arbitrary time value (it may represent either minutes or hours).
@@ -84,7 +89,8 @@ void update_time_value(int* const value, int limit, int pos) {
     } else {
         (*value)++;
     }
-    sprintf(&time_value[pos], "%02d", *value);
+    ultoa(*value, &time_value[pos], BASE);
+    DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
 }
 
 /**
@@ -93,21 +99,22 @@ void update_time_value(int* const value, int limit, int pos) {
  */
 void complete_hours_setting() {
     in_setting = MINUTES;
-    time_value[2] = ':';
+    time_value[2] = ':'; // overwite '\0' added by ultoa when setting hours
 }
 
 /**
  * Assign characters to `time_value` in order to display the time in
- * the format hh:mm:ss. This function modifies the flag `display_state`
- * assigning it the value TIME_FLOWING.
+ * the format hh:mm:ss. 
  */
 void set_up_complete_time() {
-    sprintf(&time_value[0], "%02d", clock.hours);   
+    // assign the right values to time_value
+    ultoa(clock.hours, &time_value[0], BASE);
     time_value[2] = ':';
-    sprintf(&time_value[3], "%02d", clock.minutes);
+    ultoa(clock.minutes, &time_value[3], BASE);
     time_value[5] = ':';
-    sprintf(&time_value[6], "%02d", clock.seconds);
-    display_state = TIME_FLOWING;
+    ultoa(clock.seconds, &time_value[6], BASE);
+    // start making the user see the time flowing
+    update_display(TIME_FLOWING);
 }
 
 /**
@@ -127,10 +134,11 @@ void handle_button1_pressure() {
             flags.time_setting_procedure = 0; // end the time setting
             // start the awake time setting if the user is in the initial procedure
             if (!flags.set) {
-                flags.awake_setting_procedure = 1;
+                flags.awake_setting_procedure = 1; // start the second procedure
+                // update the display accordingly
                 time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
-                in_setting = HOURS;
-                display_state = TIMER_SETTING;
+                update_display(TIMER_SETTING);
+                in_setting = HOURS; // start from setting hours
             } else { // restore time flowing view
                 set_up_complete_time();
             }   
@@ -147,11 +155,10 @@ void handle_button1_pressure() {
         }
     } else if (flags.set) {
         flags.time_setting_procedure = 1;
-        sprintf(&time_value[0], "%02d", clock.hours);
+        ultoa(clock.hours, &time_value[0], BASE);
         time_value[2] = ':';
-        sprintf(&time_value[3], "%02d", clock.minutes);
-        display_state = CLOCK_SETTING;
-        flags.lcd_updated = 0;
+        ultoa(clock.minutes, &time_value[3], BASE);
+        update_display(CLOCK_SETTING);
         in_setting = HOURS;
     }
 }
@@ -189,12 +196,11 @@ void handle_button2_pressure() {
         update_proper_time_value(&timer.hours, &timer.minutes);
     } else if (flags.set) {
         flags.awake_setting_procedure = 1;
-        sprintf(&time_value[0], "%02d", timer.hours);
+        ultoa(timer.hours, &time_value[0], BASE);
         time_value[2] = ':';
-        sprintf(&time_value[3], "%02d", timer.minutes);
-        display_state = TIMER_SETTING;
-        flags.lcd_updated = 0;
+        ultoa(timer.minutes, &time_value[3], BASE);
         in_setting = HOURS;
+        update_display(TIMER_SETTING);
     }
 }
 
@@ -203,6 +209,9 @@ void handle_button2_pressure() {
  * later on by the program. 
  */
 void assign_default_values() {
+    // setting a 0 the interrupts
+    ints.button1 = 0;
+    ints.button2 = 0;
     // setting initial string values
     time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
     time_value[2] = ':';
@@ -212,7 +221,6 @@ void assign_default_values() {
     flags.time_setting_procedure = 1;
     flags.awake_setting_procedure = 0;
     flags.set = 0;
-    flags.lcd_updated = 0;
     // init the timer
     timer.hours = 0;
     timer.minutes = 0;
@@ -220,9 +228,32 @@ void assign_default_values() {
     setting.hours = 0;
     setting.minutes = 0;
     // set the display status
-    display_state = CLOCK_SETTING;
+    update_display(CLOCK_SETTING);
     // no need to assign 0 to the clock's fields since they will be init for sure
     // after the setting procedure
+}
+
+/**
+ * Update the display according to its parameter. The latter corresponds to
+ * different timer's states.
+ * @param state A display_states value representing the state
+ */
+void update_display(enum display_states state) {
+    switch (state) {
+        case CLOCK_SETTING:
+            DisplayString(0,"Enter the time:");
+            DisplayString(21,"   ");
+            break;
+        case TIMER_SETTING:
+            DisplayString(0, "Enter the awake ");
+            DisplayString(16, "time: ");
+            break;
+        case TIME_FLOWING:
+            DisplayString(0, "               ");
+            DisplayString(16 + 6, "         ");
+            DisplayString(16, &time_value[0]);
+            break;
+    }
 }
 
 /**
@@ -254,11 +285,11 @@ void update_clock() {
  */
 void high_isr(void) __interrupt (1) {
     if(INTCON3bits.INT1F == 1) { // Button 2
-        handle_button2_pressure();
+        ints.button2 = 1;
         INTCON3bits.INT1F = 0;
     } 
     if (INTCON3bits.INT3F == 1) { // Button 1
-        handle_button1_pressure();
+        ints.button1 = 1;
         INTCON3bits.INT3F = 0;
     }
 }
@@ -305,44 +336,14 @@ void main(void) {
     assign_default_values();
 
     while(1) {
-        DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
-        switch (display_state) {
-            case CLOCK_SETTING:
-                DisplayString(0,"Enter the time:");
-                DisplayString(21,"   ");
-                display_state = STABLE;
-                break;
-            case TIMER_SETTING:
-                DisplayString(0, "Enter the awake ");
-                DisplayString(16, "time: ");
-                display_state = STABLE;
-                break;
-            case TIME_FLOWING:
-                if (!flags.lcd_updated) {
-                    DisplayString(0, "               ");
-                    DisplayString(16 + 6, "         ");
-                    DisplayString(16, &time_value[0]);
-                    flags.lcd_updated = 1;
-                }
-                // FIXME don't update time this way
-                delay_ms(1000);
-                update_clock();
-            // no need to handle STABLE -> no display changes required
+        if (ints.button1) {
+            ints.button1 = 0;
+            handle_button1_pressure();
         }
-        /*if (flags.set_awake_time) {
-            DisplayString(0, "Enter the awake ");
-            DisplayString(16, "time: ");
-            flags.set_awake_time = 0;
-        } else if (flags.set) {
-            if (!flags.lcd_updated) {
-                DisplayString(0, "               ");
-                DisplayString(16 + 6, "         ");
-                DisplayString(16, &time_value[0]);
-                flags.lcd_updated = 1;
-            }
-            delay_ms(1000);
-            update_clock();
-        }*/
+        if (ints.button2) {
+            ints.button2 = 0;
+            handle_button2_pressure();
+        }
     }
 }
  
