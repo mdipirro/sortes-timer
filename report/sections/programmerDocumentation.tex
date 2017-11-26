@@ -34,3 +34,4 @@ We use a char array, \texttt{time\_value}, to store the time values as a string.
 	\item \texttt{TIMER\_SETTING}, corresponding to the awake time setting procedure;
 	\item \texttt{TIME\_FLOWING}, corresponding to the time-only view;
 \end{itemize}
+When needed, we update this array using the function\texttt{ultoa} and then we display the new time. This function is helpful, because it inserts a null character (\texttt{'\0'}) after the converted value, such that the display update does not require the entire array to be shown. For instance, when the user is setting the hours value only two digits (and consequently two characters) have to be displayed: there is no need to display the minutes value, which remains unchanged during the hours setting. 
