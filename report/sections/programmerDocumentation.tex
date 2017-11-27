@@ -1,6 +1,6 @@
 \section{Documentation for programmers}
 \subsection{Specification}
-The aim of this program is to simulate an alarm clock. The functionality it provides is:
+The aim of this program is to simulate an alarm clock. The functionality it provides is the following:
 \begin{itemize}
 	\item Displaying the time flowing in the following format: \texttt{hh:mm:ss};
 	\item When the time reaches the value 23:59:59, it jumps to 00:00:00;
@@ -12,26 +12,33 @@ The aim of this program is to simulate an alarm clock. The functionality it prov
 \subsection{Structural choices}
 The program operates by using interrupts. 
 
-\textbf{BUT1} and \textbf{BUT2} are mapped to high priority interrupts, respectively \textbf{INT3} and \textbf{INT1}. The function \texttt{high\_isr} handles a pressure on one of these two buttons. Since it is a bad practice to have ``fat'' interrupt handlers, the function only acts on a flag to let the \texttt{main} know what happened. These two flags are the fields \texttt{button1} and \texttt{button2} of the \texttt{interrupts} struct type. The \texttt{main} then acts accordingly, by calling either \texttt{handle\_button1\_pressure} or \texttt{handle\_button2\_pressure}. Their behavior depends on the actual state of the timer. On one hand they are used to set both the clock's and the wake up time. On the other hand, they are used to begin a setting procedure. The action is determined by one of the following three flags, forming the \texttt{flags} struct type:
+\textbf{BUT1} and \textbf{BUT2} are mapped to high priority interrupts, respectively \textbf{INT3} and \textbf{INT1}. The function \texttt{HighISR} handles a pressure on one of these two buttons. Since it is a bad practice to have ``fat'' interrupt handlers, the function only acts on two flags to let the \texttt{main} know what happened. These flags are the fields \texttt{button1} and \texttt{button2} of the \texttt{interrupts} struct type. The \texttt{main} then acts accordingly, by calling either \texttt{HandleButton1Pressure} or \\\texttt{HandleButton2Pressure}. Their behavior depends on the actual state of the timer. On one hand they are used to set both the clock's and the wake up time. On the other hand, they are used to begin a setting procedure. The action is determined by one of the following three flags, forming the \texttt{flags} struct type:
 \begin{itemize}
 	\item \texttt{time\_setting\_procedure}, 1 if and only if the user is setting the clock's time;
 	\item \texttt{awake\_setting\_procedure}, 1 if and only if the user is setting the wake up time;
 	\item \texttt{set}, \ if and only if the initial setting procedure has been completed.
 \end{itemize}
 
-Please notice that once \texttt{flags.set} is set at 1, it never changes this value. On the other hand, both \texttt{time\_setting\_procedure} and \texttt{awake\_setting\_procedure} are reset when the corresponding setting procedure ends, and set at 1 one it restarts.
+Please notice that once \texttt{flags.set} is set at 1, it never changes this value. On the other hand, both \texttt{time\_setting\_procedure} and \texttt{awake\_setting\_procedure} are reset when the corresponding setting procedure ends, and set at 1 when it restarts.
 
 Three different struct types are used to store time values:
 \begin{itemize}
 	\item \texttt{clock\_time} represents the flowing time and is shown when no setting procedure is underway. It contains three fields: \texttt{hours}, \texttt{minutes} and \texttt{seconds};
 	\item \texttt{awake\_time} represents the wake up time. This struct only contains \texttt{hours} and \texttt{minutes};
-	\item \texttt{setting\_values} represents a time value which will be copied into \texttt{clock\_time} at the end of the setting procedure. We use a separate struct for this so that the current, ongoing, time value is not affected by the user. On a different version providing the possibility to cancel a setting procedure, this copy would be useful in order to preserve the ongoing value to be modified. Since the user is not allowed to set the seconds, this struct only contains two fields: \texttt{hours} and \texttt{minutes}.
+	\item \texttt{setting\_values} represents a time value which will be copied into \\\texttt{clock\_time} at the end of the setting procedure. We use a separate struct for this so that the current, ongoing, time value is not affected by the user. On a different version providing the possibility to cancel a setting procedure, this copy would be useful in order to preserve the ongoing value to be modified. Since the user is not allowed to set the seconds, this struct only contains two fields: \texttt{hours} and \texttt{minutes}.
 \end{itemize}
 
-We use a char array, \texttt{time\_value}, to store the time values as a string. This array is then used during the LCD display updates. The main entry point for these updates is the function \texttt{update\_display}. It accepts one parameter representing the current timer's state. This state is one of the three values of the \texttt{display\_states} enum type:
+We use a char array, \texttt{time\_value}, to store the time values as a string. This array is then used during the LCD display updates. The main entry point for these updates is the function \texttt{UpdateDisplay}. It accepts one parameter representing the current timer's state. This state is one of the three values of the \texttt{display\_states} enum type:
 \begin{itemize}
 	\item \texttt{CLOCK\_SETTING}, corresponding to the clock's time setting procedure;
 	\item \texttt{TIMER\_SETTING}, corresponding to the awake time setting procedure;
 	\item \texttt{TIME\_FLOWING}, corresponding to the time-only view;
 \end{itemize}
-When needed, we update this array using the function\texttt{ultoa} and then we display the new time. This function is helpful, because it inserts a null character (\texttt{'\0'}) after the converted value, such that the display update does not require the entire array to be shown. For instance, when the user is setting the hours value only two digits (and consequently two characters) have to be displayed: there is no need to display the minutes value, which remains unchanged during the hours setting. 
+When needed, we update this array using the function \texttt{ultoa} and then we display the new time. This function is helpful, because it inserts a null character (\texttt{'$\backslash$0'}) after the converted value, such that the display update does not require the entire array to be shown. For instance, when the user is setting the hours value only two digits (and consequently two characters) have to be displayed: there is no need to display the minutes value, which remains unchanged during the hours setting. 
+
+Another possibility would be to use \texttt{sprintf} instead of \texttt{ultoa}. The former simplifies the string formatting, since it is possible to format the value with two digits (by providing \texttt{$"$\%2d$"$} as a parameter). Nonetheless, the use (and consequently the inclusion) of this function increases the space occupied by the program. We achieve the same result with an additional check on the generated string. We enforce by constructions that the values to be converted are always valid time values (range 0-59). Consequently, the generated string has always at least two characters: the number (in case it is less than 10) and the null character. By accessing the second character (which is always well defined), and comparing it with \texttt{'$\backslash$0'} we can discriminate two different cases:
+\begin{enumerate}
+	\item They are equal. The value comprises only one digit and we need to prepend (in \texttt{time\_value}) a $0$;
+	\item They are not equal. The value comprises two digits and there is no need to further manipulate its char representation.
+\end{enumerate}
+The \texttt{time\_value}'s dereferentiation correctness is ensured by construction. We initialize and manipulate its elements making sure we never access an uninitialized element or an out-of-bounds location.
