@@ -10,9 +10,9 @@ The aim of this program is to simulate an alarm clock. The functionality it prov
 \end{itemize}
 
 \subsection{Structural choices}
-The program operates by using interruptions. 
+The program operates by using interrupts. 
 
-\textbf{BUT1} and \textbf{BUT2} are mapped to high priority interruptions, respectively \textbf{INT3} and \textbf{INT1}. The function \texttt{high\_isr} handles a pressure on one of these two buttons. Since it is a bad practice to have ``fat'' interrupt handlers, the function only acts on a flag to let the \texttt{main} know what happened. These two flags are the fields \texttt{button1} and \texttt{button2} of the \texttt{interrupts} struct type. The \texttt{main} then acts accordingly, by calling either \texttt{handle\_button1\_pressure} or \texttt{handle\_button2\_pressure}. Their behavior depends on the actual state of the timer. On one hand they are used to set both the clock's and the wake up time. On the other hand, they are used to begin a setting procedure. The action is determined by one of the following three flags, forming the \texttt{flags} struct type:
+\textbf{BUT1} and \textbf{BUT2} are mapped to high priority interrupts, respectively \textbf{INT3} and \textbf{INT1}. The function \texttt{high\_isr} handles a pressure on one of these two buttons. Since it is a bad practice to have ``fat'' interrupt handlers, the function only acts on a flag to let the \texttt{main} know what happened. These two flags are the fields \texttt{button1} and \texttt{button2} of the \texttt{interrupts} struct type. The \texttt{main} then acts accordingly, by calling either \texttt{handle\_button1\_pressure} or \texttt{handle\_button2\_pressure}. Their behavior depends on the actual state of the timer. On one hand they are used to set both the clock's and the wake up time. On the other hand, they are used to begin a setting procedure. The action is determined by one of the following three flags, forming the \texttt{flags} struct type:
 \begin{itemize}
 	\item \texttt{time\_setting\_procedure}, 1 if and only if the user is setting the clock's time;
 	\item \texttt{awake\_setting\_procedure}, 1 if and only if the user is setting the wake up time;
