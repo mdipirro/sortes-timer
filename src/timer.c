@@ -61,16 +61,16 @@ struct interrupts {
 
 char time_value[9]; // string used to display the time
 
-void update_time_value(int* const, int, int);
-void complete_hours_setting();
-void int2string(int, int);
-void set_up_complete_time();
-void handle_button1_pressure();
-void update_proper_time_value(int* const, int* const);
-void handle_button2_pressure();
-void update_display(enum display_states);
-void assign_default_values();
-void update_clock();
+void UpdateTimeValue(int* const, int, int);
+void CompleteHoursSetting();
+void Int2String(int, int);
+void SetupCompleteTime();
+void HandleButton1Pressure();
+void UpdateProperTimeValue(int* const, int* const);
+void HandleButton2Pressure();
+void UpdateDisplay(enum display_states);
+void AssignDefaultValues();
+void UpdateClock();
 void DisplayString(BYTE pos, char* text);
 void DisplayWORD(BYTE pos, WORD w);
 void DisplayIPValue(DWORD IPdw);
@@ -85,15 +85,14 @@ size_t strlcpy(char *dst, const char *src, size_t siz);
  * @param limit Limit beyond which an overflow is issued
  * @param pos Position of the corresponding time value in time_value
  */
-void update_time_value(int* const value, int limit, int pos) {
+void UpdateTimeValue(int* const value, int limit, int pos) {
     if (*value == limit) {
         *value = 0;
     } else {
         (*value)++;
     }
-    ultoa(*value, &time_value[pos], BASE);
     // if the value has only one digit, prepend a 0
-    int2string(*value, pos);
+    Int2String(*value, pos);
     DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
 }
 
@@ -101,7 +100,7 @@ void update_time_value(int* const value, int limit, int pos) {
  * Complete the hour's setting procedure and start the minutes' one. This 
  * function set the `in_setting` flag to `MINUTES`.
  */
-void complete_hours_setting() {
+void CompleteHoursSetting() {
     in_setting = MINUTES;
     time_value[2] = ':'; // overwite '\0' added by ultoa when setting hours
 }
@@ -113,7 +112,7 @@ void complete_hours_setting() {
  * @param value The int
  * @param pos The position in time_value
  */
-void int2string(int value, int pos) {
+void Int2String(int value, int pos) {
     ultoa(value, &time_value[pos], BASE);
     // if the value has only one digit, prepend a 0
     if (!(time_value[pos + 1])) {
@@ -127,15 +126,15 @@ void int2string(int value, int pos) {
  * Assign characters to `time_value` in order to display the time in
  * the format hh:mm:ss. 
  */
-void set_up_complete_time() {
+void SetupCompleteTime() {
     // assign the right values to time_value
-    int2string(clock.hours, 0);
+    Int2String(clock.hours, 0);
     time_value[2] = ':';
-    int2string(clock.minutes, 3);
+    Int2String(clock.minutes, 3);
     time_value[5] = ':';
-    int2string(clock.seconds, 6);
+    Int2String(clock.seconds, 6);
     // start making the user see the time flowing
-    update_display(TIME_FLOWING);
+    UpdateDisplay(TIME_FLOWING);
 }
 
 /**
@@ -143,10 +142,10 @@ void set_up_complete_time() {
  * values entered during the setting (or changing) procedure. It is also 
  * used to issue a clock's time modification.
  */
-void handle_button1_pressure() {
+void HandleButton1Pressure() {
     if (flags.time_setting_procedure) { // setting clock's time
         if (in_setting == HOURS) {
-            complete_hours_setting(); // start minutes setting
+            CompleteHoursSetting(); // start minutes setting
         } else {
             // init the clock
             clock.hours = setting.hours;
@@ -158,28 +157,28 @@ void handle_button1_pressure() {
                 flags.awake_setting_procedure = 1; // start the second procedure
                 // update the display accordingly
                 time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
-                update_display(TIMER_SETTING);
+                UpdateDisplay(TIMER_SETTING);
                 in_setting = HOURS; // start from setting hours
             } else { // restore time flowing view
-                set_up_complete_time();
+                SetupCompleteTime();
             }   
         }
     } else if (flags.awake_setting_procedure) { // setting the awake time
         if (in_setting == HOURS) {
-            complete_hours_setting();
+            CompleteHoursSetting();
         } else {
             // end the procedure
             flags.awake_setting_procedure = 0; 
             flags.set = 1; 
             // display the complete time
-            set_up_complete_time();
+            SetupCompleteTime();
         }
     } else if (flags.set) {
         flags.time_setting_procedure = 1;
         ultoa(clock.hours, &time_value[0], BASE);
         time_value[2] = ':';
         ultoa(clock.minutes, &time_value[3], BASE);
-        update_display(CLOCK_SETTING);
+        UpdateDisplay(CLOCK_SETTING);
         in_setting = HOURS;
     }
 }
@@ -191,15 +190,15 @@ void handle_button1_pressure() {
  * only one out of two values, according to `in_setting`:
  * -) in_setting = HOURS -> hours
  * -) in_setting = MINUTES -> minutes
- * This function uses `update_time_value`.
+ * This function uses `UpdateTimeValue`.
  * @param hours A pointer to an int corresponding to an hour value
  * @param hours A pointer to an int corresponding to an minute value
  */
-void update_proper_time_value(int* const hours, int* const minutes) {
+void UpdateProperTimeValue(int* const hours, int* const minutes) {
     if (in_setting == HOURS) {
-        update_time_value(hours, MAX_HOURS, 0);
+        UpdateTimeValue(hours, MAX_HOURS, 0);
     } else {
-        update_time_value(minutes, MAX_MINUTES, 3);
+        UpdateTimeValue(minutes, MAX_MINUTES, 3);
     }
 }
 
@@ -208,20 +207,20 @@ void update_proper_time_value(int* const hours, int* const minutes) {
  * of both hours and minutes during the setting and the changing procedures.
  * It is also used to issue a modification of the awake time.
  */
-void handle_button2_pressure() {
+void HandleButton2Pressure() {
     if (flags.time_setting_procedure) { // setting the clock's time
         // update the values in the `setting` struct
-        update_proper_time_value(&setting.hours, &setting.minutes); 
+        UpdateProperTimeValue(&setting.hours, &setting.minutes); 
     } else if (flags.awake_setting_procedure) { // setting the awake time
         // update the values in the `timer` struct
-        update_proper_time_value(&timer.hours, &timer.minutes);
+        UpdateProperTimeValue(&timer.hours, &timer.minutes);
     } else if (flags.set) {
         flags.awake_setting_procedure = 1;
         ultoa(timer.hours, &time_value[0], BASE);
         time_value[2] = ':';
         ultoa(timer.minutes, &time_value[3], BASE);
         in_setting = HOURS;
-        update_display(TIMER_SETTING);
+        UpdateDisplay(TIMER_SETTING);
     }
 }
 
@@ -229,7 +228,7 @@ void handle_button2_pressure() {
  * This function is meant as an initial setup. It sets every flag value used
  * later on by the program. 
  */
-void assign_default_values() {
+void AssignDefaultValues() {
     // setting a 0 the interrupts
     ints.button1 = 0;
     ints.button2 = 0;
@@ -249,7 +248,7 @@ void assign_default_values() {
     setting.hours = 0;
     setting.minutes = 0;
     // set the display status
-    update_display(CLOCK_SETTING);
+    UpdateDisplay(CLOCK_SETTING);
     // no need to assign 0 to the clock's fields since they will be init for sure
     // after the setting procedure
 }
@@ -259,7 +258,7 @@ void assign_default_values() {
  * different timer's states.
  * @param state A display_states value representing the state
  */
-void update_display(enum display_states state) {
+void UpdateDisplay(enum display_states state) {
     switch (state) {
         case CLOCK_SETTING:
             DisplayString(0,"Enter the time:");
@@ -287,15 +286,15 @@ void update_display(enum display_states state) {
  * -) minutes go from 0 to 59
  * -) hours go from 0 to 23
  */
-void update_clock() {
+void UpdateClock() {
     clock.seconds = (clock.seconds == MAX_SECONDS) ? 0 : clock.seconds + 1;
     sprintf(&time_value[6], "%02d", clock.seconds);
     if (!clock.seconds) { // new minute
-        update_time_value(&clock.minutes, MAX_MINUTES, 3);
+        UpdateTimeValue(&clock.minutes, MAX_MINUTES, 3);
         time_value[5] = ':';
     }
     if (!clock.minutes) { // new hour
-        update_time_value(&clock.hours, MAX_HOURS, 0);
+        UpdateTimeValue(&clock.hours, MAX_HOURS, 0);
         time_value[3] = ':';
     }
 }
@@ -356,16 +355,16 @@ void main(void) {
     INTCON3bits.INT1E  = 1;   //enable INT1 interrupt (button 2)
     INTCON3bits.INT3E  = 1;   
 
-    assign_default_values();
+    AssignDefaultValues();
 
     while(1) {
         if (ints.button1) {
             ints.button1 = 0;
-            handle_button1_pressure();
+            HandleButton1Pressure();
         }
         if (ints.button2) {
             ints.button2 = 0;
-            handle_button2_pressure();
+            HandleButton2Pressure();
         }
     }
 }
