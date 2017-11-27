@@ -91,7 +91,6 @@ void UpdateTimeValue(int* const value, int limit, int pos) {
     } else {
         (*value)++;
     }
-    // if the value has only one digit, prepend a 0
     Int2String(*value, pos);
     DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
 }
@@ -175,9 +174,9 @@ void HandleButton1Pressure() {
         }
     } else if (flags.set) {
         flags.time_setting_procedure = 1;
-        ultoa(clock.hours, &time_value[0], BASE);
+        Int2String(clock.hours, 0);
         time_value[2] = ':';
-        ultoa(clock.minutes, &time_value[3], BASE);
+        Int2String(clock.minutes, 3);
         UpdateDisplay(CLOCK_SETTING);
         in_setting = HOURS;
     }
@@ -216,9 +215,9 @@ void HandleButton2Pressure() {
         UpdateProperTimeValue(&timer.hours, &timer.minutes);
     } else if (flags.set) {
         flags.awake_setting_procedure = 1;
-        ultoa(timer.hours, &time_value[0], BASE);
+        Int2String(timer.hours, 0);
         time_value[2] = ':';
-        ultoa(timer.minutes, &time_value[3], BASE);
+        Int2String(timer.minutes, 3);
         in_setting = HOURS;
         UpdateDisplay(TIMER_SETTING);
     }
@@ -305,7 +304,7 @@ void UpdateClock() {
  * -) INT1F, issued by a pressure of BUT2
  * -) INT3F, issued by a pressure of BUT1
  */
-void high_isr(void) __interrupt (1) {
+void HighISR(void) __interrupt (1) {
     if(INTCON3bits.INT1F == 1) { // Button 2
         ints.button2 = 1;
         INTCON3bits.INT1F = 0;
