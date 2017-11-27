@@ -63,6 +63,8 @@ char time_value[9]; // string used to display the time
 
 void update_time_value(int* const, int, int);
 void complete_hours_setting();
+void int2string(int, int);
+void set_up_complete_time();
 void handle_button1_pressure();
 void update_proper_time_value(int* const, int* const);
 void handle_button2_pressure();
@@ -90,6 +92,8 @@ void update_time_value(int* const value, int limit, int pos) {
         (*value)++;
     }
     ultoa(*value, &time_value[pos], BASE);
+    // if the value has only one digit, prepend a 0
+    int2string(*value, pos);
     DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
 }
 
@@ -103,16 +107,33 @@ void complete_hours_setting() {
 }
 
 /**
+ * Given an int, casts it in a string using ultoa. If the int is < 10
+ * (meaning it has only one digit), prepend a 0. The value is then 
+ assigned to the corresponding position in time_value.
+ * @param value The int
+ * @param pos The position in time_value
+ */
+void int2string(int value, int pos) {
+    ultoa(value, &time_value[pos], BASE);
+    // if the value has only one digit, prepend a 0
+    if (!(time_value[pos + 1])) {
+        time_value[pos + 1] = time_value[pos];
+        time_value[pos] = '0';
+        time_value[pos + 2] = '\0';
+    }
+}
+
+/**
  * Assign characters to `time_value` in order to display the time in
  * the format hh:mm:ss. 
  */
 void set_up_complete_time() {
     // assign the right values to time_value
-    ultoa(clock.hours, &time_value[0], BASE);
+    int2string(clock.hours, 0);
     time_value[2] = ':';
-    ultoa(clock.minutes, &time_value[3], BASE);
+    int2string(clock.minutes, 3);
     time_value[5] = ':';
-    ultoa(clock.seconds, &time_value[6], BASE);
+    int2string(clock.seconds, 6);
     // start making the user see the time flowing
     update_display(TIME_FLOWING);
 }
@@ -242,14 +263,16 @@ void update_display(enum display_states state) {
     switch (state) {
         case CLOCK_SETTING:
             DisplayString(0,"Enter the time:");
+            DisplayString(16, &time_value[0]);
             DisplayString(21,"   ");
             break;
         case TIMER_SETTING:
             DisplayString(0, "Enter the awake ");
             DisplayString(16, "time: ");
+            DisplayString(22, &time_value[0]);
             break;
         case TIME_FLOWING:
-            DisplayString(0, "               ");
+            DisplayString(0, "                ");
             DisplayString(16 + 6, "         ");
             DisplayString(16, &time_value[0]);
             break;
@@ -296,7 +319,7 @@ void high_isr(void) __interrupt (1) {
 
 // FIXME
 // wait for approx 1ms
-#define CLOCK_FREQ 40000000 // 40 Mhz
+#define CLOCK_FREQ 25000000 // 40 Mhz
 #define EXEC_FREQ CLOCK_FREQ/4 // 4 clock cycles to execute an instruction
 void delay_1ms(void) {
 	TMR0H=(0x10000-EXEC_FREQ/1000)>>8;
