@@ -17,16 +17,16 @@ The procedure for setting the awake time is the same. The board displays two dif
 	\item \textit{Enter the time}, for the clock's time;
 	\item \textit{Enter the awake time}, for the awake time.
 \end{itemize}
-Once completed the initial settings, the display shows the time, in the format \textit{hh:mm:ss}. 
+Once completed the initial settings, the display shows the time, in the format \textit{hh:mm:ss}. Every second the display is updated, and \textbf{LED0} (yellow) blinks to show the flowing time. Its period is set to half a second.
 
 \subsection{Change clock's or awake time}
-Users cannot modify an already saved value during the initial setting. In order to correct mistakes a user has to complete the procedure and then modify specifically the wrongly-provided time. This can be done using the two buttons, with the following mapping:
+Users cannot modify an already saved value during the initial setting. In order to correct mistakes, a user has to complete the procedure and then modify specifically the wrongly-provided time. This can be done using the two buttons, with the following mapping:
 \begin{itemize}
 	\item \textbf{BUT1} allows the user to modify the clock's time, and
 	\item \textbf{BUT2} allows the user to modify the awake time.
 \end{itemize}
-The steps to follow are the same as the aforementioned ones. The display shows a different message according to the actual chosen procedure. After completion, seconds start again from zero. 
+The steps to follow are the same as the aforementioned ones. The display shows a different message according to the actual chosen procedure. If the clock's time changes, seconds restart from zero. Otherwise, if the wake up time changes, seconds remain untouched.
 
 \subsection{Ringing}
-Ringing is replaced by a blinking led (WHICH ONE????????). The blinking duration is set to 30 seconds. After that the led stops blinking and the timer will wake up after 24 hours, unless the user sets the awake differently.
+Ringing is replaced by blinking \textbf{LED1} (red). The blinking duration is set to 30 seconds. After that the led stops blinking and the timer will wake up after 24 hours, unless the user sets it differently.
 
