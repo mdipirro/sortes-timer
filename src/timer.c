@@ -356,7 +356,7 @@ void UpdateClock() {
         if(!flags.alarm && (clock.minutes == timer.minutes && clock.hours == timer.hours))
             flags.alarm = 1; // alarm activation
     }
-    if(flags.alarm && (clock.seconds > (30 + 1) || clock.minutes != timer.minutes || clock.hours != timer.hours))
+    if(flags.alarm && (clock.seconds > 30 || clock.minutes != timer.minutes || clock.hours != timer.hours))
         flags.alarm = 0;     // alarm deactivation after ~30 seconds or after clock change
     if (!flags.awake_setting_procedure    && !flags.time_setting_procedure)
         DisplayString(16, &time_value[0]);
@@ -399,12 +399,15 @@ void main(void) {
 
     while(1) {
         if (flags.half_sec) {               // routine executed every half second
-            //clock update
+            // clock update
             if (flags.one_sec) {
                 UpdateClock();
-            }            
-            //led blinking
-            if (flags.one_sec && flags.alarm) {
+            }
+            // turn off the red LED if the alarm is not active
+            if (!flags.alarm && LATJbits.LATJ1)
+                LATJbits.LATJ1  = 0;
+            // LEDs blinking
+            if (flags.alarm && flags.one_sec) {
                 LATJbits.LATJ0 ^= 1;        // led0 blink
                 LATJbits.LATJ1 ^= 1;        // led1 blink
             } else {
