@@ -9,16 +9,16 @@
 #include "Include/LCDBlocking.h"
 #include "Include/TCPIP_Stack/Delay.h"
 
-#define CLOCK_FREQ 25000000 // 25 Mhz
-#define EXTCLOCK_FREQ 32768	// 32.768 kHz
-#define EXEC_FREQ CLOCK_FREQ/4 // 4 clock cycles to execute an instruction
+#define CLOCK_FREQ 25000000      // 25 Mhz
+#define EXTCLOCK_FREQ 32768      // 32.768 kHz
+#define EXEC_FREQ CLOCK_FREQ/4   // 4 clock cycles to execute an instruction
 
 #define LOW(a)      (a & 0xFF)
 #define HIGH(a)     ((a>>8) & 0xFF)
-#define MAX_HOURS   23 // max allowed value for hours
-#define MAX_MINUTES 59 // max allowed value for minutes
-#define MAX_SECONDS 59 // max allowed value for seconds
-#define BASE        10 // radix for ultoa
+#define MAX_HOURS   23           // max allowed value for hours
+#define MAX_MINUTES 59           // max allowed value for minutes
+#define MAX_SECONDS 59           // max allowed value for seconds
+#define BASE        10           // radix for ultoa
 
 // enum representing which value the user is currently setting
 enum setting_values {
@@ -37,6 +37,7 @@ struct flags {
     int time_setting_procedure; // the user is setting the clock's time
     int awake_setting_procedure; // the user is setting the awake time
     int set; // initial set up completed
+    int half_sec;
     int one_sec;
     int alarm;
 } flags;
@@ -60,6 +61,7 @@ struct setting_values {
     int minutes;
 } setting;
 
+// struct representing the triggered interrupts
 struct interrupts {
     int button1;
     int button2;
@@ -74,8 +76,9 @@ void SetupCompleteTime();
 void HandleButton1Pressure();
 void UpdateProperTimeValue(int* const, int* const);
 void HandleButton2Pressure();
-void UpdateDisplay(enum display_states);
+void ConfigureRegisters();
 void AssignDefaultValues();
+void UpdateDisplay(enum display_states);
 void UpdateClock();
 void DisplayString(BYTE pos, char* text);
 void DisplayWORD(BYTE pos, WORD w);
@@ -176,7 +179,7 @@ void HandleButton1Pressure() {
             flags.set = 1; 
             // display the complete time
             SetupCompleteTime();
-            T1CONbits.TMR1ON	=	1;
+            T1CONbits.TMR1ON    =    1;
         }
     } else if (flags.set) {
         flags.time_setting_procedure = 1;
@@ -232,6 +235,48 @@ void HandleButton2Pressure() {
 }
 
 /**
+ * This function is meant as an initial setup. It sets the configuration
+ * registers for interrupts, timers, buttons and LEDs handling
+ */
+void ConfigureRegisters() {
+    // global interrupt configuration
+    INTCONbits.GIE      =   1;   //enable high priority interrupts
+    RCONbits.IPEN       =   1;   //enable interrupts priority levels
+    
+    /**
+     * timer1 (32.760 kHz) configuration
+     * 16-bit counter, 0.5 seconds to overflow (bounded configuration)
+     */
+    T1CONbits.TMR1ON    =   0;    // disable timer1
+    T1CONbits.RD16      =   1;    // use timer1 16-bit counter
+    T1CONbits.T1CKPS0   =   0;    // prescaler set to 1:1
+    T1CONbits.T1CKPS1   =   0;
+    T1CONbits.T1OSCEN   =   1;    // timer1 oscillator enable
+    T1CONbits.TMR1CS    =   1;    // external clock selected
+    PIR1bits.TMR1IF     =   0;    // clear timer1 overflow bit
+    PIE1bits.TMR1IE     =   1;    // timer1 interrupt enable
+    IPR1bits.TMR1IP     =   1;    // high priority interrupt
+    TMR1L               =   (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 initial value
+    TMR1H               =   (0x10000 - EXTCLOCK_FREQ/2) >> 8;
+
+    // external interrupts (buttons) configuration
+    INTCON3bits.INT1P   =   1;    //connect INT1 interrupt (button 2) to high prio
+    INTCON2bits.INT3IP  =   1;    //connect INT3 interrupt (button 1) to high prio
+    INTCON2bits.INTEDG1 =   0;    //INT1 interrupts on falling edge
+    INTCON2bits.INTEDG3 =   0;    //INT3 interrupts on falling edge
+    INTCON3bits.INT1F   =   0;    //clear INT1 flag
+    INTCON3bits.INT3F   =   0;    //clear INT3 flag
+    INTCON3bits.INT1E   =   1;    //enable INT1 interrupt (button 2)
+    INTCON3bits.INT3E   =   1;    //enable INT1 interrupt (button 1)
+
+    // LEDs configuration
+    TRISJbits.TRISJ0    =   0;    // configure PORTJ0 for output (led0)
+    TRISJbits.TRISJ1    =   0;    // configure PORTJ1 for output (led1)
+    LATJbits.LATJ0      =   1;    // led0 output high
+    LATJbits.LATJ1      =   0;    // led1 output low
+}
+
+/**
  * This function is meant as an initial setup. It sets every flag value used
  * later on by the program. 
  */
@@ -248,6 +293,7 @@ void AssignDefaultValues() {
     flags.time_setting_procedure = 1;
     flags.awake_setting_procedure = 0;
     flags.set = 0;
+    flags.half_sec = 0;
     flags.one_sec = 0;
     flags.alarm = 0;
     // init the timer
@@ -296,102 +342,80 @@ void UpdateDisplay(enum display_states state) {
  * -) hours go from 0 to 23
  */
 void UpdateClock() {
-	UpdateTimeValue(&clock.seconds, MAX_SECONDS, 6);
+    UpdateTimeValue(&clock.seconds, MAX_SECONDS, 6);
     if (!clock.seconds) { // new minute
         UpdateTimeValue(&clock.minutes, MAX_MINUTES, 3);
         time_value[5] = ':';
         if (!clock.minutes) { // new hour
-			UpdateTimeValue(&clock.hours, MAX_HOURS, 0);
-			time_value[2] = ':';
-		}
-		if((clock.minutes == timer.minutes) && (clock.hours == timer.hours))
-			flags.alarm = 1;
+            UpdateTimeValue(&clock.hours, MAX_HOURS, 0);
+            time_value[2] = ':';
+        }
+        if(!flags.alarm && (clock.minutes == timer.minutes) && (clock.hours == timer.hours))
+            flags.alarm = 1; // alarm activation
     }
-    if (!flags.awake_setting_procedure	&& !flags.time_setting_procedure)
-		DisplayString(16, &time_value[0]);
+    if(flags.alarm && (clock.seconds > (30 + 1)))
+        flags.alarm = 0;     // alarm deactivation after ~30 seconds
+    if (!flags.awake_setting_procedure    && !flags.time_setting_procedure)
+        DisplayString(16, &time_value[0]);
 }
 
 /**
- * Handle a high priority interrupt. This function actually handles two
+ * Handle a high priority interrupt. This function actually handles three
  * interrupts:
+ * -) TMR1IF, issued by timer1 counter overflow
  * -) INT1F, issued by a pressure of BUT2
  * -) INT3F, issued by a pressure of BUT1
  */
 void HighISR(void) __interrupt (1) {
-	if(PIR1bits.TMR1IF == 1) {
-		LATJbits.LATJ0	^=	1; // toggle LED
-		TMR1L			=	(0x10000 - EXTCLOCK_FREQ/2) & 0xff;	// timer1 initial value
-		TMR1H			=	(0x10000 - EXTCLOCK_FREQ/2) >> 8;
-		if(LATJbits.LATJ0)
-			flags.one_sec = 1;
-		PIR1bits.TMR1IF = 	0;
-	}
-    if(INTCON3bits.INT1F == 1) { // Button 2
-        ints.button2 = 1;
+    if(PIR1bits.TMR1IF == 1) {      // timer1 overflow (every 0.5 seconds)
+        TMR1L             =     (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 reset
+        TMR1H             =     (0x10000 - EXTCLOCK_FREQ/2) >> 8;
+        flags.half_sec = 1;         // set a flag every 0.5 seconds
+        if(!LATJbits.LATJ0)
+            flags.one_sec = 1;      // set a flag every second (i.e. every time led0 becomes high)
+        PIR1bits.TMR1IF = 0;
+    }
+    if(INTCON3bits.INT1F == 1) {    // button 2 ISR
+        ints.button2 = 1;           // set a flag for successive handling
         INTCON3bits.INT1F = 0;
     } 
-    if (INTCON3bits.INT3F == 1) { // Button 1
-        ints.button1 = 1;
+    if (INTCON3bits.INT3F == 1) {   // button 1 ISR
+        ints.button1 = 1;           // set a flag for successive handling
         INTCON3bits.INT3F = 0;
     }
 }
 
 
-void main(void) { 
+void main(void) {
     LCDInit();
-    DelayMs(100);
+    DelayMs(200);
 
-	/**
-	 *  timer1 (32.760 kHz) configuration
-	 *  16-bit counter, 0.5 seconds to overflow (bounded configuration)
-	 */
-	T1CONbits.TMR1ON	=	0;		// disable timer1
-	T1CONbits.RD16		=	1;		// use timer1 16-bit counter
-	T1CONbits.T1CKPS0	=	0;		// prescaler set to 1:1
-	T1CONbits.T1CKPS1	=	0;
-	T1CONbits.T1OSCEN	=	1;		// timer1 oscillator enable
-	T1CONbits.TMR1CS	=	1;		// external clock selected
-	PIR1bits.TMR1IF		=	0;		// clear timer1 overflow bit
-	PIE1bits.TMR1IE		=	1;		// timer1 interrupt enable
-	IPR1bits.TMR1IP		=	1;		// high priority interrupt
-	TMR1L				=	(0x10000 - EXTCLOCK_FREQ/2) & 0xff;	// timer1 initial value
-	TMR1H				=	(0x10000 - EXTCLOCK_FREQ/2) >> 8;
-
-    RCONbits.IPEN      = 1;   //enable interrupts priority levels
-    INTCON3bits.INT1P  = 1;   //connect INT1 interrupt (button 2) to high prio
-    INTCON2bits.INT3IP = 1;
-    INTCON2bits.INTEDG1= 0;   //INT1 interrupts on falling edge
-    INTCON2bits.INTEDG3= 0;   //connect INT1 interrupt (button 2) to high prio
-    INTCONbits.GIE     = 1;   //enable high priority interrupts
-    INTCON3bits.INT1F  = 0;   //clear INT1 flag
-    INTCON3bits.INT3F  = 0;
-    INTCON3bits.INT1E  = 1;   //enable INT1 interrupt (button 2)
-    INTCON3bits.INT3E  = 1;   
-
-	TRISJbits.TRISJ0	=	0; // configure PORTJ0 for output (LED)
-	TRISJbits.TRISJ1	=	0; // configure PORTJ1 for output (LED)
-	LATJbits.LATJ0		=	1;
-	LATJbits.LATJ1		=	0;
-
+    // initial configuration
+    ConfigureRegisters();
     AssignDefaultValues();
 
     while(1) {
-        if (flags.one_sec) {
-			UpdateClock();
-			if(flags.alarm) {
-				LATJbits.LATJ1	^=	1;
-				if(clock.seconds > 30) {
-					LATJbits.LATJ1	=	0;
-					flags.alarm 	=	0;
-				}
-			}
-			flags.one_sec = 0;
-		}
-        if (ints.button1) {
+        if (flags.half_sec) {               // routine executed every half second
+            //clock update
+            if (flags.one_sec) {
+                UpdateClock();
+            }            
+            //led blinking
+            if (flags.one_sec && flags.alarm) {
+                LATJbits.LATJ0 ^= 1;        // led0 blink
+                LATJbits.LATJ1 ^= 1;        // led1 blink
+            } else {
+                LATJbits.LATJ0 ^= 1;        // led0 blink
+            }
+            // flags reset
+            flags.one_sec = 0;
+            flags.half_sec = 0;
+        }
+        if (ints.button1) {         // button 1 pressed
             ints.button1 = 0;
             HandleButton1Pressure();
         }
-        if (ints.button2) {
+        if (ints.button2) {         // button 2 pressed
             ints.button2 = 0;
             HandleButton2Pressure();
         }
