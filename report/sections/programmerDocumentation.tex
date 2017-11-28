@@ -48,6 +48,6 @@ The time flow is managed using \texttt{timer1}, linked to the external \textit{3
 In this software the timer counter generates an interrupt every 0.5 seconds; this means that a 16 bit register is needed and that the counter is not free-running, because the initial value must be set every time an overflow occurs. The time overhead of initial value reassignation, however, is completely negligible.
 
 A different flag is set for half-seconds (\texttt{flags.half\_sec}) and full-seconds (\texttt{flags.one\_sec}), both are handled by the main function.
-The program executes a series of instructions when the half-second flag is high: it flips the orange LED value, then if a second has passed it calls the function \texttt{UpdateClock} to ensure that the global variables and the display reflect the change in time; furthermore, it handles the blinking of the red LED according to the state of the alarm (``ringing'' or not). In the end, the flags are reset to zero.
+The program executes a series of instructions when the half-second flag is high: it flips the yellow LED value, then if a second has passed it calls the function \texttt{UpdateClock} to ensure that the global variables and the display reflect the change in time; furthermore, it handles the blinking of the red LED according to the state of the alarm (``ringing'' or not). In the end, the flags are reset to zero.
 
 Some efforts have been put in trying to make the two LEDs blink as synchronously as possible: this was achieved by smart ordering of some instructions and \texttt{if} statements de-annidation.
