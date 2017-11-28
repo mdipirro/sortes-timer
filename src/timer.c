@@ -353,11 +353,11 @@ void UpdateClock() {
             UpdateTimeValue(&clock.hours, MAX_HOURS, 0);
             time_value[2] = ':';
         }
-        if(!flags.alarm && (clock.minutes == timer.minutes) && (clock.hours == timer.hours))
+        if(!flags.alarm && (clock.minutes == timer.minutes && clock.hours == timer.hours))
             flags.alarm = 1; // alarm activation
     }
-    if(flags.alarm && (clock.seconds > (30 + 1)))
-        flags.alarm = 0;     // alarm deactivation after ~30 seconds
+    if(flags.alarm && (clock.seconds > (30 + 1) || clock.minutes != timer.minutes || clock.hours != timer.hours))
+        flags.alarm = 0;     // alarm deactivation after ~30 seconds or after clock change
     if (!flags.awake_setting_procedure    && !flags.time_setting_procedure)
         DisplayString(16, &time_value[0]);
 }
