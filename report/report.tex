@@ -1,4 +1,5 @@
 \documentclass[a4paper,10pt]{article}
+\usepackage[margin=1.2in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
@@ -6,11 +7,12 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{courier}
 
 \definecolor{mGreen}{rgb}{0,0.6,0}
 \definecolor{mGray}{rgb}{0.5,0.5,0.5}
 \definecolor{mPurple}{rgb}{0.58,0,0.82}
-\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+\definecolor{backgroundColour}{rgb}{0.96,0.96,0.96}
 
 \lstdefinestyle{CStyle}{
 	backgroundcolor=\color{backgroundColour},   
@@ -18,7 +20,7 @@
 	keywordstyle=\color{magenta},
 	numberstyle=\tiny\color{mGray},
 	stringstyle=\color{mPurple},
-	basicstyle=\footnotesize,
+	basicstyle=\ttfamily\footnotesize,
 	breakatwhitespace=false,         
 	breaklines=true,                 
 	captionpos=b,                    
