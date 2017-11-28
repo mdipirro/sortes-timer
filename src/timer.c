@@ -182,10 +182,13 @@ void HandleButton1Pressure() {
             T1CONbits.TMR1ON    =    1;
         }
     } else if (flags.set) {
-        flags.time_setting_procedure = 1;
-        Int2String(clock.hours, 0);
+        // copy the actual time into the temporary structure
+        setting.hours   = clock.hours;
+        setting.minutes = clock.minutes;
+        flags.time_setting_procedure = 1; // start the time setting
+        Int2String(setting.hours, 0);
         time_value[2] = ':';
-        Int2String(clock.minutes, 3);
+        Int2String(setting.minutes, 3);
         UpdateDisplay(CLOCK_SETTING);
         in_setting = HOURS;
     }

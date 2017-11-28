@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.4 #5595 (Nov 15 2017) (UNIX)
-; This file was generated Tue Nov 28 01:41:33 2017
+; This file was generated Tue Nov 28 03:22:59 2017
 ;--------------------------------------------------------
 ; PIC16 port for the Microchip 16-bit core micros
 ;--------------------------------------------------------
@@ -553,9 +553,9 @@ ivec_0x1_HighISR:
 ; ; Starting pCode block
 S_timer__main	code
 _main:
-;	.line	390; timer.c	LCDInit();
+;	.line	393; timer.c	LCDInit();
 	CALL	_LCDInit
-;	.line	391; timer.c	DelayMs(200);
+;	.line	394; timer.c	DelayMs(200);
 	MOVLW	0x20
 	MOVWF	r0x00
 	MOVLW	0x30
@@ -581,29 +581,29 @@ _00258_DS_:
 	IORWF	r0x06, W
 	IORWF	r0x07, W
 	BNZ	_00258_DS_
-;	.line	394; timer.c	ConfigureRegisters();
+;	.line	397; timer.c	ConfigureRegisters();
 	CALL	_ConfigureRegisters
-;	.line	395; timer.c	AssignDefaultValues();
+;	.line	398; timer.c	AssignDefaultValues();
 	CALL	_AssignDefaultValues
 _00277_DS_:
 	BANKSEL	(_flags + 6)
-;	.line	398; timer.c	if (flags.half_sec) {               // routine executed every half second
+;	.line	401; timer.c	if (flags.half_sec) {               // routine executed every half second
 	MOVF	(_flags + 6), W, B
 	BANKSEL	(_flags + 7)
 	IORWF	(_flags + 7), W, B
 	BTFSC	STATUS, 2
 	BRA	_00271_DS_
 	BANKSEL	(_flags + 8)
-;	.line	400; timer.c	if (flags.one_sec) {
+;	.line	403; timer.c	if (flags.one_sec) {
 	MOVF	(_flags + 8), W, B
 	BANKSEL	(_flags + 9)
 	IORWF	(_flags + 9), W, B
 	BZ	_00265_DS_
-;	.line	401; timer.c	UpdateClock();
+;	.line	404; timer.c	UpdateClock();
 	CALL	_UpdateClock
 _00265_DS_:
 	BANKSEL	(_flags + 8)
-;	.line	404; timer.c	if (flags.one_sec && flags.alarm) {
+;	.line	407; timer.c	if (flags.one_sec && flags.alarm) {
 	MOVF	(_flags + 8), W, B
 	BANKSEL	(_flags + 9)
 	IORWF	(_flags + 9), W, B
@@ -613,7 +613,7 @@ _00265_DS_:
 	BANKSEL	(_flags + 11)
 	IORWF	(_flags + 11), W, B
 	BZ	_00267_DS_
-;	.line	405; timer.c	LATJbits.LATJ0 ^= 1;        // led0 blink
+;	.line	408; timer.c	LATJbits.LATJ0 ^= 1;        // led0 blink
 	CLRF	r0x00
 	BTFSC	_LATJbits, 0
 	INCF	r0x00, F
@@ -626,7 +626,7 @@ _00265_DS_:
 	ANDLW	0xfe
 	IORWF	PRODH, W
 	MOVWF	_LATJbits
-;	.line	406; timer.c	LATJbits.LATJ1 ^= 1;        // led1 blink
+;	.line	409; timer.c	LATJbits.LATJ1 ^= 1;        // led1 blink
 	CLRF	r0x00
 	BTFSC	_LATJbits, 1
 	INCF	r0x00, F
@@ -642,7 +642,7 @@ _00265_DS_:
 	MOVWF	_LATJbits
 	BRA	_00268_DS_
 _00267_DS_:
-;	.line	408; timer.c	LATJbits.LATJ0 ^= 1;        // led0 blink
+;	.line	411; timer.c	LATJbits.LATJ0 ^= 1;        // led0 blink
 	CLRF	r0x00
 	BTFSC	_LATJbits, 0
 	INCF	r0x00, F
@@ -657,43 +657,43 @@ _00267_DS_:
 	MOVWF	_LATJbits
 _00268_DS_:
 	BANKSEL	(_flags + 8)
-;	.line	411; timer.c	flags.one_sec = 0;
+;	.line	414; timer.c	flags.one_sec = 0;
 	CLRF	(_flags + 8), B
 	BANKSEL	(_flags + 9)
 	CLRF	(_flags + 9), B
 	BANKSEL	(_flags + 6)
-;	.line	412; timer.c	flags.half_sec = 0;
+;	.line	415; timer.c	flags.half_sec = 0;
 	CLRF	(_flags + 6), B
 	BANKSEL	(_flags + 7)
 	CLRF	(_flags + 7), B
 _00271_DS_:
 	BANKSEL	_ints
-;	.line	414; timer.c	if (ints.button1) {         // button 1 pressed
+;	.line	417; timer.c	if (ints.button1) {         // button 1 pressed
 	MOVF	_ints, W, B
 	BANKSEL	(_ints + 1)
 	IORWF	(_ints + 1), W, B
 	BZ	_00273_DS_
 	BANKSEL	_ints
-;	.line	415; timer.c	ints.button1 = 0;
+;	.line	418; timer.c	ints.button1 = 0;
 	CLRF	_ints, B
 	BANKSEL	(_ints + 1)
 	CLRF	(_ints + 1), B
-;	.line	416; timer.c	HandleButton1Pressure();
+;	.line	419; timer.c	HandleButton1Pressure();
 	CALL	_HandleButton1Pressure
 _00273_DS_:
 	BANKSEL	(_ints + 2)
-;	.line	418; timer.c	if (ints.button2) {         // button 2 pressed
+;	.line	421; timer.c	if (ints.button2) {         // button 2 pressed
 	MOVF	(_ints + 2), W, B
 	BANKSEL	(_ints + 3)
 	IORWF	(_ints + 3), W, B
 	BTFSC	STATUS, 2
 	BRA	_00277_DS_
 	BANKSEL	(_ints + 2)
-;	.line	419; timer.c	ints.button2 = 0;
+;	.line	422; timer.c	ints.button2 = 0;
 	CLRF	(_ints + 2), B
 	BANKSEL	(_ints + 3)
 	CLRF	(_ints + 3), B
-;	.line	420; timer.c	HandleButton2Pressure();
+;	.line	423; timer.c	HandleButton2Pressure();
 	CALL	_HandleButton2Pressure
 	BRA	_00277_DS_
 	RETURN	
@@ -701,7 +701,7 @@ _00273_DS_:
 ; ; Starting pCode block
 S_timer__strlcpy	code
 _strlcpy:
-;	.line	526; timer.c	strlcpy(char *dst, const char *src, size_t siz)
+;	.line	529; timer.c	strlcpy(char *dst, const char *src, size_t siz)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -742,23 +742,23 @@ _strlcpy:
 	MOVFF	PLUSW2, r0x06
 	MOVLW	0x09
 	MOVFF	PLUSW2, r0x07
-;	.line	528; timer.c	char       *d = dst;
+;	.line	531; timer.c	char       *d = dst;
 	MOVFF	r0x00, r0x08
 	MOVFF	r0x01, r0x09
 	MOVFF	r0x02, r0x0a
-;	.line	529; timer.c	const char *s = src;
+;	.line	532; timer.c	const char *s = src;
 	MOVFF	r0x03, r0x0b
 	MOVFF	r0x04, r0x0c
 	MOVFF	r0x05, r0x0d
-;	.line	530; timer.c	size_t      n = siz;
+;	.line	533; timer.c	size_t      n = siz;
 	MOVFF	r0x06, r0x0e
 	MOVFF	r0x07, r0x0f
-;	.line	533; timer.c	if (n != 0)
+;	.line	536; timer.c	if (n != 0)
 	MOVF	r0x06, W
 	IORWF	r0x07, W
 	BTFSC	STATUS, 2
 	BRA	_00326_DS_
-;	.line	535; timer.c	while (--n != 0)
+;	.line	538; timer.c	while (--n != 0)
 	MOVFF	r0x03, r0x10
 	MOVFF	r0x04, r0x11
 	MOVFF	r0x05, r0x12
@@ -772,7 +772,7 @@ _00322_DS_:
 	MOVF	r0x13, W
 	IORWF	r0x14, W
 	BZ	_00341_DS_
-;	.line	537; timer.c	if ((*d++ = *s++) == '\0')
+;	.line	540; timer.c	if ((*d++ = *s++) == '\0')
 	MOVFF	r0x10, FSR0L
 	MOVFF	r0x11, PRODL
 	MOVF	r0x12, W
@@ -796,7 +796,7 @@ _00322_DS_:
 	MOVF	r0x15, W
 	BNZ	_00322_DS_
 _00341_DS_:
-;	.line	538; timer.c	break;
+;	.line	541; timer.c	break;
 	MOVFF	r0x10, r0x0b
 	MOVFF	r0x11, r0x0c
 	MOVFF	r0x12, r0x0d
@@ -806,15 +806,15 @@ _00341_DS_:
 	MOVFF	r0x13, r0x0e
 	MOVFF	r0x14, r0x0f
 _00326_DS_:
-;	.line	543; timer.c	if (n == 0)
+;	.line	546; timer.c	if (n == 0)
 	MOVF	r0x0e, W
 	IORWF	r0x0f, W
 	BNZ	_00333_DS_
-;	.line	545; timer.c	if (siz != 0)
+;	.line	548; timer.c	if (siz != 0)
 	MOVF	r0x06, W
 	IORWF	r0x07, W
 	BZ	_00340_DS_
-;	.line	546; timer.c	*d = '\0';          /* NUL-terminate dst */
+;	.line	549; timer.c	*d = '\0';          /* NUL-terminate dst */
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVFF	r0x08, FSR0L
@@ -822,7 +822,7 @@ _00326_DS_:
 	MOVF	r0x0a, W
 	CALL	__gptrput1
 _00340_DS_:
-;	.line	547; timer.c	while (*s++)
+;	.line	550; timer.c	while (*s++)
 	MOVFF	r0x0b, r0x00
 	MOVFF	r0x0c, r0x01
 	MOVFF	r0x0d, r0x02
@@ -843,7 +843,7 @@ _00329_DS_:
 	MOVFF	r0x01, r0x0c
 	MOVFF	r0x02, r0x0d
 _00333_DS_:
-;	.line	551; timer.c	return (s - src - 1);       /* count does not include NUL */
+;	.line	554; timer.c	return (s - src - 1);       /* count does not include NUL */
 	MOVF	r0x03, W
 	SUBWF	r0x0b, W
 	MOVWF	r0x03
@@ -884,7 +884,7 @@ _00333_DS_:
 ; ; Starting pCode block
 S_timer__DisplayString	code
 _DisplayString:
-;	.line	474; timer.c	void DisplayString(BYTE pos, char* text)
+;	.line	477; timer.c	void DisplayString(BYTE pos, char* text)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -905,7 +905,7 @@ _DisplayString:
 	MOVFF	PLUSW2, r0x02
 	MOVLW	0x05
 	MOVFF	PLUSW2, r0x03
-;	.line	476; timer.c	BYTE        l = strlen(text);/*number of actual chars in the string*/
+;	.line	479; timer.c	BYTE        l = strlen(text);/*number of actual chars in the string*/
 	MOVF	r0x03, W
 	MOVWF	POSTDEC1
 	MOVF	r0x02, W
@@ -917,11 +917,11 @@ _DisplayString:
 	MOVFF	PRODL, r0x05
 	MOVLW	0x03
 	ADDWF	FSR1L, F
-;	.line	477; timer.c	BYTE      max = 32-pos;    /*available space on the lcd*/
+;	.line	480; timer.c	BYTE      max = 32-pos;    /*available space on the lcd*/
 	MOVF	r0x00, W
 	SUBLW	0x20
 	MOVWF	r0x05
-;	.line	478; timer.c	char       *d = (char*)&LCDText[pos];
+;	.line	481; timer.c	char       *d = (char*)&LCDText[pos];
 	CLRF	r0x06
 	MOVLW	LOW(_LCDText)
 	ADDWF	r0x00, F
@@ -933,19 +933,19 @@ _DisplayString:
 	MOVWF	r0x00
 	MOVLW	0x80
 	MOVWF	r0x07
-;	.line	480; timer.c	size_t      n = (l<max)?l:max;
+;	.line	483; timer.c	size_t      n = (l<max)?l:max;
 	MOVF	r0x05, W
 	SUBWF	r0x04, W
 	BNC	_00310_DS_
 	MOVFF	r0x05, r0x04
 _00310_DS_:
 	CLRF	r0x05
-;	.line	482; timer.c	if (n != 0)
+;	.line	485; timer.c	if (n != 0)
 	MOVF	r0x04, W
 	IORWF	r0x05, W
 	BZ	_00306_DS_
 _00302_DS_:
-;	.line	483; timer.c	while (n-- != 0)*d++ = *s++;
+;	.line	486; timer.c	while (n-- != 0)*d++ = *s++;
 	MOVFF	r0x04, r0x08
 	MOVFF	r0x05, r0x09
 	MOVLW	0xff
@@ -977,7 +977,7 @@ _00302_DS_:
 	INCF	r0x07, F
 	BRA	_00302_DS_
 _00306_DS_:
-;	.line	484; timer.c	LCDUpdate();
+;	.line	487; timer.c	LCDUpdate();
 	CALL	_LCDUpdate
 	MOVFF	PREINC1, r0x09
 	MOVFF	PREINC1, r0x08
@@ -995,7 +995,7 @@ _00306_DS_:
 ; ; Starting pCode block
 S_timer__DisplayWORD	code
 _DisplayWORD:
-;	.line	435; timer.c	void DisplayWORD(BYTE pos, WORD w) //WORD is a 16 bits unsigned
+;	.line	438; timer.c	void DisplayWORD(BYTE pos, WORD w) //WORD is a 16 bits unsigned
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1010,7 +1010,7 @@ _DisplayWORD:
 	MOVFF	PLUSW2, r0x01
 	MOVLW	0x04
 	MOVFF	PLUSW2, r0x02
-;	.line	443; timer.c	ultoa(w, WDigit, radix);      
+;	.line	446; timer.c	ultoa(w, WDigit, radix);      
 	CLRF	r0x03
 	CLRF	r0x04
 	MOVLW	0x0a
@@ -1030,7 +1030,7 @@ _DisplayWORD:
 	CALL	_ultoa
 	MOVLW	0x07
 	ADDWF	FSR1L, F
-;	.line	444; timer.c	for(j = 0; j < strlen((char*)WDigit); j++)
+;	.line	447; timer.c	for(j = 0; j < strlen((char*)WDigit); j++)
 	CLRF	r0x01
 _00286_DS_:
 	MOVLW	HIGH(_DisplayWORD_WDigit_1_1)
@@ -1063,7 +1063,7 @@ _00286_DS_:
 	SUBWF	r0x04, W
 _00296_DS_:
 	BC	_00289_DS_
-;	.line	446; timer.c	LCDText[LCDPos++] = WDigit[j];
+;	.line	449; timer.c	LCDText[LCDPos++] = WDigit[j];
 	MOVFF	r0x00, r0x02
 	INCF	r0x00, F
 	CLRF	r0x03
@@ -1083,11 +1083,11 @@ _00296_DS_:
 	MOVFF	r0x02, FSR0L
 	MOVFF	r0x03, FSR0H
 	MOVFF	r0x04, INDF0
-;	.line	444; timer.c	for(j = 0; j < strlen((char*)WDigit); j++)
+;	.line	447; timer.c	for(j = 0; j < strlen((char*)WDigit); j++)
 	INCF	r0x01, F
 	BRA	_00286_DS_
 _00289_DS_:
-;	.line	448; timer.c	if(LCDPos < 32u)
+;	.line	451; timer.c	if(LCDPos < 32u)
 	MOVFF	r0x00, r0x01
 	CLRF	r0x02
 	MOVLW	0x00
@@ -1097,7 +1097,7 @@ _00289_DS_:
 	SUBWF	r0x01, W
 _00297_DS_:
 	BC	_00285_DS_
-;	.line	449; timer.c	LCDText[LCDPos] = 0;
+;	.line	452; timer.c	LCDText[LCDPos] = 0;
 	CLRF	r0x01
 	MOVLW	LOW(_LCDText)
 	ADDWF	r0x00, F
@@ -1108,7 +1108,7 @@ _00297_DS_:
 	MOVLW	0x00
 	MOVWF	INDF0
 _00285_DS_:
-;	.line	450; timer.c	LCDUpdate();
+;	.line	453; timer.c	LCDUpdate();
 	CALL	_LCDUpdate
 	MOVFF	PREINC1, r0x05
 	MOVFF	PREINC1, r0x04
@@ -1122,7 +1122,7 @@ _00285_DS_:
 ; ; Starting pCode block
 S_timer__HighISR	code
 _HighISR:
-;	.line	369; timer.c	void HighISR(void) __interrupt (1) {
+;	.line	372; timer.c	void HighISR(void) __interrupt (1) {
 	MOVFF	WREG, POSTDEC1
 	MOVFF	STATUS, POSTDEC1
 	MOVFF	BSR, POSTDEC1
@@ -1135,67 +1135,67 @@ _HighISR:
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-;	.line	370; timer.c	if(PIR1bits.TMR1IF == 1) {      // timer1 overflow (every 0.5 seconds)
+;	.line	373; timer.c	if(PIR1bits.TMR1IF == 1) {      // timer1 overflow (every 0.5 seconds)
 	CLRF	r0x00
 	BTFSC	_PIR1bits, 0
 	INCF	r0x00, F
 	MOVF	r0x00, W
 	XORLW	0x01
 	BNZ	_00237_DS_
-;	.line	371; timer.c	TMR1L             =     (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 reset
+;	.line	374; timer.c	TMR1L             =     (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 reset
 	CLRF	_TMR1L
-;	.line	372; timer.c	TMR1H             =     (0x10000 - EXTCLOCK_FREQ/2) >> 8;
+;	.line	375; timer.c	TMR1H             =     (0x10000 - EXTCLOCK_FREQ/2) >> 8;
 	MOVLW	0xc0
 	MOVWF	_TMR1H
-;	.line	373; timer.c	flags.half_sec = 1;         // set a flag every 0.5 seconds
+;	.line	376; timer.c	flags.half_sec = 1;         // set a flag every 0.5 seconds
 	MOVLW	0x01
 	BANKSEL	(_flags + 6)
 	MOVWF	(_flags + 6), B
 	BANKSEL	(_flags + 7)
 	CLRF	(_flags + 7), B
-;	.line	374; timer.c	if(!LATJbits.LATJ0)
+;	.line	377; timer.c	if(!LATJbits.LATJ0)
 	BTFSC	_LATJbits, 0
 	BRA	_00235_DS_
-;	.line	375; timer.c	flags.one_sec = 1;      // set a flag every second (i.e. every time led0 becomes high)
+;	.line	378; timer.c	flags.one_sec = 1;      // set a flag every second (i.e. every time led0 becomes high)
 	MOVLW	0x01
 	BANKSEL	(_flags + 8)
 	MOVWF	(_flags + 8), B
 	BANKSEL	(_flags + 9)
 	CLRF	(_flags + 9), B
 _00235_DS_:
-;	.line	376; timer.c	PIR1bits.TMR1IF = 0;
+;	.line	379; timer.c	PIR1bits.TMR1IF = 0;
 	BCF	_PIR1bits, 0
 _00237_DS_:
-;	.line	378; timer.c	if(INTCON3bits.INT1F == 1) {    // button 2 ISR
+;	.line	381; timer.c	if(INTCON3bits.INT1F == 1) {    // button 2 ISR
 	CLRF	r0x00
 	BTFSC	_INTCON3bits, 0
 	INCF	r0x00, F
 	MOVF	r0x00, W
 	XORLW	0x01
 	BNZ	_00239_DS_
-;	.line	379; timer.c	ints.button2 = 1;           // set a flag for successive handling
+;	.line	382; timer.c	ints.button2 = 1;           // set a flag for successive handling
 	MOVLW	0x01
 	BANKSEL	(_ints + 2)
 	MOVWF	(_ints + 2), B
 	BANKSEL	(_ints + 3)
 	CLRF	(_ints + 3), B
-;	.line	380; timer.c	INTCON3bits.INT1F = 0;
+;	.line	383; timer.c	INTCON3bits.INT1F = 0;
 	BCF	_INTCON3bits, 0
 _00239_DS_:
-;	.line	382; timer.c	if (INTCON3bits.INT3F == 1) {   // button 1 ISR
+;	.line	385; timer.c	if (INTCON3bits.INT3F == 1) {   // button 1 ISR
 	CLRF	r0x00
 	BTFSC	_INTCON3bits, 2
 	INCF	r0x00, F
 	MOVF	r0x00, W
 	XORLW	0x01
 	BNZ	_00242_DS_
-;	.line	383; timer.c	ints.button1 = 1;           // set a flag for successive handling
+;	.line	386; timer.c	ints.button1 = 1;           // set a flag for successive handling
 	MOVLW	0x01
 	BANKSEL	_ints
 	MOVWF	_ints, B
 	BANKSEL	(_ints + 1)
 	CLRF	(_ints + 1), B
-;	.line	384; timer.c	INTCON3bits.INT3F = 0;
+;	.line	387; timer.c	INTCON3bits.INT3F = 0;
 	BCF	_INTCON3bits, 2
 _00242_DS_:
 	MOVFF	PREINC1, r0x00
@@ -1214,13 +1214,13 @@ _00242_DS_:
 ; ; Starting pCode block
 S_timer__UpdateClock	code
 _UpdateClock:
-;	.line	344; timer.c	void UpdateClock() {
+;	.line	347; timer.c	void UpdateClock() {
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVFF	r0x01, POSTDEC1
 	MOVFF	r0x02, POSTDEC1
-;	.line	345; timer.c	UpdateTimeValue(&clock.seconds, MAX_SECONDS, 6);
+;	.line	348; timer.c	UpdateTimeValue(&clock.seconds, MAX_SECONDS, 6);
 	MOVLW	HIGH(_clock + 4)
 	MOVWF	r0x01
 	MOVLW	LOW(_clock + 4)
@@ -1245,13 +1245,13 @@ _UpdateClock:
 	MOVLW	0x07
 	ADDWF	FSR1L, F
 	BANKSEL	(_clock + 4)
-;	.line	346; timer.c	if (!clock.seconds) { // new minute
+;	.line	349; timer.c	if (!clock.seconds) { // new minute
 	MOVF	(_clock + 4), W, B
 	BANKSEL	(_clock + 5)
 	IORWF	(_clock + 5), W, B
 	BTFSS	STATUS, 2
 	BRA	_00207_DS_
-;	.line	347; timer.c	UpdateTimeValue(&clock.minutes, MAX_MINUTES, 3);
+;	.line	350; timer.c	UpdateTimeValue(&clock.minutes, MAX_MINUTES, 3);
 	MOVLW	HIGH(_clock + 2)
 	MOVWF	r0x01
 	MOVLW	LOW(_clock + 2)
@@ -1275,17 +1275,17 @@ _UpdateClock:
 	CALL	_UpdateTimeValue
 	MOVLW	0x07
 	ADDWF	FSR1L, F
-;	.line	348; timer.c	time_value[5] = ':';
+;	.line	351; timer.c	time_value[5] = ':';
 	MOVLW	0x3a
 	BANKSEL	(_time_value + 5)
 	MOVWF	(_time_value + 5), B
 	BANKSEL	(_clock + 2)
-;	.line	349; timer.c	if (!clock.minutes) { // new hour
+;	.line	352; timer.c	if (!clock.minutes) { // new hour
 	MOVF	(_clock + 2), W, B
 	BANKSEL	(_clock + 3)
 	IORWF	(_clock + 3), W, B
 	BNZ	_00201_DS_
-;	.line	350; timer.c	UpdateTimeValue(&clock.hours, MAX_HOURS, 0);
+;	.line	353; timer.c	UpdateTimeValue(&clock.hours, MAX_HOURS, 0);
 	MOVLW	HIGH(_clock)
 	MOVWF	r0x01
 	MOVLW	LOW(_clock)
@@ -1309,13 +1309,13 @@ _UpdateClock:
 	CALL	_UpdateTimeValue
 	MOVLW	0x07
 	ADDWF	FSR1L, F
-;	.line	351; timer.c	time_value[2] = ':';
+;	.line	354; timer.c	time_value[2] = ':';
 	MOVLW	0x3a
 	BANKSEL	(_time_value + 2)
 	MOVWF	(_time_value + 2), B
 _00201_DS_:
 	BANKSEL	(_flags + 10)
-;	.line	353; timer.c	if(!flags.alarm && (clock.minutes == timer.minutes) && (clock.hours == timer.hours))
+;	.line	356; timer.c	if(!flags.alarm && (clock.minutes == timer.minutes) && (clock.hours == timer.hours))
 	MOVF	(_flags + 10), W, B
 	BANKSEL	(_flags + 11)
 	IORWF	(_flags + 11), W, B
@@ -1346,7 +1346,7 @@ _00226_DS_:
 _00227_DS_:
 	BRA	_00207_DS_
 _00228_DS_:
-;	.line	354; timer.c	flags.alarm = 1; // alarm activation
+;	.line	357; timer.c	flags.alarm = 1; // alarm activation
 	MOVLW	0x01
 	BANKSEL	(_flags + 10)
 	MOVWF	(_flags + 10), B
@@ -1354,7 +1354,7 @@ _00228_DS_:
 	CLRF	(_flags + 11), B
 _00207_DS_:
 	BANKSEL	(_flags + 10)
-;	.line	356; timer.c	if(flags.alarm && (clock.seconds > (30 + 1)))
+;	.line	359; timer.c	if(flags.alarm && (clock.seconds > (30 + 1)))
 	MOVF	(_flags + 10), W, B
 	BANKSEL	(_flags + 11)
 	IORWF	(_flags + 11), W, B
@@ -1370,13 +1370,13 @@ _00207_DS_:
 _00229_DS_:
 	BNC	_00209_DS_
 	BANKSEL	(_flags + 10)
-;	.line	357; timer.c	flags.alarm = 0;     // alarm deactivation after ~30 seconds
+;	.line	360; timer.c	flags.alarm = 0;     // alarm deactivation after ~30 seconds
 	CLRF	(_flags + 10), B
 	BANKSEL	(_flags + 11)
 	CLRF	(_flags + 11), B
 _00209_DS_:
 	BANKSEL	(_flags + 2)
-;	.line	358; timer.c	if (!flags.awake_setting_procedure    && !flags.time_setting_procedure)
+;	.line	361; timer.c	if (!flags.awake_setting_procedure    && !flags.time_setting_procedure)
 	MOVF	(_flags + 2), W, B
 	BANKSEL	(_flags + 3)
 	IORWF	(_flags + 3), W, B
@@ -1386,7 +1386,7 @@ _00209_DS_:
 	BANKSEL	(_flags + 1)
 	IORWF	(_flags + 1), W, B
 	BNZ	_00214_DS_
-;	.line	359; timer.c	DisplayString(16, &time_value[0]);
+;	.line	362; timer.c	DisplayString(16, &time_value[0]);
 	MOVLW	HIGH(_time_value)
 	MOVWF	r0x01
 	MOVLW	LOW(_time_value)
@@ -1414,7 +1414,7 @@ _00214_DS_:
 ; ; Starting pCode block
 S_timer__UpdateDisplay	code
 _UpdateDisplay:
-;	.line	316; timer.c	void UpdateDisplay(enum display_states state) {
+;	.line	319; timer.c	void UpdateDisplay(enum display_states state) {
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1422,7 +1422,7 @@ _UpdateDisplay:
 	MOVFF	r0x02, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-;	.line	317; timer.c	switch (state) {
+;	.line	320; timer.c	switch (state) {
 	MOVLW	0x03
 	SUBWF	r0x00, W
 	BTFSC	STATUS, 0
@@ -1455,7 +1455,7 @@ _00195_DS_:
 	GOTO	_00188_DS_
 	GOTO	_00189_DS_
 _00187_DS_:
-;	.line	319; timer.c	DisplayString(0,"Enter the time:");
+;	.line	322; timer.c	DisplayString(0,"Enter the time:");
 	MOVLW	UPPER(__str_0)
 	MOVWF	POSTDEC1
 	MOVLW	HIGH(__str_0)
@@ -1467,7 +1467,7 @@ _00187_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	320; timer.c	DisplayString(16, &time_value[0]);
+;	.line	323; timer.c	DisplayString(16, &time_value[0]);
 	MOVLW	HIGH(_time_value)
 	MOVWF	r0x01
 	MOVLW	LOW(_time_value)
@@ -1485,7 +1485,7 @@ _00187_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	321; timer.c	DisplayString(21,"   ");
+;	.line	324; timer.c	DisplayString(21,"   ");
 	MOVLW	UPPER(__str_1)
 	MOVWF	POSTDEC1
 	MOVLW	HIGH(__str_1)
@@ -1497,10 +1497,10 @@ _00187_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	322; timer.c	break;
+;	.line	325; timer.c	break;
 	BRA	_00191_DS_
 _00188_DS_:
-;	.line	324; timer.c	DisplayString(0, "Enter the awake ");
+;	.line	327; timer.c	DisplayString(0, "Enter the awake ");
 	MOVLW	UPPER(__str_2)
 	MOVWF	POSTDEC1
 	MOVLW	HIGH(__str_2)
@@ -1512,7 +1512,7 @@ _00188_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	325; timer.c	DisplayString(16, "time: ");
+;	.line	328; timer.c	DisplayString(16, "time: ");
 	MOVLW	UPPER(__str_3)
 	MOVWF	POSTDEC1
 	MOVLW	HIGH(__str_3)
@@ -1524,7 +1524,7 @@ _00188_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	326; timer.c	DisplayString(22, &time_value[0]);
+;	.line	329; timer.c	DisplayString(22, &time_value[0]);
 	MOVLW	HIGH(_time_value)
 	MOVWF	r0x01
 	MOVLW	LOW(_time_value)
@@ -1542,10 +1542,10 @@ _00188_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	327; timer.c	break;
+;	.line	330; timer.c	break;
 	BRA	_00191_DS_
 _00189_DS_:
-;	.line	329; timer.c	DisplayString(0, "                ");
+;	.line	332; timer.c	DisplayString(0, "                ");
 	MOVLW	UPPER(__str_4)
 	MOVWF	POSTDEC1
 	MOVLW	HIGH(__str_4)
@@ -1557,7 +1557,7 @@ _00189_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	330; timer.c	DisplayString(16 + 6, "         ");
+;	.line	333; timer.c	DisplayString(16 + 6, "         ");
 	MOVLW	UPPER(__str_5)
 	MOVWF	POSTDEC1
 	MOVLW	HIGH(__str_5)
@@ -1569,7 +1569,7 @@ _00189_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	331; timer.c	DisplayString(16, &time_value[0]);
+;	.line	334; timer.c	DisplayString(16, &time_value[0]);
 	MOVLW	HIGH(_time_value)
 	MOVWF	r0x01
 	MOVLW	LOW(_time_value)
@@ -1588,7 +1588,7 @@ _00189_DS_:
 	MOVLW	0x04
 	ADDWF	FSR1L, F
 _00191_DS_:
-;	.line	333; timer.c	}
+;	.line	336; timer.c	}
 	MOVFF	PREINC1, r0x02
 	MOVFF	PREINC1, r0x01
 	MOVFF	PREINC1, r0x00
@@ -1598,20 +1598,20 @@ _00191_DS_:
 ; ; Starting pCode block
 S_timer__AssignDefaultValues	code
 _AssignDefaultValues:
-;	.line	283; timer.c	void AssignDefaultValues() {
+;	.line	286; timer.c	void AssignDefaultValues() {
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	BANKSEL	_ints
-;	.line	285; timer.c	ints.button1 = 0;
+;	.line	288; timer.c	ints.button1 = 0;
 	CLRF	_ints, B
 	BANKSEL	(_ints + 1)
 	CLRF	(_ints + 1), B
 	BANKSEL	(_ints + 2)
-;	.line	286; timer.c	ints.button2 = 0;
+;	.line	289; timer.c	ints.button2 = 0;
 	CLRF	(_ints + 2), B
 	BANKSEL	(_ints + 3)
 	CLRF	(_ints + 3), B
-;	.line	288; timer.c	time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
+;	.line	291; timer.c	time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
 	MOVLW	0x30
 	BANKSEL	(_time_value + 4)
 	MOVWF	(_time_value + 4), B
@@ -1624,68 +1624,68 @@ _AssignDefaultValues:
 	MOVLW	0x30
 	BANKSEL	_time_value
 	MOVWF	_time_value, B
-;	.line	289; timer.c	time_value[2] = ':';
+;	.line	292; timer.c	time_value[2] = ':';
 	MOVLW	0x3a
 	BANKSEL	(_time_value + 2)
 	MOVWF	(_time_value + 2), B
 	BANKSEL	(_time_value + 5)
-;	.line	290; timer.c	time_value[5] = '\0';
+;	.line	293; timer.c	time_value[5] = '\0';
 	CLRF	(_time_value + 5), B
 	BANKSEL	_in_setting
-;	.line	291; timer.c	in_setting = HOURS; // start from setting the hours
+;	.line	294; timer.c	in_setting = HOURS; // start from setting the hours
 	CLRF	_in_setting, B
-;	.line	293; timer.c	flags.time_setting_procedure = 1;
+;	.line	296; timer.c	flags.time_setting_procedure = 1;
 	MOVLW	0x01
 	BANKSEL	_flags
 	MOVWF	_flags, B
 	BANKSEL	(_flags + 1)
 	CLRF	(_flags + 1), B
 	BANKSEL	(_flags + 2)
-;	.line	294; timer.c	flags.awake_setting_procedure = 0;
+;	.line	297; timer.c	flags.awake_setting_procedure = 0;
 	CLRF	(_flags + 2), B
 	BANKSEL	(_flags + 3)
 	CLRF	(_flags + 3), B
 	BANKSEL	(_flags + 4)
-;	.line	295; timer.c	flags.set = 0;
+;	.line	298; timer.c	flags.set = 0;
 	CLRF	(_flags + 4), B
 	BANKSEL	(_flags + 5)
 	CLRF	(_flags + 5), B
 	BANKSEL	(_flags + 6)
-;	.line	296; timer.c	flags.half_sec = 0;
+;	.line	299; timer.c	flags.half_sec = 0;
 	CLRF	(_flags + 6), B
 	BANKSEL	(_flags + 7)
 	CLRF	(_flags + 7), B
 	BANKSEL	(_flags + 8)
-;	.line	297; timer.c	flags.one_sec = 0;
+;	.line	300; timer.c	flags.one_sec = 0;
 	CLRF	(_flags + 8), B
 	BANKSEL	(_flags + 9)
 	CLRF	(_flags + 9), B
 	BANKSEL	(_flags + 10)
-;	.line	298; timer.c	flags.alarm = 0;
+;	.line	301; timer.c	flags.alarm = 0;
 	CLRF	(_flags + 10), B
 	BANKSEL	(_flags + 11)
 	CLRF	(_flags + 11), B
 	BANKSEL	_timer
-;	.line	300; timer.c	timer.hours = 0;
+;	.line	303; timer.c	timer.hours = 0;
 	CLRF	_timer, B
 	BANKSEL	(_timer + 1)
 	CLRF	(_timer + 1), B
 	BANKSEL	(_timer + 2)
-;	.line	301; timer.c	timer.minutes = 0;
+;	.line	304; timer.c	timer.minutes = 0;
 	CLRF	(_timer + 2), B
 	BANKSEL	(_timer + 3)
 	CLRF	(_timer + 3), B
 	BANKSEL	_setting
-;	.line	303; timer.c	setting.hours = 0;
+;	.line	306; timer.c	setting.hours = 0;
 	CLRF	_setting, B
 	BANKSEL	(_setting + 1)
 	CLRF	(_setting + 1), B
 	BANKSEL	(_setting + 2)
-;	.line	304; timer.c	setting.minutes = 0;
+;	.line	307; timer.c	setting.minutes = 0;
 	CLRF	(_setting + 2), B
 	BANKSEL	(_setting + 3)
 	CLRF	(_setting + 3), B
-;	.line	306; timer.c	UpdateDisplay(CLOCK_SETTING);
+;	.line	309; timer.c	UpdateDisplay(CLOCK_SETTING);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_UpdateDisplay
@@ -1696,59 +1696,59 @@ _AssignDefaultValues:
 ; ; Starting pCode block
 S_timer__ConfigureRegisters	code
 _ConfigureRegisters:
-;	.line	241; timer.c	void ConfigureRegisters() {
+;	.line	244; timer.c	void ConfigureRegisters() {
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
-;	.line	243; timer.c	INTCONbits.GIE      =   1;   //enable high priority interrupts
+;	.line	246; timer.c	INTCONbits.GIE      =   1;   //enable high priority interrupts
 	BSF	_INTCONbits, 7
-;	.line	244; timer.c	RCONbits.IPEN       =   1;   //enable interrupts priority levels
+;	.line	247; timer.c	RCONbits.IPEN       =   1;   //enable interrupts priority levels
 	BSF	_RCONbits, 7
-;	.line	250; timer.c	T1CONbits.TMR1ON    =   0;    // disable timer1
+;	.line	253; timer.c	T1CONbits.TMR1ON    =   0;    // disable timer1
 	BCF	_T1CONbits, 0
-;	.line	251; timer.c	T1CONbits.RD16      =   1;    // use timer1 16-bit counter
+;	.line	254; timer.c	T1CONbits.RD16      =   1;    // use timer1 16-bit counter
 	BSF	_T1CONbits, 7
-;	.line	252; timer.c	T1CONbits.T1CKPS0   =   0;    // prescaler set to 1:1
+;	.line	255; timer.c	T1CONbits.T1CKPS0   =   0;    // prescaler set to 1:1
 	BCF	_T1CONbits, 4
-;	.line	253; timer.c	T1CONbits.T1CKPS1   =   0;
+;	.line	256; timer.c	T1CONbits.T1CKPS1   =   0;
 	BCF	_T1CONbits, 5
-;	.line	254; timer.c	T1CONbits.T1OSCEN   =   1;    // timer1 oscillator enable
+;	.line	257; timer.c	T1CONbits.T1OSCEN   =   1;    // timer1 oscillator enable
 	BSF	_T1CONbits, 3
-;	.line	255; timer.c	T1CONbits.TMR1CS    =   1;    // external clock selected
+;	.line	258; timer.c	T1CONbits.TMR1CS    =   1;    // external clock selected
 	BSF	_T1CONbits, 1
-;	.line	256; timer.c	PIR1bits.TMR1IF     =   0;    // clear timer1 overflow bit
+;	.line	259; timer.c	PIR1bits.TMR1IF     =   0;    // clear timer1 overflow bit
 	BCF	_PIR1bits, 0
-;	.line	257; timer.c	PIE1bits.TMR1IE     =   1;    // timer1 interrupt enable
+;	.line	260; timer.c	PIE1bits.TMR1IE     =   1;    // timer1 interrupt enable
 	BSF	_PIE1bits, 0
-;	.line	258; timer.c	IPR1bits.TMR1IP     =   1;    // high priority interrupt
+;	.line	261; timer.c	IPR1bits.TMR1IP     =   1;    // high priority interrupt
 	BSF	_IPR1bits, 0
-;	.line	259; timer.c	TMR1L               =   (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 initial value
+;	.line	262; timer.c	TMR1L               =   (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 initial value
 	CLRF	_TMR1L
-;	.line	260; timer.c	TMR1H               =   (0x10000 - EXTCLOCK_FREQ/2) >> 8;
+;	.line	263; timer.c	TMR1H               =   (0x10000 - EXTCLOCK_FREQ/2) >> 8;
 	MOVLW	0xc0
 	MOVWF	_TMR1H
-;	.line	263; timer.c	INTCON3bits.INT1P   =   1;    //connect INT1 interrupt (button 2) to high prio
+;	.line	266; timer.c	INTCON3bits.INT1P   =   1;    //connect INT1 interrupt (button 2) to high prio
 	BSF	_INTCON3bits, 6
-;	.line	264; timer.c	INTCON2bits.INT3IP  =   1;    //connect INT3 interrupt (button 1) to high prio
+;	.line	267; timer.c	INTCON2bits.INT3IP  =   1;    //connect INT3 interrupt (button 1) to high prio
 	BSF	_INTCON2bits, 1
-;	.line	265; timer.c	INTCON2bits.INTEDG1 =   0;    //INT1 interrupts on falling edge
+;	.line	268; timer.c	INTCON2bits.INTEDG1 =   0;    //INT1 interrupts on falling edge
 	BCF	_INTCON2bits, 5
-;	.line	266; timer.c	INTCON2bits.INTEDG3 =   0;    //INT3 interrupts on falling edge
+;	.line	269; timer.c	INTCON2bits.INTEDG3 =   0;    //INT3 interrupts on falling edge
 	BCF	_INTCON2bits, 3
-;	.line	267; timer.c	INTCON3bits.INT1F   =   0;    //clear INT1 flag
+;	.line	270; timer.c	INTCON3bits.INT1F   =   0;    //clear INT1 flag
 	BCF	_INTCON3bits, 0
-;	.line	268; timer.c	INTCON3bits.INT3F   =   0;    //clear INT3 flag
+;	.line	271; timer.c	INTCON3bits.INT3F   =   0;    //clear INT3 flag
 	BCF	_INTCON3bits, 2
-;	.line	269; timer.c	INTCON3bits.INT1E   =   1;    //enable INT1 interrupt (button 2)
+;	.line	272; timer.c	INTCON3bits.INT1E   =   1;    //enable INT1 interrupt (button 2)
 	BSF	_INTCON3bits, 3
-;	.line	270; timer.c	INTCON3bits.INT3E   =   1;    //enable INT1 interrupt (button 1)
+;	.line	273; timer.c	INTCON3bits.INT3E   =   1;    //enable INT1 interrupt (button 1)
 	BSF	_INTCON3bits, 5
-;	.line	273; timer.c	TRISJbits.TRISJ0    =   0;    // configure PORTJ0 for output (led0)
+;	.line	276; timer.c	TRISJbits.TRISJ0    =   0;    // configure PORTJ0 for output (led0)
 	BCF	_TRISJbits, 0
-;	.line	274; timer.c	TRISJbits.TRISJ1    =   0;    // configure PORTJ1 for output (led1)
+;	.line	277; timer.c	TRISJbits.TRISJ1    =   0;    // configure PORTJ1 for output (led1)
 	BCF	_TRISJbits, 1
-;	.line	275; timer.c	LATJbits.LATJ0      =   1;    // led0 output high
+;	.line	278; timer.c	LATJbits.LATJ0      =   1;    // led0 output high
 	BSF	_LATJbits, 0
-;	.line	276; timer.c	LATJbits.LATJ1      =   0;    // led1 output low
+;	.line	279; timer.c	LATJbits.LATJ1      =   0;    // led1 output low
 	BCF	_LATJbits, 1
 	MOVFF	PREINC1, FSR2L
 	RETURN	
@@ -1756,7 +1756,7 @@ _ConfigureRegisters:
 ; ; Starting pCode block
 S_timer__HandleButton2Pressure	code
 _HandleButton2Pressure:
-;	.line	220; timer.c	void HandleButton2Pressure() {
+;	.line	223; timer.c	void HandleButton2Pressure() {
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1766,12 +1766,12 @@ _HandleButton2Pressure:
 	MOVFF	r0x04, POSTDEC1
 	MOVFF	r0x05, POSTDEC1
 	BANKSEL	_flags
-;	.line	221; timer.c	if (flags.time_setting_procedure) { // setting the clock's time
+;	.line	224; timer.c	if (flags.time_setting_procedure) { // setting the clock's time
 	MOVF	_flags, W, B
 	BANKSEL	(_flags + 1)
 	IORWF	(_flags + 1), W, B
 	BZ	_00170_DS_
-;	.line	223; timer.c	UpdateProperTimeValue(&setting.hours, &setting.minutes); 
+;	.line	226; timer.c	UpdateProperTimeValue(&setting.hours, &setting.minutes); 
 	MOVLW	HIGH(_setting)
 	MOVWF	r0x01
 	MOVLW	LOW(_setting)
@@ -1802,12 +1802,12 @@ _HandleButton2Pressure:
 	BRA	_00172_DS_
 _00170_DS_:
 	BANKSEL	(_flags + 2)
-;	.line	224; timer.c	} else if (flags.awake_setting_procedure) { // setting the awake time
+;	.line	227; timer.c	} else if (flags.awake_setting_procedure) { // setting the awake time
 	MOVF	(_flags + 2), W, B
 	BANKSEL	(_flags + 3)
 	IORWF	(_flags + 3), W, B
 	BZ	_00167_DS_
-;	.line	226; timer.c	UpdateProperTimeValue(&timer.hours, &timer.minutes);
+;	.line	229; timer.c	UpdateProperTimeValue(&timer.hours, &timer.minutes);
 	MOVLW	HIGH(_timer)
 	MOVWF	r0x01
 	MOVLW	LOW(_timer)
@@ -1838,18 +1838,18 @@ _00170_DS_:
 	BRA	_00172_DS_
 _00167_DS_:
 	BANKSEL	(_flags + 4)
-;	.line	227; timer.c	} else if (flags.set) {
+;	.line	230; timer.c	} else if (flags.set) {
 	MOVF	(_flags + 4), W, B
 	BANKSEL	(_flags + 5)
 	IORWF	(_flags + 5), W, B
 	BZ	_00172_DS_
-;	.line	228; timer.c	flags.awake_setting_procedure = 1;
+;	.line	231; timer.c	flags.awake_setting_procedure = 1;
 	MOVLW	0x01
 	BANKSEL	(_flags + 2)
 	MOVWF	(_flags + 2), B
 	BANKSEL	(_flags + 3)
 	CLRF	(_flags + 3), B
-;	.line	229; timer.c	Int2String(timer.hours, 0);
+;	.line	232; timer.c	Int2String(timer.hours, 0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x00
@@ -1863,11 +1863,11 @@ _00167_DS_:
 	CALL	_Int2String
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	230; timer.c	time_value[2] = ':';
+;	.line	233; timer.c	time_value[2] = ':';
 	MOVLW	0x3a
 	BANKSEL	(_time_value + 2)
 	MOVWF	(_time_value + 2), B
-;	.line	231; timer.c	Int2String(timer.minutes, 3);
+;	.line	234; timer.c	Int2String(timer.minutes, 3);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x03
@@ -1882,9 +1882,9 @@ _00167_DS_:
 	MOVLW	0x04
 	ADDWF	FSR1L, F
 	BANKSEL	_in_setting
-;	.line	232; timer.c	in_setting = HOURS;
+;	.line	235; timer.c	in_setting = HOURS;
 	CLRF	_in_setting, B
-;	.line	233; timer.c	UpdateDisplay(TIMER_SETTING);
+;	.line	236; timer.c	UpdateDisplay(TIMER_SETTING);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_UpdateDisplay
@@ -1902,7 +1902,7 @@ _00172_DS_:
 ; ; Starting pCode block
 S_timer__UpdateProperTimeValue	code
 _UpdateProperTimeValue:
-;	.line	205; timer.c	void UpdateProperTimeValue(int* const hours, int* const minutes) {
+;	.line	208; timer.c	void UpdateProperTimeValue(int* const hours, int* const minutes) {
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1925,10 +1925,10 @@ _UpdateProperTimeValue:
 	MOVLW	0x07
 	MOVFF	PLUSW2, r0x05
 	BANKSEL	_in_setting
-;	.line	206; timer.c	if (in_setting == HOURS) {
+;	.line	209; timer.c	if (in_setting == HOURS) {
 	MOVF	_in_setting, W, B
 	BNZ	_00157_DS_
-;	.line	207; timer.c	UpdateTimeValue(hours, MAX_HOURS, 0);
+;	.line	210; timer.c	UpdateTimeValue(hours, MAX_HOURS, 0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x00
@@ -1947,7 +1947,7 @@ _UpdateProperTimeValue:
 	MOVLW	0x07
 	ADDWF	FSR1L, F
 	BANKSEL	(_flags + 2)
-;	.line	208; timer.c	DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
+;	.line	211; timer.c	DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
 	MOVF	(_flags + 2), W, B
 	MOVWF	r0x00
 ; ;multiply lit val:0x06 by variable r0x00 and store in r0x00
@@ -1977,7 +1977,7 @@ _UpdateProperTimeValue:
 	ADDWF	FSR1L, F
 	BRA	_00159_DS_
 _00157_DS_:
-;	.line	210; timer.c	UpdateTimeValue(minutes, MAX_MINUTES, 3);
+;	.line	213; timer.c	UpdateTimeValue(minutes, MAX_MINUTES, 3);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x03
@@ -1996,7 +1996,7 @@ _00157_DS_:
 	MOVLW	0x07
 	ADDWF	FSR1L, F
 	BANKSEL	(_flags + 2)
-;	.line	211; timer.c	DisplayString(19 + 6 * flags.awake_setting_procedure, &time_value[3]);
+;	.line	214; timer.c	DisplayString(19 + 6 * flags.awake_setting_procedure, &time_value[3]);
 	MOVF	(_flags + 2), W, B
 	MOVWF	r0x00
 ; ;multiply lit val:0x06 by variable r0x00 and store in r0x00
@@ -2159,52 +2159,71 @@ _00146_DS_:
 	MOVF	(_flags + 4), W, B
 	BANKSEL	(_flags + 5)
 	IORWF	(_flags + 5), W, B
-	BZ	_00151_DS_
-;	.line	185; timer.c	flags.time_setting_procedure = 1;
+	BTFSC	STATUS, 2
+	BRA	_00151_DS_
+	BANKSEL	_clock
+;	.line	186; timer.c	setting.hours   = clock.hours;
+	MOVF	_clock, W, B
+	BANKSEL	_setting
+	MOVWF	_setting, B
+	BANKSEL	(_clock + 1)
+	MOVF	(_clock + 1), W, B
+	BANKSEL	(_setting + 1)
+	MOVWF	(_setting + 1), B
+	BANKSEL	(_clock + 2)
+;	.line	187; timer.c	setting.minutes = clock.minutes;
+	MOVF	(_clock + 2), W, B
+	BANKSEL	(_setting + 2)
+	MOVWF	(_setting + 2), B
+	BANKSEL	(_clock + 3)
+	MOVF	(_clock + 3), W, B
+	BANKSEL	(_setting + 3)
+	MOVWF	(_setting + 3), B
+;	.line	188; timer.c	flags.time_setting_procedure = 1; // start the time setting
 	MOVLW	0x01
 	BANKSEL	_flags
 	MOVWF	_flags, B
 	BANKSEL	(_flags + 1)
 	CLRF	(_flags + 1), B
-;	.line	186; timer.c	Int2String(clock.hours, 0);
+;	.line	189; timer.c	Int2String(setting.hours, 0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x00
 	MOVWF	POSTDEC1
-	BANKSEL	(_clock + 1)
-	MOVF	(_clock + 1), W, B
+	BANKSEL	(_setting + 1)
+	MOVF	(_setting + 1), W, B
 	MOVWF	POSTDEC1
-	BANKSEL	_clock
-	MOVF	_clock, W, B
+	BANKSEL	_setting
+	MOVF	_setting, W, B
 	MOVWF	POSTDEC1
 	CALL	_Int2String
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	187; timer.c	time_value[2] = ':';
+;	.line	190; timer.c	time_value[2] = ':';
 	MOVLW	0x3a
 	BANKSEL	(_time_value + 2)
 	MOVWF	(_time_value + 2), B
-;	.line	188; timer.c	Int2String(clock.minutes, 3);
+;	.line	191; timer.c	Int2String(setting.minutes, 3);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x03
 	MOVWF	POSTDEC1
-	BANKSEL	(_clock + 3)
-	MOVF	(_clock + 3), W, B
+	BANKSEL	(_setting + 3)
+	MOVF	(_setting + 3), W, B
 	MOVWF	POSTDEC1
-	BANKSEL	(_clock + 2)
-	MOVF	(_clock + 2), W, B
+	BANKSEL	(_setting + 2)
+	MOVF	(_setting + 2), W, B
 	MOVWF	POSTDEC1
 	CALL	_Int2String
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-;	.line	189; timer.c	UpdateDisplay(CLOCK_SETTING);
+;	.line	192; timer.c	UpdateDisplay(CLOCK_SETTING);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_UpdateDisplay
 	INCF	FSR1L, F
 	BANKSEL	_in_setting
-;	.line	190; timer.c	in_setting = HOURS;
+;	.line	193; timer.c	in_setting = HOURS;
 	CLRF	_in_setting, B
 _00151_DS_:
 	MOVFF	PREINC1, FSR2L
@@ -2522,8 +2541,8 @@ __str_5:
 
 
 ; Statistics:
-; code size:	 4064 (0x0fe0) bytes ( 3.10%)
-;           	 2032 (0x07f0) words
+; code size:	 4098 (0x1002) bytes ( 3.13%)
+;           	 2049 (0x0801) words
 ; udata size:	   46 (0x002e) bytes ( 1.20%)
 ; access size:	   22 (0x0016) bytes
 

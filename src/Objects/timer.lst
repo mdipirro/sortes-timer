@@ -1,4 +1,4 @@
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  1
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -7,7 +7,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00001 ;--------------------------------------------------------
                00002 ; File Created by SDCC : free open source ANSI-C Compiler
                00003 ; Version 2.9.4 #5595 (Nov 15 2017) (UNIX)
-               00004 ; This file was generated Tue Nov 28 01:41:33 2017
+               00004 ; This file was generated Tue Nov 28 03:22:59 2017
                00005 ;--------------------------------------------------------
                00006 ; PIC16 port for the Microchip 16-bit core micros
                00007 ;--------------------------------------------------------
@@ -58,7 +58,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00052         extern _MACON4bits
                00053         extern _MACLCON1bits
                00054         extern _MACLCON2bits
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  2
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -118,7 +118,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00106         extern _DDRCbits
                00107         extern _TRISCbits
                00108         extern _DDRDbits
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  3
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -178,7 +178,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00160         extern _ECON1bits
                00161         extern _OSCCONbits
                00162         extern _T0CONbits
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  4
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -238,7 +238,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00214         extern _EHT5
                00215         extern _EHT6
                00216         extern _EHT7
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  5
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -298,7 +298,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00268         extern _EIE
                00269         extern _ESTAT
                00270         extern _ECON2
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  6
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -358,7 +358,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00322         extern _LATC
                00323         extern _LATD
                00324         extern _LATE
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  7
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -418,7 +418,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00376         extern _ECCP1AS
                00377         extern _CCP3CON
                00378         extern _ECCP3CON
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  8
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -478,7 +478,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00430         extern _FSR1L
                00431         extern _FSR1H
                00432         extern _PLUSW1
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE  9
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -538,7 +538,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000FE4     00484 PREINC1 equ     0xfe4
   00000FDB     00485 PLUSW2  equ     0xfdb
   00000FF3     00486 PRODL   equ     0xff3
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 10
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -598,7 +598,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00538 
                00539 ;--------------------------------------------------------
                00540 ; interrupt vector 
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 11
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -619,9 +619,9 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00553 ; ; Starting pCode block
                00554 S_timer__main   code
 0000 00555 _main:
-               00556 ;       .line   390; timer.c    LCDInit();
+               00556 ;       .line   393; timer.c    LCDInit();
 0000 EC00 F000 00557         CALL    _LCDInit
-               00558 ;       .line   391; timer.c    DelayMs(200);
+               00558 ;       .line   394; timer.c    DelayMs(200);
 0004 0E20      00559         MOVLW   0x20
 0006 6E00      00560         MOVWF   r0x00
 0008 0E30      00561         MOVLW   0x30
@@ -647,18 +647,18 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0036 1000      00581         IORWF   r0x06, W
 0038 1000      00582         IORWF   r0x07, W
 003A E100      00583         BNZ     _00258_DS_
-               00584 ;       .line   394; timer.c    ConfigureRegisters();
+               00584 ;       .line   397; timer.c    ConfigureRegisters();
 003C EC00 F000 00585         CALL    _ConfigureRegisters
-               00586 ;       .line   395; timer.c    AssignDefaultValues();
+               00586 ;       .line   398; timer.c    AssignDefaultValues();
 0040 EC00 F000 00587         CALL    _AssignDefaultValues
 0044 00588 _00277_DS_:
 0044 0000      00589         BANKSEL (_flags + 6)
-               00590 ;       .line   398; timer.c    if (flags.half_sec) {               // routine executed every half second
+               00590 ;       .line   401; timer.c    if (flags.half_sec) {               // routine executed every half second
 0046 5100      00591         MOVF    (_flags + 6), W, B
 0048 0000      00592         BANKSEL (_flags + 7)
 004A 1100      00593         IORWF   (_flags + 7), W, B
 004C B4D8      00594         BTFSC   STATUS, 2
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 12
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -666,16 +666,16 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
  
 004E D000      00595         BRA     _00271_DS_
 0050 0000      00596         BANKSEL (_flags + 8)
-               00597 ;       .line   400; timer.c    if (flags.one_sec) {
+               00597 ;       .line   403; timer.c    if (flags.one_sec) {
 0052 5100      00598         MOVF    (_flags + 8), W, B
 0054 0000      00599         BANKSEL (_flags + 9)
 0056 1100      00600         IORWF   (_flags + 9), W, B
 0058 E000      00601         BZ      _00265_DS_
-               00602 ;       .line   401; timer.c    UpdateClock();
+               00602 ;       .line   404; timer.c    UpdateClock();
 005A EC00 F000 00603         CALL    _UpdateClock
 005E 00604 _00265_DS_:
 005E 0000      00605         BANKSEL (_flags + 8)
-               00606 ;       .line   404; timer.c    if (flags.one_sec && flags.alarm) {
+               00606 ;       .line   407; timer.c    if (flags.one_sec && flags.alarm) {
 0060 5100      00607         MOVF    (_flags + 8), W, B
 0062 0000      00608         BANKSEL (_flags + 9)
 0064 1100      00609         IORWF   (_flags + 9), W, B
@@ -685,7 +685,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 006C 0000      00613         BANKSEL (_flags + 11)
 006E 1100      00614         IORWF   (_flags + 11), W, B
 0070 E000      00615         BZ      _00267_DS_
-               00616 ;       .line   405; timer.c    LATJbits.LATJ0 ^= 1;        // led0 blink
+               00616 ;       .line   408; timer.c    LATJbits.LATJ0 ^= 1;        // led0 blink
 0072 6A00      00617         CLRF    r0x00
 0074 B000      00618         BTFSC   _LATJbits, 0
 0076 2A00      00619         INCF    r0x00, F
@@ -698,7 +698,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0084 0BFE      00626         ANDLW   0xfe
 0086 10F4      00627         IORWF   PRODH, W
 0088 6E00      00628         MOVWF   _LATJbits
-               00629 ;       .line   406; timer.c    LATJbits.LATJ1 ^= 1;        // led1 blink
+               00629 ;       .line   409; timer.c    LATJbits.LATJ1 ^= 1;        // led1 blink
 008A 6A00      00630         CLRF    r0x00
 008C B200      00631         BTFSC   _LATJbits, 1
 008E 2A00      00632         INCF    r0x00, F
@@ -714,11 +714,11 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00A2 6E00      00642         MOVWF   _LATJbits
 00A4 D000      00643         BRA     _00268_DS_
 00A6 00644 _00267_DS_:
-               00645 ;       .line   408; timer.c    LATJbits.LATJ0 ^= 1;        // led0 blink
+               00645 ;       .line   411; timer.c    LATJbits.LATJ0 ^= 1;        // led0 blink
 00A6 6A00      00646         CLRF    r0x00
 00A8 B000      00647         BTFSC   _LATJbits, 0
 00AA 2A00      00648         INCF    r0x00, F
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 13
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -735,57 +735,57 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00BC 6E00      00657         MOVWF   _LATJbits
 00BE 00658 _00268_DS_:
 00BE 0000      00659         BANKSEL (_flags + 8)
-               00660 ;       .line   411; timer.c    flags.one_sec = 0;
+               00660 ;       .line   414; timer.c    flags.one_sec = 0;
 00C0 6B00      00661         CLRF    (_flags + 8), B
 00C2 0000      00662         BANKSEL (_flags + 9)
 00C4 6B00      00663         CLRF    (_flags + 9), B
 00C6 0000      00664         BANKSEL (_flags + 6)
-               00665 ;       .line   412; timer.c    flags.half_sec = 0;
+               00665 ;       .line   415; timer.c    flags.half_sec = 0;
 00C8 6B00      00666         CLRF    (_flags + 6), B
 00CA 0000      00667         BANKSEL (_flags + 7)
 00CC 6B00      00668         CLRF    (_flags + 7), B
 00CE 00669 _00271_DS_:
 00CE 0000      00670         BANKSEL _ints
-               00671 ;       .line   414; timer.c    if (ints.button1) {         // button 1 pressed
+               00671 ;       .line   417; timer.c    if (ints.button1) {         // button 1 pressed
 00D0 5100      00672         MOVF    _ints, W, B
 00D2 0000      00673         BANKSEL (_ints + 1)
 00D4 1100      00674         IORWF   (_ints + 1), W, B
 00D6 E000      00675         BZ      _00273_DS_
 00D8 0000      00676         BANKSEL _ints
-               00677 ;       .line   415; timer.c    ints.button1 = 0;
+               00677 ;       .line   418; timer.c    ints.button1 = 0;
 00DA 6B00      00678         CLRF    _ints, B
 00DC 0000      00679         BANKSEL (_ints + 1)
 00DE 6B00      00680         CLRF    (_ints + 1), B
-               00681 ;       .line   416; timer.c    HandleButton1Pressure();
+               00681 ;       .line   419; timer.c    HandleButton1Pressure();
 00E0 EC00 F000 00682         CALL    _HandleButton1Pressure
 00E4 00683 _00273_DS_:
 00E4 0000      00684         BANKSEL (_ints + 2)
-               00685 ;       .line   418; timer.c    if (ints.button2) {         // button 2 pressed
+               00685 ;       .line   421; timer.c    if (ints.button2) {         // button 2 pressed
 00E6 5100      00686         MOVF    (_ints + 2), W, B
 00E8 0000      00687         BANKSEL (_ints + 3)
 00EA 1100      00688         IORWF   (_ints + 3), W, B
 00EC B4D8      00689         BTFSC   STATUS, 2
 00EE D000      00690         BRA     _00277_DS_
 00F0 0000      00691         BANKSEL (_ints + 2)
-               00692 ;       .line   419; timer.c    ints.button2 = 0;
+               00692 ;       .line   422; timer.c    ints.button2 = 0;
 00F2 6B00      00693         CLRF    (_ints + 2), B
 00F4 0000      00694         BANKSEL (_ints + 3)
 00F6 6B00      00695         CLRF    (_ints + 3), B
-               00696 ;       .line   420; timer.c    HandleButton2Pressure();
+               00696 ;       .line   423; timer.c    HandleButton2Pressure();
 00F8 EC00 F000 00697         CALL    _HandleButton2Pressure
 00FC D000      00698         BRA     _00277_DS_
 00FE 0012      00699         RETURN  
                00700 
                00701 ; ; Starting pCode block
                00702 S_timer__strlcpy        code
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 14
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
 0000 00703 _strlcpy:
-               00704 ;       .line   526; timer.c    strlcpy(char *dst, const char *src, size_t siz)
+               00704 ;       .line   529; timer.c    strlcpy(char *dst, const char *src, size_t siz)
 0000 CFD9 FFE5 00705         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 00706         MOVFF   FSR1L, FSR2L
 0008 C000 FFE5 00707         MOVFF   r0x00, POSTDEC1
@@ -826,19 +826,19 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0086 CFDB F000 00742         MOVFF   PLUSW2, r0x06
 008A 0E09      00743         MOVLW   0x09
 008C CFDB F000 00744         MOVFF   PLUSW2, r0x07
-               00745 ;       .line   528; timer.c    char       *d = dst;
+               00745 ;       .line   531; timer.c    char       *d = dst;
 0090 C000 F000 00746         MOVFF   r0x00, r0x08
 0094 C000 F000 00747         MOVFF   r0x01, r0x09
 0098 C000 F000 00748         MOVFF   r0x02, r0x0a
-               00749 ;       .line   529; timer.c    const char *s = src;
+               00749 ;       .line   532; timer.c    const char *s = src;
 009C C000 F000 00750         MOVFF   r0x03, r0x0b
 00A0 C000 F000 00751         MOVFF   r0x04, r0x0c
 00A4 C000 F000 00752         MOVFF   r0x05, r0x0d
-               00753 ;       .line   530; timer.c    size_t      n = siz;
+               00753 ;       .line   533; timer.c    size_t      n = siz;
 00A8 C000 F000 00754         MOVFF   r0x06, r0x0e
 00AC C000 F000 00755         MOVFF   r0x07, r0x0f
-               00756 ;       .line   533; timer.c    if (n != 0)
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 15
+               00756 ;       .line   536; timer.c    if (n != 0)
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 15
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -848,7 +848,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00B2 1000      00758         IORWF   r0x07, W
 00B4 B4D8      00759         BTFSC   STATUS, 2
 00B6 D000      00760         BRA     _00326_DS_
-               00761 ;       .line   535; timer.c    while (--n != 0)
+               00761 ;       .line   538; timer.c    while (--n != 0)
 00B8 C000 F000 00762         MOVFF   r0x03, r0x10
 00BC C000 F000 00763         MOVFF   r0x04, r0x11
 00C0 C000 F000 00764         MOVFF   r0x05, r0x12
@@ -862,7 +862,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00D4 5000      00772         MOVF    r0x13, W
 00D6 1000      00773         IORWF   r0x14, W
 00D8 E000      00774         BZ      _00341_DS_
-               00775 ;       .line   537; timer.c    if ((*d++ = *s++) == '\0')
+               00775 ;       .line   540; timer.c    if ((*d++ = *s++) == '\0')
 00DA C000 FFE9 00776         MOVFF   r0x10, FSR0L
 00DE C000 FFF3 00777         MOVFF   r0x11, PRODL
 00E2 5000      00778         MOVF    r0x12, W
@@ -886,7 +886,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0110 5000      00796         MOVF    r0x15, W
 0112 E100      00797         BNZ     _00322_DS_
 0114 00798 _00341_DS_:
-               00799 ;       .line   538; timer.c    break;
+               00799 ;       .line   541; timer.c    break;
 0114 C000 F000 00800         MOVFF   r0x10, r0x0b
 0118 C000 F000 00801         MOVFF   r0x11, r0x0c
 011C C000 F000 00802         MOVFF   r0x12, r0x0d
@@ -896,9 +896,9 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 012C C000 F000 00806         MOVFF   r0x13, r0x0e
 0130 C000 F000 00807         MOVFF   r0x14, r0x0f
 0134 00808 _00326_DS_:
-               00809 ;       .line   543; timer.c    if (n == 0)
+               00809 ;       .line   546; timer.c    if (n == 0)
 0134 5000      00810         MOVF    r0x0e, W
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 16
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 16
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -906,11 +906,11 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
  
 0136 1000      00811         IORWF   r0x0f, W
 0138 E100      00812         BNZ     _00333_DS_
-               00813 ;       .line   545; timer.c    if (siz != 0)
+               00813 ;       .line   548; timer.c    if (siz != 0)
 013A 5000      00814         MOVF    r0x06, W
 013C 1000      00815         IORWF   r0x07, W
 013E E000      00816         BZ      _00340_DS_
-               00817 ;       .line   546; timer.c    *d = '\0';          /* NUL-terminate dst */
+               00817 ;       .line   549; timer.c    *d = '\0';          /* NUL-terminate dst */
 0140 0E00      00818         MOVLW   0x00
 0142 6EE5      00819         MOVWF   POSTDEC1
 0144 C000 FFE9 00820         MOVFF   r0x08, FSR0L
@@ -918,7 +918,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 014C 5000      00822         MOVF    r0x0a, W
 014E EC00 F000 00823         CALL    __gptrput1
 0152 00824 _00340_DS_:
-               00825 ;       .line   547; timer.c    while (*s++)
+               00825 ;       .line   550; timer.c    while (*s++)
 0152 C000 F000 00826         MOVFF   r0x0b, r0x00
 0156 C000 F000 00827         MOVFF   r0x0c, r0x01
 015A C000 F000 00828         MOVFF   r0x0d, r0x02
@@ -939,7 +939,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0180 C000 F000 00843         MOVFF   r0x01, r0x0c
 0184 C000 F000 00844         MOVFF   r0x02, r0x0d
 0188 00845 _00333_DS_:
-               00846 ;       .line   551; timer.c    return (s - src - 1);       /* count does not include NUL */
+               00846 ;       .line   554; timer.c    return (s - src - 1);       /* count does not include NUL */
 0188 5000      00847         MOVF    r0x03, W
 018A 5C00      00848         SUBWF   r0x0b, W
 018C 6E00      00849         MOVWF   r0x03
@@ -958,7 +958,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 01AE CFE4 F000 00862         MOVFF   PREINC1, r0x12
 01B2 CFE4 F000 00863         MOVFF   PREINC1, r0x11
 01B6 CFE4 F000 00864         MOVFF   PREINC1, r0x10
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 17
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 17
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -986,7 +986,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00884 ; ; Starting pCode block
                00885 S_timer__DisplayString  code
 0000 00886 _DisplayString:
-               00887 ;       .line   474; timer.c    void DisplayString(BYTE pos, char* text)
+               00887 ;       .line   477; timer.c    void DisplayString(BYTE pos, char* text)
 0000 CFD9 FFE5 00888         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 00889         MOVFF   FSR1L, FSR2L
 0008 C000 FFE5 00890         MOVFF   r0x00, POSTDEC1
@@ -1007,7 +1007,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 003E CFDB F000 00905         MOVFF   PLUSW2, r0x02
 0042 0E05      00906         MOVLW   0x05
 0044 CFDB F000 00907         MOVFF   PLUSW2, r0x03
-               00908 ;       .line   476; timer.c    BYTE        l = strlen(text);/*number of actual chars in the string*/
+               00908 ;       .line   479; timer.c    BYTE        l = strlen(text);/*number of actual chars in the string*/
 0048 5000      00909         MOVF    r0x03, W
 004A 6EE5      00910         MOVWF   POSTDEC1
 004C 5000      00911         MOVF    r0x02, W
@@ -1018,18 +1018,18 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0058 6E00      00916         MOVWF   r0x04
 005A CFF3 F000 00917         MOVFF   PRODL, r0x05
 005E 0E03      00918         MOVLW   0x03
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 18
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 18
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
 0060 26E1      00919         ADDWF   FSR1L, F
-               00920 ;       .line   477; timer.c    BYTE      max = 32-pos;    /*available space on the lcd*/
+               00920 ;       .line   480; timer.c    BYTE      max = 32-pos;    /*available space on the lcd*/
 0062 5000      00921         MOVF    r0x00, W
 0064 0820      00922         SUBLW   0x20
 0066 6E00      00923         MOVWF   r0x05
-               00924 ;       .line   478; timer.c    char       *d = (char*)&LCDText[pos];
+               00924 ;       .line   481; timer.c    char       *d = (char*)&LCDText[pos];
 0068 6A00      00925         CLRF    r0x06
 006A 0E00      00926         MOVLW   LOW(_LCDText)
 006C 2600      00927         ADDWF   r0x00, F
@@ -1041,19 +1041,19 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0078 6E00      00933         MOVWF   r0x00
 007A 0E80      00934         MOVLW   0x80
 007C 6E00      00935         MOVWF   r0x07
-               00936 ;       .line   480; timer.c    size_t      n = (l<max)?l:max;
+               00936 ;       .line   483; timer.c    size_t      n = (l<max)?l:max;
 007E 5000      00937         MOVF    r0x05, W
 0080 5C00      00938         SUBWF   r0x04, W
 0082 E300      00939         BNC     _00310_DS_
 0084 C000 F000 00940         MOVFF   r0x05, r0x04
 0088 00941 _00310_DS_:
 0088 6A00      00942         CLRF    r0x05
-               00943 ;       .line   482; timer.c    if (n != 0)
+               00943 ;       .line   485; timer.c    if (n != 0)
 008A 5000      00944         MOVF    r0x04, W
 008C 1000      00945         IORWF   r0x05, W
 008E E000      00946         BZ      _00306_DS_
 0090 00947 _00302_DS_:
-               00948 ;       .line   483; timer.c    while (n-- != 0)*d++ = *s++;
+               00948 ;       .line   486; timer.c    while (n-- != 0)*d++ = *s++;
 0090 C000 F000 00949         MOVFF   r0x04, r0x08
 0094 C000 F000 00950         MOVFF   r0x05, r0x09
 0098 0EFF      00951         MOVLW   0xff
@@ -1078,7 +1078,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00C8 C000 FFF3 00970         MOVFF   r0x06, PRODL
 00CC 5000      00971         MOVF    r0x07, W
 00CE EC00 F000 00972         CALL    __gptrput1
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 19
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 19
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1091,7 +1091,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00DA 2A00      00977         INCF    r0x07, F
 00DC D000      00978         BRA     _00302_DS_
 00DE 00979 _00306_DS_:
-               00980 ;       .line   484; timer.c    LCDUpdate();
+               00980 ;       .line   487; timer.c    LCDUpdate();
 00DE EC00 F000 00981         CALL    _LCDUpdate
 00E2 CFE4 F000 00982         MOVFF   PREINC1, r0x09
 00E6 CFE4 F000 00983         MOVFF   PREINC1, r0x08
@@ -1109,7 +1109,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                00995 ; ; Starting pCode block
                00996 S_timer__DisplayWORD    code
 0000 00997 _DisplayWORD:
-               00998 ;       .line   435; timer.c    void DisplayWORD(BYTE pos, WORD w) //WORD is a 16 bits unsigned
+               00998 ;       .line   438; timer.c    void DisplayWORD(BYTE pos, WORD w) //WORD is a 16 bits unsigned
 0000 CFD9 FFE5 00999         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 01000         MOVFF   FSR1L, FSR2L
 0008 C000 FFE5 01001         MOVFF   r0x00, POSTDEC1
@@ -1124,7 +1124,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0028 CFDB F000 01010         MOVFF   PLUSW2, r0x01
 002C 0E04      01011         MOVLW   0x04
 002E CFDB F000 01012         MOVFF   PLUSW2, r0x02
-               01013 ;       .line   443; timer.c    ultoa(w, WDigit, radix);      
+               01013 ;       .line   446; timer.c    ultoa(w, WDigit, radix);      
 0032 6A00      01014         CLRF    r0x03
 0034 6A00      01015         CLRF    r0x04
 0036 0E0A      01016         MOVLW   0x0a
@@ -1138,7 +1138,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0046 5000      01024         MOVF    r0x03, W
 0048 6EE5      01025         MOVWF   POSTDEC1
 004A 5000      01026         MOVF    r0x02, W
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 20
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 20
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1150,7 +1150,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0052 EC00 F000 01030         CALL    _ultoa
 0056 0E07      01031         MOVLW   0x07
 0058 26E1      01032         ADDWF   FSR1L, F
-               01033 ;       .line   444; timer.c    for(j = 0; j < strlen((char*)WDigit); j++)
+               01033 ;       .line   447; timer.c    for(j = 0; j < strlen((char*)WDigit); j++)
 005A 6A00      01034         CLRF    r0x01
 005C 01035 _00286_DS_:
 005C 0E00      01036         MOVLW   HIGH(_DisplayWORD_WDigit_1_1)
@@ -1183,7 +1183,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0098 5C00      01063         SUBWF   r0x04, W
 009A 01064 _00296_DS_:
 009A E200      01065         BC      _00289_DS_
-               01066 ;       .line   446; timer.c    LCDText[LCDPos++] = WDigit[j];
+               01066 ;       .line   449; timer.c    LCDText[LCDPos++] = WDigit[j];
 009C C000 F000 01067         MOVFF   r0x00, r0x02
 00A0 2A00      01068         INCF    r0x00, F
 00A2 6A00      01069         CLRF    r0x03
@@ -1198,7 +1198,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00B4 0E00      01078         MOVLW   HIGH(_DisplayWORD_WDigit_1_1)
 00B6 2200      01079         ADDWFC  r0x05, F
 00B8 C000 FFE9 01080         MOVFF   r0x04, FSR0L
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 21
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 21
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1209,11 +1209,11 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00C4 C000 FFE9 01083         MOVFF   r0x02, FSR0L
 00C8 C000 FFEA 01084         MOVFF   r0x03, FSR0H
 00CC C000 FFEF 01085         MOVFF   r0x04, INDF0
-               01086 ;       .line   444; timer.c    for(j = 0; j < strlen((char*)WDigit); j++)
+               01086 ;       .line   447; timer.c    for(j = 0; j < strlen((char*)WDigit); j++)
 00D0 2A00      01087         INCF    r0x01, F
 00D2 D000      01088         BRA     _00286_DS_
 00D4 01089 _00289_DS_:
-               01090 ;       .line   448; timer.c    if(LCDPos < 32u)
+               01090 ;       .line   451; timer.c    if(LCDPos < 32u)
 00D4 C000 F000 01091         MOVFF   r0x00, r0x01
 00D8 6A00      01092         CLRF    r0x02
 00DA 0E00      01093         MOVLW   0x00
@@ -1223,7 +1223,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00E2 5C00      01097         SUBWF   r0x01, W
 00E4 01098 _00297_DS_:
 00E4 E200      01099         BC      _00285_DS_
-               01100 ;       .line   449; timer.c    LCDText[LCDPos] = 0;
+               01100 ;       .line   452; timer.c    LCDText[LCDPos] = 0;
 00E6 6A00      01101         CLRF    r0x01
 00E8 0E00      01102         MOVLW   LOW(_LCDText)
 00EA 2600      01103         ADDWF   r0x00, F
@@ -1234,7 +1234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00F8 0E00      01108         MOVLW   0x00
 00FA 6EEF      01109         MOVWF   INDF0
 00FC 01110 _00285_DS_:
-               01111 ;       .line   450; timer.c    LCDUpdate();
+               01111 ;       .line   453; timer.c    LCDUpdate();
 00FC EC00 F000 01112         CALL    _LCDUpdate
 0100 CFE4 F000 01113         MOVFF   PREINC1, r0x05
 0104 CFE4 F000 01114         MOVFF   PREINC1, r0x04
@@ -1248,7 +1248,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                01122 ; ; Starting pCode block
                01123 S_timer__HighISR        code
 0000 01124 _HighISR:
-               01125 ;       .line   369; timer.c    void HighISR(void) __interrupt (1) {
+               01125 ;       .line   372; timer.c    void HighISR(void) __interrupt (1) {
 0000 CFE8 FFE5 01126         MOVFF   WREG, POSTDEC1
 0004 CFD8 FFE5 01127         MOVFF   STATUS, POSTDEC1
 0008 CFE0 FFE5 01128         MOVFF   BSR, POSTDEC1
@@ -1258,7 +1258,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0018 CFEA FFE5 01132         MOVFF   FSR0H, POSTDEC1
 001C CFFA FFE5 01133         MOVFF   PCLATH, POSTDEC1
 0020 CFFB FFE5 01134         MOVFF   PCLATU, POSTDEC1
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 22
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 22
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1267,58 +1267,58 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0024 CFD9 FFE5 01135         MOVFF   FSR2L, POSTDEC1
 0028 CFE1 FFD9 01136         MOVFF   FSR1L, FSR2L
 002C C000 FFE5 01137         MOVFF   r0x00, POSTDEC1
-               01138 ;       .line   370; timer.c    if(PIR1bits.TMR1IF == 1) {      // timer1 overflow (every 0.5 seconds)
+               01138 ;       .line   373; timer.c    if(PIR1bits.TMR1IF == 1) {      // timer1 overflow (every 0.5 seconds)
 0030 6A00      01139         CLRF    r0x00
 0032 B000      01140         BTFSC   _PIR1bits, 0
 0034 2A00      01141         INCF    r0x00, F
 0036 5000      01142         MOVF    r0x00, W
 0038 0A01      01143         XORLW   0x01
 003A E100      01144         BNZ     _00237_DS_
-               01145 ;       .line   371; timer.c    TMR1L             =     (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 reset
+               01145 ;       .line   374; timer.c    TMR1L             =     (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 reset
 003C 6A00      01146         CLRF    _TMR1L
-               01147 ;       .line   372; timer.c    TMR1H             =     (0x10000 - EXTCLOCK_FREQ/2) >> 8;
+               01147 ;       .line   375; timer.c    TMR1H             =     (0x10000 - EXTCLOCK_FREQ/2) >> 8;
 003E 0EC0      01148         MOVLW   0xc0
 0040 6E00      01149         MOVWF   _TMR1H
-               01150 ;       .line   373; timer.c    flags.half_sec = 1;         // set a flag every 0.5 seconds
+               01150 ;       .line   376; timer.c    flags.half_sec = 1;         // set a flag every 0.5 seconds
 0042 0E01      01151         MOVLW   0x01
 0044 0000      01152         BANKSEL (_flags + 6)
 0046 6F00      01153         MOVWF   (_flags + 6), B
 0048 0000      01154         BANKSEL (_flags + 7)
 004A 6B00      01155         CLRF    (_flags + 7), B
-               01156 ;       .line   374; timer.c    if(!LATJbits.LATJ0)
+               01156 ;       .line   377; timer.c    if(!LATJbits.LATJ0)
 004C B000      01157         BTFSC   _LATJbits, 0
 004E D000      01158         BRA     _00235_DS_
-               01159 ;       .line   375; timer.c    flags.one_sec = 1;      // set a flag every second (i.e. every time led0 becomes high)
+               01159 ;       .line   378; timer.c    flags.one_sec = 1;      // set a flag every second (i.e. every time led0 becomes high)
 0050 0E01      01160         MOVLW   0x01
 0052 0000      01161         BANKSEL (_flags + 8)
 0054 6F00      01162         MOVWF   (_flags + 8), B
 0056 0000      01163         BANKSEL (_flags + 9)
 0058 6B00      01164         CLRF    (_flags + 9), B
 005A 01165 _00235_DS_:
-               01166 ;       .line   376; timer.c    PIR1bits.TMR1IF = 0;
+               01166 ;       .line   379; timer.c    PIR1bits.TMR1IF = 0;
 005A 9000      01167         BCF     _PIR1bits, 0
 005C 01168 _00237_DS_:
-               01169 ;       .line   378; timer.c    if(INTCON3bits.INT1F == 1) {    // button 2 ISR
+               01169 ;       .line   381; timer.c    if(INTCON3bits.INT1F == 1) {    // button 2 ISR
 005C 6A00      01170         CLRF    r0x00
 005E B000      01171         BTFSC   _INTCON3bits, 0
 0060 2A00      01172         INCF    r0x00, F
 0062 5000      01173         MOVF    r0x00, W
 0064 0A01      01174         XORLW   0x01
 0066 E100      01175         BNZ     _00239_DS_
-               01176 ;       .line   379; timer.c    ints.button2 = 1;           // set a flag for successive handling
+               01176 ;       .line   382; timer.c    ints.button2 = 1;           // set a flag for successive handling
 0068 0E01      01177         MOVLW   0x01
 006A 0000      01178         BANKSEL (_ints + 2)
 006C 6F00      01179         MOVWF   (_ints + 2), B
 006E 0000      01180         BANKSEL (_ints + 3)
 0070 6B00      01181         CLRF    (_ints + 3), B
-               01182 ;       .line   380; timer.c    INTCON3bits.INT1F = 0;
+               01182 ;       .line   383; timer.c    INTCON3bits.INT1F = 0;
 0072 9000      01183         BCF     _INTCON3bits, 0
 0074 01184 _00239_DS_:
-               01185 ;       .line   382; timer.c    if (INTCON3bits.INT3F == 1) {   // button 1 ISR
+               01185 ;       .line   385; timer.c    if (INTCON3bits.INT3F == 1) {   // button 1 ISR
 0074 6A00      01186         CLRF    r0x00
 0076 B400      01187         BTFSC   _INTCON3bits, 2
 0078 2A00      01188         INCF    r0x00, F
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 23
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 23
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1327,13 +1327,13 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 007A 5000      01189         MOVF    r0x00, W
 007C 0A01      01190         XORLW   0x01
 007E E100      01191         BNZ     _00242_DS_
-               01192 ;       .line   383; timer.c    ints.button1 = 1;           // set a flag for successive handling
+               01192 ;       .line   386; timer.c    ints.button1 = 1;           // set a flag for successive handling
 0080 0E01      01193         MOVLW   0x01
 0082 0000      01194         BANKSEL _ints
 0084 6F00      01195         MOVWF   _ints, B
 0086 0000      01196         BANKSEL (_ints + 1)
 0088 6B00      01197         CLRF    (_ints + 1), B
-               01198 ;       .line   384; timer.c    INTCON3bits.INT3F = 0;
+               01198 ;       .line   387; timer.c    INTCON3bits.INT3F = 0;
 008A 9400      01199         BCF     _INTCON3bits, 2
 008C 01200 _00242_DS_:
 008C CFE4 F000 01201         MOVFF   PREINC1, r0x00
@@ -1352,13 +1352,13 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                01214 ; ; Starting pCode block
                01215 S_timer__UpdateClock    code
 0000 01216 _UpdateClock:
-               01217 ;       .line   344; timer.c    void UpdateClock() {
+               01217 ;       .line   347; timer.c    void UpdateClock() {
 0000 CFD9 FFE5 01218         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 01219         MOVFF   FSR1L, FSR2L
 0008 C000 FFE5 01220         MOVFF   r0x00, POSTDEC1
 000C C000 FFE5 01221         MOVFF   r0x01, POSTDEC1
 0010 C000 FFE5 01222         MOVFF   r0x02, POSTDEC1
-               01223 ;       .line   345; timer.c    UpdateTimeValue(&clock.seconds, MAX_SECONDS, 6);
+               01223 ;       .line   348; timer.c    UpdateTimeValue(&clock.seconds, MAX_SECONDS, 6);
 0014 0E00      01224         MOVLW   HIGH(_clock + 4)
 0016 6E00      01225         MOVWF   r0x01
 0018 0E00      01226         MOVLW   LOW(_clock + 4)
@@ -1378,7 +1378,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0034 5000      01240         MOVF    r0x01, W
 0036 6EE5      01241         MOVWF   POSTDEC1
 0038 5000      01242         MOVF    r0x00, W
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 24
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 24
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1389,13 +1389,13 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0040 0E07      01245         MOVLW   0x07
 0042 26E1      01246         ADDWF   FSR1L, F
 0044 0000      01247         BANKSEL (_clock + 4)
-               01248 ;       .line   346; timer.c    if (!clock.seconds) { // new minute
+               01248 ;       .line   349; timer.c    if (!clock.seconds) { // new minute
 0046 5100      01249         MOVF    (_clock + 4), W, B
 0048 0000      01250         BANKSEL (_clock + 5)
 004A 1100      01251         IORWF   (_clock + 5), W, B
 004C A4D8      01252         BTFSS   STATUS, 2
 004E D000      01253         BRA     _00207_DS_
-               01254 ;       .line   347; timer.c    UpdateTimeValue(&clock.minutes, MAX_MINUTES, 3);
+               01254 ;       .line   350; timer.c    UpdateTimeValue(&clock.minutes, MAX_MINUTES, 3);
 0050 0E00      01255         MOVLW   HIGH(_clock + 2)
 0052 6E00      01256         MOVWF   r0x01
 0054 0E00      01257         MOVLW   LOW(_clock + 2)
@@ -1419,17 +1419,17 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0078 EC00 F000 01275         CALL    _UpdateTimeValue
 007C 0E07      01276         MOVLW   0x07
 007E 26E1      01277         ADDWF   FSR1L, F
-               01278 ;       .line   348; timer.c    time_value[5] = ':';
+               01278 ;       .line   351; timer.c    time_value[5] = ':';
 0080 0E3A      01279         MOVLW   0x3a
 0082 0000      01280         BANKSEL (_time_value + 5)
 0084 6F00      01281         MOVWF   (_time_value + 5), B
 0086 0000      01282         BANKSEL (_clock + 2)
-               01283 ;       .line   349; timer.c    if (!clock.minutes) { // new hour
+               01283 ;       .line   352; timer.c    if (!clock.minutes) { // new hour
 0088 5100      01284         MOVF    (_clock + 2), W, B
 008A 0000      01285         BANKSEL (_clock + 3)
 008C 1100      01286         IORWF   (_clock + 3), W, B
 008E E100      01287         BNZ     _00201_DS_
-               01288 ;       .line   350; timer.c    UpdateTimeValue(&clock.hours, MAX_HOURS, 0);
+               01288 ;       .line   353; timer.c    UpdateTimeValue(&clock.hours, MAX_HOURS, 0);
 0090 0E00      01289         MOVLW   HIGH(_clock)
 0092 6E00      01290         MOVWF   r0x01
 0094 0E00      01291         MOVLW   LOW(_clock)
@@ -1438,7 +1438,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 009A 6E00      01294         MOVWF   r0x02
 009C 0E00      01295         MOVLW   0x00
 009E 6EE5      01296         MOVWF   POSTDEC1
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 25
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 25
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1459,13 +1459,13 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00B8 EC00 F000 01309         CALL    _UpdateTimeValue
 00BC 0E07      01310         MOVLW   0x07
 00BE 26E1      01311         ADDWF   FSR1L, F
-               01312 ;       .line   351; timer.c    time_value[2] = ':';
+               01312 ;       .line   354; timer.c    time_value[2] = ':';
 00C0 0E3A      01313         MOVLW   0x3a
 00C2 0000      01314         BANKSEL (_time_value + 2)
 00C4 6F00      01315         MOVWF   (_time_value + 2), B
 00C6 01316 _00201_DS_:
 00C6 0000      01317         BANKSEL (_flags + 10)
-               01318 ;       .line   353; timer.c    if(!flags.alarm && (clock.minutes == timer.minutes) && (clock.hours == timer.hours))
+               01318 ;       .line   356; timer.c    if(!flags.alarm && (clock.minutes == timer.minutes) && (clock.hours == timer.hours))
 00C8 5100      01319         MOVF    (_flags + 10), W, B
 00CA 0000      01320         BANKSEL (_flags + 11)
 00CC 1100      01321         IORWF   (_flags + 11), W, B
@@ -1496,9 +1496,9 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00FA 01346 _00227_DS_:
 00FA D000      01347         BRA     _00207_DS_
 00FC 01348 _00228_DS_:
-               01349 ;       .line   354; timer.c    flags.alarm = 1; // alarm activation
+               01349 ;       .line   357; timer.c    flags.alarm = 1; // alarm activation
 00FC 0E01      01350         MOVLW   0x01
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 26
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 26
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1510,7 +1510,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0104 6B00      01354         CLRF    (_flags + 11), B
 0106 01355 _00207_DS_:
 0106 0000      01356         BANKSEL (_flags + 10)
-               01357 ;       .line   356; timer.c    if(flags.alarm && (clock.seconds > (30 + 1)))
+               01357 ;       .line   359; timer.c    if(flags.alarm && (clock.seconds > (30 + 1)))
 0108 5100      01358         MOVF    (_flags + 10), W, B
 010A 0000      01359         BANKSEL (_flags + 11)
 010C 1100      01360         IORWF   (_flags + 11), W, B
@@ -1526,13 +1526,13 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0120 01370 _00229_DS_:
 0120 E300      01371         BNC     _00209_DS_
 0122 0000      01372         BANKSEL (_flags + 10)
-               01373 ;       .line   357; timer.c    flags.alarm = 0;     // alarm deactivation after ~30 seconds
+               01373 ;       .line   360; timer.c    flags.alarm = 0;     // alarm deactivation after ~30 seconds
 0124 6B00      01374         CLRF    (_flags + 10), B
 0126 0000      01375         BANKSEL (_flags + 11)
 0128 6B00      01376         CLRF    (_flags + 11), B
 012A 01377 _00209_DS_:
 012A 0000      01378         BANKSEL (_flags + 2)
-               01379 ;       .line   358; timer.c    if (!flags.awake_setting_procedure    && !flags.time_setting_procedure)
+               01379 ;       .line   361; timer.c    if (!flags.awake_setting_procedure    && !flags.time_setting_procedure)
 012C 5100      01380         MOVF    (_flags + 2), W, B
 012E 0000      01381         BANKSEL (_flags + 3)
 0130 1100      01382         IORWF   (_flags + 3), W, B
@@ -1542,7 +1542,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0138 0000      01386         BANKSEL (_flags + 1)
 013A 1100      01387         IORWF   (_flags + 1), W, B
 013C E100      01388         BNZ     _00214_DS_
-               01389 ;       .line   359; timer.c    DisplayString(16, &time_value[0]);
+               01389 ;       .line   362; timer.c    DisplayString(16, &time_value[0]);
 013E 0E00      01390         MOVLW   HIGH(_time_value)
 0140 6E00      01391         MOVWF   r0x01
 0142 0E00      01392         MOVLW   LOW(_time_value)
@@ -1558,7 +1558,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0156 0E10      01402         MOVLW   0x10
 0158 6EE5      01403         MOVWF   POSTDEC1
 015A EC00 F000 01404         CALL    _DisplayString
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 27
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 27
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1576,7 +1576,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                01414 ; ; Starting pCode block
                01415 S_timer__UpdateDisplay  code
 0000 01416 _UpdateDisplay:
-               01417 ;       .line   316; timer.c    void UpdateDisplay(enum display_states state) {
+               01417 ;       .line   319; timer.c    void UpdateDisplay(enum display_states state) {
 0000 CFD9 FFE5 01418         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 01419         MOVFF   FSR1L, FSR2L
 0008 C000 FFE5 01420         MOVFF   r0x00, POSTDEC1
@@ -1584,7 +1584,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0010 C000 FFE5 01422         MOVFF   r0x02, POSTDEC1
 0014 0E02      01423         MOVLW   0x02
 0016 CFDB F000 01424         MOVFF   PLUSW2, r0x00
-               01425 ;       .line   317; timer.c    switch (state) {
+               01425 ;       .line   320; timer.c    switch (state) {
 001A 0E03      01426         MOVLW   0x03
 001C 5C00      01427         SUBWF   r0x00, W
 001E B0D8      01428         BTFSC   STATUS, 0
@@ -1617,8 +1617,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 005C EF00 F000 01455         GOTO    _00188_DS_
 0060 EF00 F000 01456         GOTO    _00189_DS_
 0064 01457 _00187_DS_:
-               01458 ;       .line   319; timer.c    DisplayString(0,"Enter the time:");
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 28
+               01458 ;       .line   322; timer.c    DisplayString(0,"Enter the time:");
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 28
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1635,7 +1635,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0074 EC00 F000 01467         CALL    _DisplayString
 0078 0E04      01468         MOVLW   0x04
 007A 26E1      01469         ADDWF   FSR1L, F
-               01470 ;       .line   320; timer.c    DisplayString(16, &time_value[0]);
+               01470 ;       .line   323; timer.c    DisplayString(16, &time_value[0]);
 007C 0E00      01471         MOVLW   HIGH(_time_value)
 007E 6E00      01472         MOVWF   r0x01
 0080 0E00      01473         MOVLW   LOW(_time_value)
@@ -1653,7 +1653,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0098 EC00 F000 01485         CALL    _DisplayString
 009C 0E04      01486         MOVLW   0x04
 009E 26E1      01487         ADDWF   FSR1L, F
-               01488 ;       .line   321; timer.c    DisplayString(21,"   ");
+               01488 ;       .line   324; timer.c    DisplayString(21,"   ");
 00A0 0E00      01489         MOVLW   UPPER(__str_1)
 00A2 6EE5      01490         MOVWF   POSTDEC1
 00A4 0E00      01491         MOVLW   HIGH(__str_1)
@@ -1665,10 +1665,10 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00B0 EC00 F000 01497         CALL    _DisplayString
 00B4 0E04      01498         MOVLW   0x04
 00B6 26E1      01499         ADDWF   FSR1L, F
-               01500 ;       .line   322; timer.c    break;
+               01500 ;       .line   325; timer.c    break;
 00B8 D000      01501         BRA     _00191_DS_
 00BA 01502 _00188_DS_:
-               01503 ;       .line   324; timer.c    DisplayString(0, "Enter the awake ");
+               01503 ;       .line   327; timer.c    DisplayString(0, "Enter the awake ");
 00BA 0E00      01504         MOVLW   UPPER(__str_2)
 00BC 6EE5      01505         MOVWF   POSTDEC1
 00BE 0E00      01506         MOVLW   HIGH(__str_2)
@@ -1678,7 +1678,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00C6 0E00      01510         MOVLW   0x00
 00C8 6EE5      01511         MOVWF   POSTDEC1
 00CA EC00 F000 01512         CALL    _DisplayString
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 29
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 29
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1686,7 +1686,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
  
 00CE 0E04      01513         MOVLW   0x04
 00D0 26E1      01514         ADDWF   FSR1L, F
-               01515 ;       .line   325; timer.c    DisplayString(16, "time: ");
+               01515 ;       .line   328; timer.c    DisplayString(16, "time: ");
 00D2 0E00      01516         MOVLW   UPPER(__str_3)
 00D4 6EE5      01517         MOVWF   POSTDEC1
 00D6 0E00      01518         MOVLW   HIGH(__str_3)
@@ -1698,7 +1698,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00E2 EC00 F000 01524         CALL    _DisplayString
 00E6 0E04      01525         MOVLW   0x04
 00E8 26E1      01526         ADDWF   FSR1L, F
-               01527 ;       .line   326; timer.c    DisplayString(22, &time_value[0]);
+               01527 ;       .line   329; timer.c    DisplayString(22, &time_value[0]);
 00EA 0E00      01528         MOVLW   HIGH(_time_value)
 00EC 6E00      01529         MOVWF   r0x01
 00EE 0E00      01530         MOVLW   LOW(_time_value)
@@ -1716,10 +1716,10 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0106 EC00 F000 01542         CALL    _DisplayString
 010A 0E04      01543         MOVLW   0x04
 010C 26E1      01544         ADDWF   FSR1L, F
-               01545 ;       .line   327; timer.c    break;
+               01545 ;       .line   330; timer.c    break;
 010E D000      01546         BRA     _00191_DS_
 0110 01547 _00189_DS_:
-               01548 ;       .line   329; timer.c    DisplayString(0, "                ");
+               01548 ;       .line   332; timer.c    DisplayString(0, "                ");
 0110 0E00      01549         MOVLW   UPPER(__str_4)
 0112 6EE5      01550         MOVWF   POSTDEC1
 0114 0E00      01551         MOVLW   HIGH(__str_4)
@@ -1731,14 +1731,14 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0120 EC00 F000 01557         CALL    _DisplayString
 0124 0E04      01558         MOVLW   0x04
 0126 26E1      01559         ADDWF   FSR1L, F
-               01560 ;       .line   330; timer.c    DisplayString(16 + 6, "         ");
+               01560 ;       .line   333; timer.c    DisplayString(16 + 6, "         ");
 0128 0E00      01561         MOVLW   UPPER(__str_5)
 012A 6EE5      01562         MOVWF   POSTDEC1
 012C 0E00      01563         MOVLW   HIGH(__str_5)
 012E 6EE5      01564         MOVWF   POSTDEC1
 0130 0E00      01565         MOVLW   LOW(__str_5)
 0132 6EE5      01566         MOVWF   POSTDEC1
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 30
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 30
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1749,7 +1749,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0138 EC00 F000 01569         CALL    _DisplayString
 013C 0E04      01570         MOVLW   0x04
 013E 26E1      01571         ADDWF   FSR1L, F
-               01572 ;       .line   331; timer.c    DisplayString(16, &time_value[0]);
+               01572 ;       .line   334; timer.c    DisplayString(16, &time_value[0]);
 0140 0E00      01573         MOVLW   HIGH(_time_value)
 0142 6E00      01574         MOVWF   r0x01
 0144 0E00      01575         MOVLW   LOW(_time_value)
@@ -1768,7 +1768,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0160 0E04      01588         MOVLW   0x04
 0162 26E1      01589         ADDWF   FSR1L, F
 0164 01590 _00191_DS_:
-               01591 ;       .line   333; timer.c    }
+               01591 ;       .line   336; timer.c    }
 0164 CFE4 F000 01592         MOVFF   PREINC1, r0x02
 0168 CFE4 F000 01593         MOVFF   PREINC1, r0x01
 016C CFE4 F000 01594         MOVFF   PREINC1, r0x00
@@ -1778,27 +1778,27 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                01598 ; ; Starting pCode block
                01599 S_timer__AssignDefaultValues    code
 0000 01600 _AssignDefaultValues:
-               01601 ;       .line   283; timer.c    void AssignDefaultValues() {
+               01601 ;       .line   286; timer.c    void AssignDefaultValues() {
 0000 CFD9 FFE5 01602         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 01603         MOVFF   FSR1L, FSR2L
 0008 0000      01604         BANKSEL _ints
-               01605 ;       .line   285; timer.c    ints.button1 = 0;
+               01605 ;       .line   288; timer.c    ints.button1 = 0;
 000A 6B00      01606         CLRF    _ints, B
 000C 0000      01607         BANKSEL (_ints + 1)
 000E 6B00      01608         CLRF    (_ints + 1), B
 0010 0000      01609         BANKSEL (_ints + 2)
-               01610 ;       .line   286; timer.c    ints.button2 = 0;
+               01610 ;       .line   289; timer.c    ints.button2 = 0;
 0012 6B00      01611         CLRF    (_ints + 2), B
 0014 0000      01612         BANKSEL (_ints + 3)
 0016 6B00      01613         CLRF    (_ints + 3), B
-               01614 ;       .line   288; timer.c    time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
+               01614 ;       .line   291; timer.c    time_value[0] = time_value[1] = time_value[3] = time_value[4] = '0';
 0018 0E30      01615         MOVLW   0x30
 001A 0000      01616         BANKSEL (_time_value + 4)
 001C 6F00      01617         MOVWF   (_time_value + 4), B
 001E 0E30      01618         MOVLW   0x30
 0020 0000      01619         BANKSEL (_time_value + 3)
 0022 6F00      01620         MOVWF   (_time_value + 3), B
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 31
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 31
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1810,55 +1810,55 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 002A 0E30      01624         MOVLW   0x30
 002C 0000      01625         BANKSEL _time_value
 002E 6F00      01626         MOVWF   _time_value, B
-               01627 ;       .line   289; timer.c    time_value[2] = ':';
+               01627 ;       .line   292; timer.c    time_value[2] = ':';
 0030 0E3A      01628         MOVLW   0x3a
 0032 0000      01629         BANKSEL (_time_value + 2)
 0034 6F00      01630         MOVWF   (_time_value + 2), B
 0036 0000      01631         BANKSEL (_time_value + 5)
-               01632 ;       .line   290; timer.c    time_value[5] = '\0';
+               01632 ;       .line   293; timer.c    time_value[5] = '\0';
 0038 6B00      01633         CLRF    (_time_value + 5), B
 003A 0000      01634         BANKSEL _in_setting
-               01635 ;       .line   291; timer.c    in_setting = HOURS; // start from setting the hours
+               01635 ;       .line   294; timer.c    in_setting = HOURS; // start from setting the hours
 003C 6B00      01636         CLRF    _in_setting, B
-               01637 ;       .line   293; timer.c    flags.time_setting_procedure = 1;
+               01637 ;       .line   296; timer.c    flags.time_setting_procedure = 1;
 003E 0E01      01638         MOVLW   0x01
 0040 0000      01639         BANKSEL _flags
 0042 6F00      01640         MOVWF   _flags, B
 0044 0000      01641         BANKSEL (_flags + 1)
 0046 6B00      01642         CLRF    (_flags + 1), B
 0048 0000      01643         BANKSEL (_flags + 2)
-               01644 ;       .line   294; timer.c    flags.awake_setting_procedure = 0;
+               01644 ;       .line   297; timer.c    flags.awake_setting_procedure = 0;
 004A 6B00      01645         CLRF    (_flags + 2), B
 004C 0000      01646         BANKSEL (_flags + 3)
 004E 6B00      01647         CLRF    (_flags + 3), B
 0050 0000      01648         BANKSEL (_flags + 4)
-               01649 ;       .line   295; timer.c    flags.set = 0;
+               01649 ;       .line   298; timer.c    flags.set = 0;
 0052 6B00      01650         CLRF    (_flags + 4), B
 0054 0000      01651         BANKSEL (_flags + 5)
 0056 6B00      01652         CLRF    (_flags + 5), B
 0058 0000      01653         BANKSEL (_flags + 6)
-               01654 ;       .line   296; timer.c    flags.half_sec = 0;
+               01654 ;       .line   299; timer.c    flags.half_sec = 0;
 005A 6B00      01655         CLRF    (_flags + 6), B
 005C 0000      01656         BANKSEL (_flags + 7)
 005E 6B00      01657         CLRF    (_flags + 7), B
 0060 0000      01658         BANKSEL (_flags + 8)
-               01659 ;       .line   297; timer.c    flags.one_sec = 0;
+               01659 ;       .line   300; timer.c    flags.one_sec = 0;
 0062 6B00      01660         CLRF    (_flags + 8), B
 0064 0000      01661         BANKSEL (_flags + 9)
 0066 6B00      01662         CLRF    (_flags + 9), B
 0068 0000      01663         BANKSEL (_flags + 10)
-               01664 ;       .line   298; timer.c    flags.alarm = 0;
+               01664 ;       .line   301; timer.c    flags.alarm = 0;
 006A 6B00      01665         CLRF    (_flags + 10), B
 006C 0000      01666         BANKSEL (_flags + 11)
 006E 6B00      01667         CLRF    (_flags + 11), B
 0070 0000      01668         BANKSEL _timer
-               01669 ;       .line   300; timer.c    timer.hours = 0;
+               01669 ;       .line   303; timer.c    timer.hours = 0;
 0072 6B00      01670         CLRF    _timer, B
 0074 0000      01671         BANKSEL (_timer + 1)
 0076 6B00      01672         CLRF    (_timer + 1), B
 0078 0000      01673         BANKSEL (_timer + 2)
-               01674 ;       .line   301; timer.c    timer.minutes = 0;
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 32
+               01674 ;       .line   304; timer.c    timer.minutes = 0;
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 32
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1868,16 +1868,16 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 007C 0000      01676         BANKSEL (_timer + 3)
 007E 6B00      01677         CLRF    (_timer + 3), B
 0080 0000      01678         BANKSEL _setting
-               01679 ;       .line   303; timer.c    setting.hours = 0;
+               01679 ;       .line   306; timer.c    setting.hours = 0;
 0082 6B00      01680         CLRF    _setting, B
 0084 0000      01681         BANKSEL (_setting + 1)
 0086 6B00      01682         CLRF    (_setting + 1), B
 0088 0000      01683         BANKSEL (_setting + 2)
-               01684 ;       .line   304; timer.c    setting.minutes = 0;
+               01684 ;       .line   307; timer.c    setting.minutes = 0;
 008A 6B00      01685         CLRF    (_setting + 2), B
 008C 0000      01686         BANKSEL (_setting + 3)
 008E 6B00      01687         CLRF    (_setting + 3), B
-               01688 ;       .line   306; timer.c    UpdateDisplay(CLOCK_SETTING);
+               01688 ;       .line   309; timer.c    UpdateDisplay(CLOCK_SETTING);
 0090 0E00      01689         MOVLW   0x00
 0092 6EE5      01690         MOVWF   POSTDEC1
 0094 EC00 F000 01691         CALL    _UpdateDisplay
@@ -1888,65 +1888,65 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                01696 ; ; Starting pCode block
                01697 S_timer__ConfigureRegisters     code
 0000 01698 _ConfigureRegisters:
-               01699 ;       .line   241; timer.c    void ConfigureRegisters() {
+               01699 ;       .line   244; timer.c    void ConfigureRegisters() {
 0000 CFD9 FFE5 01700         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 01701         MOVFF   FSR1L, FSR2L
-               01702 ;       .line   243; timer.c    INTCONbits.GIE      =   1;   //enable high priority interrupts
+               01702 ;       .line   246; timer.c    INTCONbits.GIE      =   1;   //enable high priority interrupts
 0008 8E00      01703         BSF     _INTCONbits, 7
-               01704 ;       .line   244; timer.c    RCONbits.IPEN       =   1;   //enable interrupts priority levels
+               01704 ;       .line   247; timer.c    RCONbits.IPEN       =   1;   //enable interrupts priority levels
 000A 8E00      01705         BSF     _RCONbits, 7
-               01706 ;       .line   250; timer.c    T1CONbits.TMR1ON    =   0;    // disable timer1
+               01706 ;       .line   253; timer.c    T1CONbits.TMR1ON    =   0;    // disable timer1
 000C 9000      01707         BCF     _T1CONbits, 0
-               01708 ;       .line   251; timer.c    T1CONbits.RD16      =   1;    // use timer1 16-bit counter
+               01708 ;       .line   254; timer.c    T1CONbits.RD16      =   1;    // use timer1 16-bit counter
 000E 8E00      01709         BSF     _T1CONbits, 7
-               01710 ;       .line   252; timer.c    T1CONbits.T1CKPS0   =   0;    // prescaler set to 1:1
+               01710 ;       .line   255; timer.c    T1CONbits.T1CKPS0   =   0;    // prescaler set to 1:1
 0010 9800      01711         BCF     _T1CONbits, 4
-               01712 ;       .line   253; timer.c    T1CONbits.T1CKPS1   =   0;
+               01712 ;       .line   256; timer.c    T1CONbits.T1CKPS1   =   0;
 0012 9A00      01713         BCF     _T1CONbits, 5
-               01714 ;       .line   254; timer.c    T1CONbits.T1OSCEN   =   1;    // timer1 oscillator enable
+               01714 ;       .line   257; timer.c    T1CONbits.T1OSCEN   =   1;    // timer1 oscillator enable
 0014 8600      01715         BSF     _T1CONbits, 3
-               01716 ;       .line   255; timer.c    T1CONbits.TMR1CS    =   1;    // external clock selected
+               01716 ;       .line   258; timer.c    T1CONbits.TMR1CS    =   1;    // external clock selected
 0016 8200      01717         BSF     _T1CONbits, 1
-               01718 ;       .line   256; timer.c    PIR1bits.TMR1IF     =   0;    // clear timer1 overflow bit
+               01718 ;       .line   259; timer.c    PIR1bits.TMR1IF     =   0;    // clear timer1 overflow bit
 0018 9000      01719         BCF     _PIR1bits, 0
-               01720 ;       .line   257; timer.c    PIE1bits.TMR1IE     =   1;    // timer1 interrupt enable
+               01720 ;       .line   260; timer.c    PIE1bits.TMR1IE     =   1;    // timer1 interrupt enable
 001A 8000      01721         BSF     _PIE1bits, 0
-               01722 ;       .line   258; timer.c    IPR1bits.TMR1IP     =   1;    // high priority interrupt
+               01722 ;       .line   261; timer.c    IPR1bits.TMR1IP     =   1;    // high priority interrupt
 001C 8000      01723         BSF     _IPR1bits, 0
-               01724 ;       .line   259; timer.c    TMR1L               =   (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 initial value
+               01724 ;       .line   262; timer.c    TMR1L               =   (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 initial value
 001E 6A00      01725         CLRF    _TMR1L
-               01726 ;       .line   260; timer.c    TMR1H               =   (0x10000 - EXTCLOCK_FREQ/2) >> 8;
+               01726 ;       .line   263; timer.c    TMR1H               =   (0x10000 - EXTCLOCK_FREQ/2) >> 8;
 0020 0EC0      01727         MOVLW   0xc0
 0022 6E00      01728         MOVWF   _TMR1H
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 33
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 33
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-               01729 ;       .line   263; timer.c    INTCON3bits.INT1P   =   1;    //connect INT1 interrupt (button 2) to high prio
+               01729 ;       .line   266; timer.c    INTCON3bits.INT1P   =   1;    //connect INT1 interrupt (button 2) to high prio
 0024 8C00      01730         BSF     _INTCON3bits, 6
-               01731 ;       .line   264; timer.c    INTCON2bits.INT3IP  =   1;    //connect INT3 interrupt (button 1) to high prio
+               01731 ;       .line   267; timer.c    INTCON2bits.INT3IP  =   1;    //connect INT3 interrupt (button 1) to high prio
 0026 8200      01732         BSF     _INTCON2bits, 1
-               01733 ;       .line   265; timer.c    INTCON2bits.INTEDG1 =   0;    //INT1 interrupts on falling edge
+               01733 ;       .line   268; timer.c    INTCON2bits.INTEDG1 =   0;    //INT1 interrupts on falling edge
 0028 9A00      01734         BCF     _INTCON2bits, 5
-               01735 ;       .line   266; timer.c    INTCON2bits.INTEDG3 =   0;    //INT3 interrupts on falling edge
+               01735 ;       .line   269; timer.c    INTCON2bits.INTEDG3 =   0;    //INT3 interrupts on falling edge
 002A 9600      01736         BCF     _INTCON2bits, 3
-               01737 ;       .line   267; timer.c    INTCON3bits.INT1F   =   0;    //clear INT1 flag
+               01737 ;       .line   270; timer.c    INTCON3bits.INT1F   =   0;    //clear INT1 flag
 002C 9000      01738         BCF     _INTCON3bits, 0
-               01739 ;       .line   268; timer.c    INTCON3bits.INT3F   =   0;    //clear INT3 flag
+               01739 ;       .line   271; timer.c    INTCON3bits.INT3F   =   0;    //clear INT3 flag
 002E 9400      01740         BCF     _INTCON3bits, 2
-               01741 ;       .line   269; timer.c    INTCON3bits.INT1E   =   1;    //enable INT1 interrupt (button 2)
+               01741 ;       .line   272; timer.c    INTCON3bits.INT1E   =   1;    //enable INT1 interrupt (button 2)
 0030 8600      01742         BSF     _INTCON3bits, 3
-               01743 ;       .line   270; timer.c    INTCON3bits.INT3E   =   1;    //enable INT1 interrupt (button 1)
+               01743 ;       .line   273; timer.c    INTCON3bits.INT3E   =   1;    //enable INT1 interrupt (button 1)
 0032 8A00      01744         BSF     _INTCON3bits, 5
-               01745 ;       .line   273; timer.c    TRISJbits.TRISJ0    =   0;    // configure PORTJ0 for output (led0)
+               01745 ;       .line   276; timer.c    TRISJbits.TRISJ0    =   0;    // configure PORTJ0 for output (led0)
 0034 9000      01746         BCF     _TRISJbits, 0
-               01747 ;       .line   274; timer.c    TRISJbits.TRISJ1    =   0;    // configure PORTJ1 for output (led1)
+               01747 ;       .line   277; timer.c    TRISJbits.TRISJ1    =   0;    // configure PORTJ1 for output (led1)
 0036 9200      01748         BCF     _TRISJbits, 1
-               01749 ;       .line   275; timer.c    LATJbits.LATJ0      =   1;    // led0 output high
+               01749 ;       .line   278; timer.c    LATJbits.LATJ0      =   1;    // led0 output high
 0038 8000      01750         BSF     _LATJbits, 0
-               01751 ;       .line   276; timer.c    LATJbits.LATJ1      =   0;    // led1 output low
+               01751 ;       .line   279; timer.c    LATJbits.LATJ1      =   0;    // led1 output low
 003A 9200      01752         BCF     _LATJbits, 1
 003C CFE4 FFD9 01753         MOVFF   PREINC1, FSR2L
 0040 0012      01754         RETURN  
@@ -1954,7 +1954,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                01756 ; ; Starting pCode block
                01757 S_timer__HandleButton2Pressure  code
 0000 01758 _HandleButton2Pressure:
-               01759 ;       .line   220; timer.c    void HandleButton2Pressure() {
+               01759 ;       .line   223; timer.c    void HandleButton2Pressure() {
 0000 CFD9 FFE5 01760         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 01761         MOVFF   FSR1L, FSR2L
 0008 C000 FFE5 01762         MOVFF   r0x00, POSTDEC1
@@ -1964,12 +1964,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0018 C000 FFE5 01766         MOVFF   r0x04, POSTDEC1
 001C C000 FFE5 01767         MOVFF   r0x05, POSTDEC1
 0020 0000      01768         BANKSEL _flags
-               01769 ;       .line   221; timer.c    if (flags.time_setting_procedure) { // setting the clock's time
+               01769 ;       .line   224; timer.c    if (flags.time_setting_procedure) { // setting the clock's time
 0022 5100      01770         MOVF    _flags, W, B
 0024 0000      01771         BANKSEL (_flags + 1)
 0026 1100      01772         IORWF   (_flags + 1), W, B
 0028 E000      01773         BZ      _00170_DS_
-               01774 ;       .line   223; timer.c    UpdateProperTimeValue(&setting.hours, &setting.minutes); 
+               01774 ;       .line   226; timer.c    UpdateProperTimeValue(&setting.hours, &setting.minutes); 
 002A 0E00      01775         MOVLW   HIGH(_setting)
 002C 6E00      01776         MOVWF   r0x01
 002E 0E00      01777         MOVLW   LOW(_setting)
@@ -1978,7 +1978,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0034 6E00      01780         MOVWF   r0x02
 0036 0E00      01781         MOVLW   HIGH(_setting + 2)
 0038 6E00      01782         MOVWF   r0x04
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 34
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 34
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2006,12 +2006,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0062 D000      01802         BRA     _00172_DS_
 0064 01803 _00170_DS_:
 0064 0000      01804         BANKSEL (_flags + 2)
-               01805 ;       .line   224; timer.c    } else if (flags.awake_setting_procedure) { // setting the awake time
+               01805 ;       .line   227; timer.c    } else if (flags.awake_setting_procedure) { // setting the awake time
 0066 5100      01806         MOVF    (_flags + 2), W, B
 0068 0000      01807         BANKSEL (_flags + 3)
 006A 1100      01808         IORWF   (_flags + 3), W, B
 006C E000      01809         BZ      _00167_DS_
-               01810 ;       .line   226; timer.c    UpdateProperTimeValue(&timer.hours, &timer.minutes);
+               01810 ;       .line   229; timer.c    UpdateProperTimeValue(&timer.hours, &timer.minutes);
 006E 0E00      01811         MOVLW   HIGH(_timer)
 0070 6E00      01812         MOVWF   r0x01
 0072 0E00      01813         MOVLW   LOW(_timer)
@@ -2038,7 +2038,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 009C 6EE5      01834         MOVWF   POSTDEC1
 009E EC00 F000 01835         CALL    _UpdateProperTimeValue
 00A2 0E06      01836         MOVLW   0x06
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 35
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 35
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2048,18 +2048,18 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00A6 D000      01838         BRA     _00172_DS_
 00A8 01839 _00167_DS_:
 00A8 0000      01840         BANKSEL (_flags + 4)
-               01841 ;       .line   227; timer.c    } else if (flags.set) {
+               01841 ;       .line   230; timer.c    } else if (flags.set) {
 00AA 5100      01842         MOVF    (_flags + 4), W, B
 00AC 0000      01843         BANKSEL (_flags + 5)
 00AE 1100      01844         IORWF   (_flags + 5), W, B
 00B0 E000      01845         BZ      _00172_DS_
-               01846 ;       .line   228; timer.c    flags.awake_setting_procedure = 1;
+               01846 ;       .line   231; timer.c    flags.awake_setting_procedure = 1;
 00B2 0E01      01847         MOVLW   0x01
 00B4 0000      01848         BANKSEL (_flags + 2)
 00B6 6F00      01849         MOVWF   (_flags + 2), B
 00B8 0000      01850         BANKSEL (_flags + 3)
 00BA 6B00      01851         CLRF    (_flags + 3), B
-               01852 ;       .line   229; timer.c    Int2String(timer.hours, 0);
+               01852 ;       .line   232; timer.c    Int2String(timer.hours, 0);
 00BC 0E00      01853         MOVLW   0x00
 00BE 6EE5      01854         MOVWF   POSTDEC1
 00C0 0E00      01855         MOVLW   0x00
@@ -2073,11 +2073,11 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00D0 EC00 F000 01863         CALL    _Int2String
 00D4 0E04      01864         MOVLW   0x04
 00D6 26E1      01865         ADDWF   FSR1L, F
-               01866 ;       .line   230; timer.c    time_value[2] = ':';
+               01866 ;       .line   233; timer.c    time_value[2] = ':';
 00D8 0E3A      01867         MOVLW   0x3a
 00DA 0000      01868         BANKSEL (_time_value + 2)
 00DC 6F00      01869         MOVWF   (_time_value + 2), B
-               01870 ;       .line   231; timer.c    Int2String(timer.minutes, 3);
+               01870 ;       .line   234; timer.c    Int2String(timer.minutes, 3);
 00DE 0E00      01871         MOVLW   0x00
 00E0 6EE5      01872         MOVWF   POSTDEC1
 00E2 0E03      01873         MOVLW   0x03
@@ -2092,13 +2092,13 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00F6 0E04      01882         MOVLW   0x04
 00F8 26E1      01883         ADDWF   FSR1L, F
 00FA 0000      01884         BANKSEL _in_setting
-               01885 ;       .line   232; timer.c    in_setting = HOURS;
+               01885 ;       .line   235; timer.c    in_setting = HOURS;
 00FC 6B00      01886         CLRF    _in_setting, B
-               01887 ;       .line   233; timer.c    UpdateDisplay(TIMER_SETTING);
+               01887 ;       .line   236; timer.c    UpdateDisplay(TIMER_SETTING);
 00FE 0E01      01888         MOVLW   0x01
 0100 6EE5      01889         MOVWF   POSTDEC1
 0102 EC00 F000 01890         CALL    _UpdateDisplay
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 36
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 36
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2118,7 +2118,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                01902 ; ; Starting pCode block
                01903 S_timer__UpdateProperTimeValue  code
 0000 01904 _UpdateProperTimeValue:
-               01905 ;       .line   205; timer.c    void UpdateProperTimeValue(int* const hours, int* const minutes) {
+               01905 ;       .line   208; timer.c    void UpdateProperTimeValue(int* const hours, int* const minutes) {
 0000 CFD9 FFE5 01906         MOVFF   FSR2L, POSTDEC1
 0004 CFE1 FFD9 01907         MOVFF   FSR1L, FSR2L
 0008 C000 FFE5 01908         MOVFF   r0x00, POSTDEC1
@@ -2141,10 +2141,10 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0042 0E07      01925         MOVLW   0x07
 0044 CFDB F000 01926         MOVFF   PLUSW2, r0x05
 0048 0000      01927         BANKSEL _in_setting
-               01928 ;       .line   206; timer.c    if (in_setting == HOURS) {
+               01928 ;       .line   209; timer.c    if (in_setting == HOURS) {
 004A 5100      01929         MOVF    _in_setting, W, B
 004C E100      01930         BNZ     _00157_DS_
-               01931 ;       .line   207; timer.c    UpdateTimeValue(hours, MAX_HOURS, 0);
+               01931 ;       .line   210; timer.c    UpdateTimeValue(hours, MAX_HOURS, 0);
 004E 0E00      01932         MOVLW   0x00
 0050 6EE5      01933         MOVWF   POSTDEC1
 0052 0E00      01934         MOVLW   0x00
@@ -2158,7 +2158,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0062 5000      01942         MOVF    r0x01, W
 0064 6EE5      01943         MOVWF   POSTDEC1
 0066 5000      01944         MOVF    r0x00, W
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 37
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 37
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2169,7 +2169,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 006E 0E07      01947         MOVLW   0x07
 0070 26E1      01948         ADDWF   FSR1L, F
 0072 0000      01949         BANKSEL (_flags + 2)
-               01950 ;       .line   208; timer.c    DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
+               01950 ;       .line   211; timer.c    DisplayString(16 + 6 * flags.awake_setting_procedure, &time_value[0]);
 0074 5100      01951         MOVF    (_flags + 2), W, B
 0076 6E00      01952         MOVWF   r0x00
                01953 ; ;multiply lit val:0x06 by variable r0x00 and store in r0x00
@@ -2199,7 +2199,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00A6 26E1      01977         ADDWF   FSR1L, F
 00A8 D000      01978         BRA     _00159_DS_
 00AA 01979 _00157_DS_:
-               01980 ;       .line   210; timer.c    UpdateTimeValue(minutes, MAX_MINUTES, 3);
+               01980 ;       .line   213; timer.c    UpdateTimeValue(minutes, MAX_MINUTES, 3);
 00AA 0E00      01981         MOVLW   0x00
 00AC 6EE5      01982         MOVWF   POSTDEC1
 00AE 0E03      01983         MOVLW   0x03
@@ -2218,13 +2218,13 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00CA 0E07      01996         MOVLW   0x07
 00CC 26E1      01997         ADDWF   FSR1L, F
 00CE 0000      01998         BANKSEL (_flags + 2)
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 38
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 38
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-               01999 ;       .line   211; timer.c    DisplayString(19 + 6 * flags.awake_setting_procedure, &time_value[3]);
+               01999 ;       .line   214; timer.c    DisplayString(19 + 6 * flags.awake_setting_procedure, &time_value[3]);
 00D0 5100      02000         MOVF    (_flags + 2), W, B
 00D2 6E00      02001         MOVWF   r0x00
                02002 ; ;multiply lit val:0x06 by variable r0x00 and store in r0x00
@@ -2278,7 +2278,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0012 D000      02050         BRA     _00149_DS_
 0014 0000      02051         BANKSEL _in_setting
                02052 ;       .line   154; timer.c    if (in_setting == HOURS) {
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 39
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 39
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2338,7 +2338,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 006C 0000      02104         BANKSEL (_time_value + 3)
 006E 6F00      02105         MOVWF   (_time_value + 3), B
 0070 0E30      02106         MOVLW   0x30
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 40
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 40
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2398,436 +2398,455 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                02158 ;       .line   184; timer.c    } else if (flags.set) {
 00C4 5100      02159         MOVF    (_flags + 4), W, B
 00C6 0000      02160         BANKSEL (_flags + 5)
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 41
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 41
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
 00C8 1100      02161         IORWF   (_flags + 5), W, B
-00CA E000      02162         BZ      _00151_DS_
-               02163 ;       .line   185; timer.c    flags.time_setting_procedure = 1;
-00CC 0E01      02164         MOVLW   0x01
-00CE 0000      02165         BANKSEL _flags
-00D0 6F00      02166         MOVWF   _flags, B
-00D2 0000      02167         BANKSEL (_flags + 1)
-00D4 6B00      02168         CLRF    (_flags + 1), B
-               02169 ;       .line   186; timer.c    Int2String(clock.hours, 0);
-00D6 0E00      02170         MOVLW   0x00
-00D8 6EE5      02171         MOVWF   POSTDEC1
-00DA 0E00      02172         MOVLW   0x00
-00DC 6EE5      02173         MOVWF   POSTDEC1
-00DE 0000      02174         BANKSEL (_clock + 1)
-00E0 5100      02175         MOVF    (_clock + 1), W, B
-00E2 6EE5      02176         MOVWF   POSTDEC1
-00E4 0000      02177         BANKSEL _clock
-00E6 5100      02178         MOVF    _clock, W, B
-00E8 6EE5      02179         MOVWF   POSTDEC1
-00EA EC00 F000 02180         CALL    _Int2String
-00EE 0E04      02181         MOVLW   0x04
-00F0 26E1      02182         ADDWF   FSR1L, F
-               02183 ;       .line   187; timer.c    time_value[2] = ':';
-00F2 0E3A      02184         MOVLW   0x3a
-00F4 0000      02185         BANKSEL (_time_value + 2)
-00F6 6F00      02186         MOVWF   (_time_value + 2), B
-               02187 ;       .line   188; timer.c    Int2String(clock.minutes, 3);
-00F8 0E00      02188         MOVLW   0x00
-00FA 6EE5      02189         MOVWF   POSTDEC1
-00FC 0E03      02190         MOVLW   0x03
-00FE 6EE5      02191         MOVWF   POSTDEC1
-0100 0000      02192         BANKSEL (_clock + 3)
-0102 5100      02193         MOVF    (_clock + 3), W, B
-0104 6EE5      02194         MOVWF   POSTDEC1
-0106 0000      02195         BANKSEL (_clock + 2)
-0108 5100      02196         MOVF    (_clock + 2), W, B
-010A 6EE5      02197         MOVWF   POSTDEC1
-010C EC00 F000 02198         CALL    _Int2String
-0110 0E04      02199         MOVLW   0x04
-0112 26E1      02200         ADDWF   FSR1L, F
-               02201 ;       .line   189; timer.c    UpdateDisplay(CLOCK_SETTING);
-0114 0E00      02202         MOVLW   0x00
-0116 6EE5      02203         MOVWF   POSTDEC1
-0118 EC00 F000 02204         CALL    _UpdateDisplay
-011C 2AE1      02205         INCF    FSR1L, F
-011E 0000      02206         BANKSEL _in_setting
-               02207 ;       .line   190; timer.c    in_setting = HOURS;
-0120 6B00      02208         CLRF    _in_setting, B
-0122 02209 _00151_DS_:
-0122 CFE4 FFD9 02210         MOVFF   PREINC1, FSR2L
-0126 0012      02211         RETURN  
-               02212 
-               02213 ; ; Starting pCode block
-               02214 S_timer__SetupCompleteTime      code
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 42
+00CA B4D8      02162         BTFSC   STATUS, 2
+00CC D000      02163         BRA     _00151_DS_
+00CE 0000      02164         BANKSEL _clock
+               02165 ;       .line   186; timer.c    setting.hours   = clock.hours;
+00D0 5100      02166         MOVF    _clock, W, B
+00D2 0000      02167         BANKSEL _setting
+00D4 6F00      02168         MOVWF   _setting, B
+00D6 0000      02169         BANKSEL (_clock + 1)
+00D8 5100      02170         MOVF    (_clock + 1), W, B
+00DA 0000      02171         BANKSEL (_setting + 1)
+00DC 6F00      02172         MOVWF   (_setting + 1), B
+00DE 0000      02173         BANKSEL (_clock + 2)
+               02174 ;       .line   187; timer.c    setting.minutes = clock.minutes;
+00E0 5100      02175         MOVF    (_clock + 2), W, B
+00E2 0000      02176         BANKSEL (_setting + 2)
+00E4 6F00      02177         MOVWF   (_setting + 2), B
+00E6 0000      02178         BANKSEL (_clock + 3)
+00E8 5100      02179         MOVF    (_clock + 3), W, B
+00EA 0000      02180         BANKSEL (_setting + 3)
+00EC 6F00      02181         MOVWF   (_setting + 3), B
+               02182 ;       .line   188; timer.c    flags.time_setting_procedure = 1; // start the time setting
+00EE 0E01      02183         MOVLW   0x01
+00F0 0000      02184         BANKSEL _flags
+00F2 6F00      02185         MOVWF   _flags, B
+00F4 0000      02186         BANKSEL (_flags + 1)
+00F6 6B00      02187         CLRF    (_flags + 1), B
+               02188 ;       .line   189; timer.c    Int2String(setting.hours, 0);
+00F8 0E00      02189         MOVLW   0x00
+00FA 6EE5      02190         MOVWF   POSTDEC1
+00FC 0E00      02191         MOVLW   0x00
+00FE 6EE5      02192         MOVWF   POSTDEC1
+0100 0000      02193         BANKSEL (_setting + 1)
+0102 5100      02194         MOVF    (_setting + 1), W, B
+0104 6EE5      02195         MOVWF   POSTDEC1
+0106 0000      02196         BANKSEL _setting
+0108 5100      02197         MOVF    _setting, W, B
+010A 6EE5      02198         MOVWF   POSTDEC1
+010C EC00 F000 02199         CALL    _Int2String
+0110 0E04      02200         MOVLW   0x04
+0112 26E1      02201         ADDWF   FSR1L, F
+               02202 ;       .line   190; timer.c    time_value[2] = ':';
+0114 0E3A      02203         MOVLW   0x3a
+0116 0000      02204         BANKSEL (_time_value + 2)
+0118 6F00      02205         MOVWF   (_time_value + 2), B
+               02206 ;       .line   191; timer.c    Int2String(setting.minutes, 3);
+011A 0E00      02207         MOVLW   0x00
+011C 6EE5      02208         MOVWF   POSTDEC1
+011E 0E03      02209         MOVLW   0x03
+0120 6EE5      02210         MOVWF   POSTDEC1
+0122 0000      02211         BANKSEL (_setting + 3)
+0124 5100      02212         MOVF    (_setting + 3), W, B
+0126 6EE5      02213         MOVWF   POSTDEC1
+0128 0000      02214         BANKSEL (_setting + 2)
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 42
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-0000 02215 _SetupCompleteTime:
-               02216 ;       .line   136; timer.c    void SetupCompleteTime() {
-0000 CFD9 FFE5 02217         MOVFF   FSR2L, POSTDEC1
-0004 CFE1 FFD9 02218         MOVFF   FSR1L, FSR2L
-               02219 ;       .line   138; timer.c    Int2String(clock.hours, 0);
-0008 0E00      02220         MOVLW   0x00
-000A 6EE5      02221         MOVWF   POSTDEC1
-000C 0E00      02222         MOVLW   0x00
-000E 6EE5      02223         MOVWF   POSTDEC1
-0010 0000      02224         BANKSEL (_clock + 1)
-0012 5100      02225         MOVF    (_clock + 1), W, B
-0014 6EE5      02226         MOVWF   POSTDEC1
-0016 0000      02227         BANKSEL _clock
-0018 5100      02228         MOVF    _clock, W, B
-001A 6EE5      02229         MOVWF   POSTDEC1
-001C EC00 F000 02230         CALL    _Int2String
-0020 0E04      02231         MOVLW   0x04
-0022 26E1      02232         ADDWF   FSR1L, F
-               02233 ;       .line   139; timer.c    time_value[2] = ':';
-0024 0E3A      02234         MOVLW   0x3a
-0026 0000      02235         BANKSEL (_time_value + 2)
-0028 6F00      02236         MOVWF   (_time_value + 2), B
-               02237 ;       .line   140; timer.c    Int2String(clock.minutes, 3);
-002A 0E00      02238         MOVLW   0x00
-002C 6EE5      02239         MOVWF   POSTDEC1
-002E 0E03      02240         MOVLW   0x03
-0030 6EE5      02241         MOVWF   POSTDEC1
-0032 0000      02242         BANKSEL (_clock + 3)
-0034 5100      02243         MOVF    (_clock + 3), W, B
-0036 6EE5      02244         MOVWF   POSTDEC1
-0038 0000      02245         BANKSEL (_clock + 2)
-003A 5100      02246         MOVF    (_clock + 2), W, B
-003C 6EE5      02247         MOVWF   POSTDEC1
-003E EC00 F000 02248         CALL    _Int2String
-0042 0E04      02249         MOVLW   0x04
-0044 26E1      02250         ADDWF   FSR1L, F
-               02251 ;       .line   141; timer.c    time_value[5] = ':';
-0046 0E3A      02252         MOVLW   0x3a
-0048 0000      02253         BANKSEL (_time_value + 5)
-004A 6F00      02254         MOVWF   (_time_value + 5), B
-               02255 ;       .line   142; timer.c    Int2String(clock.seconds, 6);
-004C 0E00      02256         MOVLW   0x00
-004E 6EE5      02257         MOVWF   POSTDEC1
-0050 0E06      02258         MOVLW   0x06
-0052 6EE5      02259         MOVWF   POSTDEC1
-0054 0000      02260         BANKSEL (_clock + 5)
-0056 5100      02261         MOVF    (_clock + 5), W, B
-0058 6EE5      02262         MOVWF   POSTDEC1
-005A 0000      02263         BANKSEL (_clock + 4)
-005C 5100      02264         MOVF    (_clock + 4), W, B
-005E 6EE5      02265         MOVWF   POSTDEC1
-0060 EC00 F000 02266         CALL    _Int2String
-0064 0E04      02267         MOVLW   0x04
-0066 26E1      02268         ADDWF   FSR1L, F
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 43
+012A 5100      02215         MOVF    (_setting + 2), W, B
+012C 6EE5      02216         MOVWF   POSTDEC1
+012E EC00 F000 02217         CALL    _Int2String
+0132 0E04      02218         MOVLW   0x04
+0134 26E1      02219         ADDWF   FSR1L, F
+               02220 ;       .line   192; timer.c    UpdateDisplay(CLOCK_SETTING);
+0136 0E00      02221         MOVLW   0x00
+0138 6EE5      02222         MOVWF   POSTDEC1
+013A EC00 F000 02223         CALL    _UpdateDisplay
+013E 2AE1      02224         INCF    FSR1L, F
+0140 0000      02225         BANKSEL _in_setting
+               02226 ;       .line   193; timer.c    in_setting = HOURS;
+0142 6B00      02227         CLRF    _in_setting, B
+0144 02228 _00151_DS_:
+0144 CFE4 FFD9 02229         MOVFF   PREINC1, FSR2L
+0148 0012      02230         RETURN  
+               02231 
+               02232 ; ; Starting pCode block
+               02233 S_timer__SetupCompleteTime      code
+0000 02234 _SetupCompleteTime:
+               02235 ;       .line   136; timer.c    void SetupCompleteTime() {
+0000 CFD9 FFE5 02236         MOVFF   FSR2L, POSTDEC1
+0004 CFE1 FFD9 02237         MOVFF   FSR1L, FSR2L
+               02238 ;       .line   138; timer.c    Int2String(clock.hours, 0);
+0008 0E00      02239         MOVLW   0x00
+000A 6EE5      02240         MOVWF   POSTDEC1
+000C 0E00      02241         MOVLW   0x00
+000E 6EE5      02242         MOVWF   POSTDEC1
+0010 0000      02243         BANKSEL (_clock + 1)
+0012 5100      02244         MOVF    (_clock + 1), W, B
+0014 6EE5      02245         MOVWF   POSTDEC1
+0016 0000      02246         BANKSEL _clock
+0018 5100      02247         MOVF    _clock, W, B
+001A 6EE5      02248         MOVWF   POSTDEC1
+001C EC00 F000 02249         CALL    _Int2String
+0020 0E04      02250         MOVLW   0x04
+0022 26E1      02251         ADDWF   FSR1L, F
+               02252 ;       .line   139; timer.c    time_value[2] = ':';
+0024 0E3A      02253         MOVLW   0x3a
+0026 0000      02254         BANKSEL (_time_value + 2)
+0028 6F00      02255         MOVWF   (_time_value + 2), B
+               02256 ;       .line   140; timer.c    Int2String(clock.minutes, 3);
+002A 0E00      02257         MOVLW   0x00
+002C 6EE5      02258         MOVWF   POSTDEC1
+002E 0E03      02259         MOVLW   0x03
+0030 6EE5      02260         MOVWF   POSTDEC1
+0032 0000      02261         BANKSEL (_clock + 3)
+0034 5100      02262         MOVF    (_clock + 3), W, B
+0036 6EE5      02263         MOVWF   POSTDEC1
+0038 0000      02264         BANKSEL (_clock + 2)
+003A 5100      02265         MOVF    (_clock + 2), W, B
+003C 6EE5      02266         MOVWF   POSTDEC1
+003E EC00 F000 02267         CALL    _Int2String
+0042 0E04      02268         MOVLW   0x04
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 43
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-               02269 ;       .line   144; timer.c    UpdateDisplay(TIME_FLOWING);
-0068 0E02      02270         MOVLW   0x02
-006A 6EE5      02271         MOVWF   POSTDEC1
-006C EC00 F000 02272         CALL    _UpdateDisplay
-0070 2AE1      02273         INCF    FSR1L, F
-0072 CFE4 FFD9 02274         MOVFF   PREINC1, FSR2L
-0076 0012      02275         RETURN  
-               02276 
-               02277 ; ; Starting pCode block
-               02278 S_timer__Int2String     code
-0000 02279 _Int2String:
-               02280 ;       .line   122; timer.c    void Int2String(int value, int pos) {
-0000 CFD9 FFE5 02281         MOVFF   FSR2L, POSTDEC1
-0004 CFE1 FFD9 02282         MOVFF   FSR1L, FSR2L
-0008 C000 FFE5 02283         MOVFF   r0x00, POSTDEC1
-000C C000 FFE5 02284         MOVFF   r0x01, POSTDEC1
-0010 C000 FFE5 02285         MOVFF   r0x02, POSTDEC1
-0014 C000 FFE5 02286         MOVFF   r0x03, POSTDEC1
-0018 C000 FFE5 02287         MOVFF   r0x04, POSTDEC1
-001C C000 FFE5 02288         MOVFF   r0x05, POSTDEC1
-0020 C000 FFE5 02289         MOVFF   r0x06, POSTDEC1
-0024 C000 FFE5 02290         MOVFF   r0x07, POSTDEC1
-0028 0E02      02291         MOVLW   0x02
-002A CFDB F000 02292         MOVFF   PLUSW2, r0x00
-002E 0E03      02293         MOVLW   0x03
-0030 CFDB F000 02294         MOVFF   PLUSW2, r0x01
-0034 0E04      02295         MOVLW   0x04
-0036 CFDB F000 02296         MOVFF   PLUSW2, r0x02
-003A 0E05      02297         MOVLW   0x05
-003C CFDB F000 02298         MOVFF   PLUSW2, r0x03
-               02299 ;       .line   123; timer.c    ultoa(value, &time_value[pos], BASE);
-0040 6AE8      02300         CLRF    WREG
-0042 BE00      02301         BTFSC   r0x01, 7
-0044 0EFF      02302         MOVLW   0xff
-0046 6E00      02303         MOVWF   r0x04
-0048 6E00      02304         MOVWF   r0x05
-004A 0E00      02305         MOVLW   LOW(_time_value)
-004C 2400      02306         ADDWF   r0x02, W
-004E 6E00      02307         MOVWF   r0x06
-0050 0E00      02308         MOVLW   HIGH(_time_value)
-0052 2000      02309         ADDWFC  r0x03, W
-0054 6E00      02310         MOVWF   r0x07
-0056 0E0A      02311         MOVLW   0x0a
-0058 6EE5      02312         MOVWF   POSTDEC1
-005A 5000      02313         MOVF    r0x07, W
-005C 6EE5      02314         MOVWF   POSTDEC1
-005E 5000      02315         MOVF    r0x06, W
-0060 6EE5      02316         MOVWF   POSTDEC1
-0062 5000      02317         MOVF    r0x05, W
-0064 6EE5      02318         MOVWF   POSTDEC1
-0066 5000      02319         MOVF    r0x04, W
-0068 6EE5      02320         MOVWF   POSTDEC1
-006A 5000      02321         MOVF    r0x01, W
-006C 6EE5      02322         MOVWF   POSTDEC1
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 44
+0044 26E1      02269         ADDWF   FSR1L, F
+               02270 ;       .line   141; timer.c    time_value[5] = ':';
+0046 0E3A      02271         MOVLW   0x3a
+0048 0000      02272         BANKSEL (_time_value + 5)
+004A 6F00      02273         MOVWF   (_time_value + 5), B
+               02274 ;       .line   142; timer.c    Int2String(clock.seconds, 6);
+004C 0E00      02275         MOVLW   0x00
+004E 6EE5      02276         MOVWF   POSTDEC1
+0050 0E06      02277         MOVLW   0x06
+0052 6EE5      02278         MOVWF   POSTDEC1
+0054 0000      02279         BANKSEL (_clock + 5)
+0056 5100      02280         MOVF    (_clock + 5), W, B
+0058 6EE5      02281         MOVWF   POSTDEC1
+005A 0000      02282         BANKSEL (_clock + 4)
+005C 5100      02283         MOVF    (_clock + 4), W, B
+005E 6EE5      02284         MOVWF   POSTDEC1
+0060 EC00 F000 02285         CALL    _Int2String
+0064 0E04      02286         MOVLW   0x04
+0066 26E1      02287         ADDWF   FSR1L, F
+               02288 ;       .line   144; timer.c    UpdateDisplay(TIME_FLOWING);
+0068 0E02      02289         MOVLW   0x02
+006A 6EE5      02290         MOVWF   POSTDEC1
+006C EC00 F000 02291         CALL    _UpdateDisplay
+0070 2AE1      02292         INCF    FSR1L, F
+0072 CFE4 FFD9 02293         MOVFF   PREINC1, FSR2L
+0076 0012      02294         RETURN  
+               02295 
+               02296 ; ; Starting pCode block
+               02297 S_timer__Int2String     code
+0000 02298 _Int2String:
+               02299 ;       .line   122; timer.c    void Int2String(int value, int pos) {
+0000 CFD9 FFE5 02300         MOVFF   FSR2L, POSTDEC1
+0004 CFE1 FFD9 02301         MOVFF   FSR1L, FSR2L
+0008 C000 FFE5 02302         MOVFF   r0x00, POSTDEC1
+000C C000 FFE5 02303         MOVFF   r0x01, POSTDEC1
+0010 C000 FFE5 02304         MOVFF   r0x02, POSTDEC1
+0014 C000 FFE5 02305         MOVFF   r0x03, POSTDEC1
+0018 C000 FFE5 02306         MOVFF   r0x04, POSTDEC1
+001C C000 FFE5 02307         MOVFF   r0x05, POSTDEC1
+0020 C000 FFE5 02308         MOVFF   r0x06, POSTDEC1
+0024 C000 FFE5 02309         MOVFF   r0x07, POSTDEC1
+0028 0E02      02310         MOVLW   0x02
+002A CFDB F000 02311         MOVFF   PLUSW2, r0x00
+002E 0E03      02312         MOVLW   0x03
+0030 CFDB F000 02313         MOVFF   PLUSW2, r0x01
+0034 0E04      02314         MOVLW   0x04
+0036 CFDB F000 02315         MOVFF   PLUSW2, r0x02
+003A 0E05      02316         MOVLW   0x05
+003C CFDB F000 02317         MOVFF   PLUSW2, r0x03
+               02318 ;       .line   123; timer.c    ultoa(value, &time_value[pos], BASE);
+0040 6AE8      02319         CLRF    WREG
+0042 BE00      02320         BTFSC   r0x01, 7
+0044 0EFF      02321         MOVLW   0xff
+0046 6E00      02322         MOVWF   r0x04
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 44
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-006E 5000      02323         MOVF    r0x00, W
-0070 6EE5      02324         MOVWF   POSTDEC1
-0072 EC00 F000 02325         CALL    _ultoa
-0076 0E07      02326         MOVLW   0x07
-0078 26E1      02327         ADDWF   FSR1L, F
-               02328 ;       .line   125; timer.c    if (!(time_value[pos + 1])) {
-007A 5000      02329         MOVF    r0x02, W
-007C 6E00      02330         MOVWF   r0x00
-007E 2800      02331         INCF    r0x00, W
-0080 6E00      02332         MOVWF   r0x01
-0082 6A00      02333         CLRF    r0x04
-0084 BE00      02334         BTFSC   r0x01, 7
-0086 6800      02335         SETF    r0x04
-0088 0E00      02336         MOVLW   LOW(_time_value)
-008A 2600      02337         ADDWF   r0x01, F
-008C 0E00      02338         MOVLW   HIGH(_time_value)
-008E 2200      02339         ADDWFC  r0x04, F
-0090 C000 FFE9 02340         MOVFF   r0x01, FSR0L
-0094 C000 FFEA 02341         MOVFF   r0x04, FSR0H
-0098 CFEF F000 02342         MOVFF   INDF0, r0x05
-009C 5000      02343         MOVF    r0x05, W
-009E E100      02344         BNZ     _00124_DS_
-               02345 ;       .line   126; timer.c    time_value[pos + 1] = time_value[pos];
-00A0 0E00      02346         MOVLW   LOW(_time_value)
-00A2 2600      02347         ADDWF   r0x02, F
-00A4 0E00      02348         MOVLW   HIGH(_time_value)
-00A6 2200      02349         ADDWFC  r0x03, F
-00A8 C000 FFE9 02350         MOVFF   r0x02, FSR0L
-00AC C000 FFEA 02351         MOVFF   r0x03, FSR0H
-00B0 CFEF F000 02352         MOVFF   INDF0, r0x05
-00B4 C000 FFE9 02353         MOVFF   r0x01, FSR0L
-00B8 C000 FFEA 02354         MOVFF   r0x04, FSR0H
-00BC C000 FFEF 02355         MOVFF   r0x05, INDF0
-               02356 ;       .line   127; timer.c    time_value[pos] = '0';
-00C0 C000 FFE9 02357         MOVFF   r0x02, FSR0L
-00C4 C000 FFEA 02358         MOVFF   r0x03, FSR0H
-00C8 0E30      02359         MOVLW   0x30
-00CA 6EEF      02360         MOVWF   INDF0
-               02361 ;       .line   128; timer.c    time_value[pos + 2] = '\0';
-00CC 2A00      02362         INCF    r0x00, F
-00CE 2A00      02363         INCF    r0x00, F
-00D0 6A00      02364         CLRF    r0x01
-00D2 BE00      02365         BTFSC   r0x00, 7
-00D4 6800      02366         SETF    r0x01
-00D6 0E00      02367         MOVLW   LOW(_time_value)
-00D8 2600      02368         ADDWF   r0x00, F
-00DA 0E00      02369         MOVLW   HIGH(_time_value)
-00DC 2200      02370         ADDWFC  r0x01, F
-00DE C000 FFE9 02371         MOVFF   r0x00, FSR0L
-00E2 C000 FFEA 02372         MOVFF   r0x01, FSR0H
-00E6 0E00      02373         MOVLW   0x00
-00E8 6EEF      02374         MOVWF   INDF0
-00EA 02375 _00124_DS_:
-00EA CFE4 F000 02376         MOVFF   PREINC1, r0x07
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 45
+0048 6E00      02323         MOVWF   r0x05
+004A 0E00      02324         MOVLW   LOW(_time_value)
+004C 2400      02325         ADDWF   r0x02, W
+004E 6E00      02326         MOVWF   r0x06
+0050 0E00      02327         MOVLW   HIGH(_time_value)
+0052 2000      02328         ADDWFC  r0x03, W
+0054 6E00      02329         MOVWF   r0x07
+0056 0E0A      02330         MOVLW   0x0a
+0058 6EE5      02331         MOVWF   POSTDEC1
+005A 5000      02332         MOVF    r0x07, W
+005C 6EE5      02333         MOVWF   POSTDEC1
+005E 5000      02334         MOVF    r0x06, W
+0060 6EE5      02335         MOVWF   POSTDEC1
+0062 5000      02336         MOVF    r0x05, W
+0064 6EE5      02337         MOVWF   POSTDEC1
+0066 5000      02338         MOVF    r0x04, W
+0068 6EE5      02339         MOVWF   POSTDEC1
+006A 5000      02340         MOVF    r0x01, W
+006C 6EE5      02341         MOVWF   POSTDEC1
+006E 5000      02342         MOVF    r0x00, W
+0070 6EE5      02343         MOVWF   POSTDEC1
+0072 EC00 F000 02344         CALL    _ultoa
+0076 0E07      02345         MOVLW   0x07
+0078 26E1      02346         ADDWF   FSR1L, F
+               02347 ;       .line   125; timer.c    if (!(time_value[pos + 1])) {
+007A 5000      02348         MOVF    r0x02, W
+007C 6E00      02349         MOVWF   r0x00
+007E 2800      02350         INCF    r0x00, W
+0080 6E00      02351         MOVWF   r0x01
+0082 6A00      02352         CLRF    r0x04
+0084 BE00      02353         BTFSC   r0x01, 7
+0086 6800      02354         SETF    r0x04
+0088 0E00      02355         MOVLW   LOW(_time_value)
+008A 2600      02356         ADDWF   r0x01, F
+008C 0E00      02357         MOVLW   HIGH(_time_value)
+008E 2200      02358         ADDWFC  r0x04, F
+0090 C000 FFE9 02359         MOVFF   r0x01, FSR0L
+0094 C000 FFEA 02360         MOVFF   r0x04, FSR0H
+0098 CFEF F000 02361         MOVFF   INDF0, r0x05
+009C 5000      02362         MOVF    r0x05, W
+009E E100      02363         BNZ     _00124_DS_
+               02364 ;       .line   126; timer.c    time_value[pos + 1] = time_value[pos];
+00A0 0E00      02365         MOVLW   LOW(_time_value)
+00A2 2600      02366         ADDWF   r0x02, F
+00A4 0E00      02367         MOVLW   HIGH(_time_value)
+00A6 2200      02368         ADDWFC  r0x03, F
+00A8 C000 FFE9 02369         MOVFF   r0x02, FSR0L
+00AC C000 FFEA 02370         MOVFF   r0x03, FSR0H
+00B0 CFEF F000 02371         MOVFF   INDF0, r0x05
+00B4 C000 FFE9 02372         MOVFF   r0x01, FSR0L
+00B8 C000 FFEA 02373         MOVFF   r0x04, FSR0H
+00BC C000 FFEF 02374         MOVFF   r0x05, INDF0
+               02375 ;       .line   127; timer.c    time_value[pos] = '0';
+00C0 C000 FFE9 02376         MOVFF   r0x02, FSR0L
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 45
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-00EE CFE4 F000 02377         MOVFF   PREINC1, r0x06
-00F2 CFE4 F000 02378         MOVFF   PREINC1, r0x05
-00F6 CFE4 F000 02379         MOVFF   PREINC1, r0x04
-00FA CFE4 F000 02380         MOVFF   PREINC1, r0x03
-00FE CFE4 F000 02381         MOVFF   PREINC1, r0x02
-0102 CFE4 F000 02382         MOVFF   PREINC1, r0x01
-0106 CFE4 F000 02383         MOVFF   PREINC1, r0x00
-010A CFE4 FFD9 02384         MOVFF   PREINC1, FSR2L
-010E 0012      02385         RETURN  
-               02386 
-               02387 ; ; Starting pCode block
-               02388 S_timer__CompleteHoursSetting   code
-0000 02389 _CompleteHoursSetting:
-               02390 ;       .line   110; timer.c    void CompleteHoursSetting() {
-0000 CFD9 FFE5 02391         MOVFF   FSR2L, POSTDEC1
-0004 CFE1 FFD9 02392         MOVFF   FSR1L, FSR2L
-               02393 ;       .line   111; timer.c    in_setting = MINUTES;
-0008 0E01      02394         MOVLW   0x01
-000A 0000      02395         BANKSEL _in_setting
-000C 6F00      02396         MOVWF   _in_setting, B
-               02397 ;       .line   112; timer.c    time_value[2] = ':'; // overwite '\0' added by ultoa when setting hours
-000E 0E3A      02398         MOVLW   0x3a
-0010 0000      02399         BANKSEL (_time_value + 2)
-0012 6F00      02400         MOVWF   (_time_value + 2), B
-0014 CFE4 FFD9 02401         MOVFF   PREINC1, FSR2L
-0018 0012      02402         RETURN  
-               02403 
-               02404 ; ; Starting pCode block
-               02405 S_timer__UpdateTimeValue        code
-0000 02406 _UpdateTimeValue:
-               02407 ;       .line   97; timer.c     void UpdateTimeValue(int* const value, int limit, int pos) {
-0000 CFD9 FFE5 02408         MOVFF   FSR2L, POSTDEC1
-0004 CFE1 FFD9 02409         MOVFF   FSR1L, FSR2L
-0008 C000 FFE5 02410         MOVFF   r0x00, POSTDEC1
-000C C000 FFE5 02411         MOVFF   r0x01, POSTDEC1
-0010 C000 FFE5 02412         MOVFF   r0x02, POSTDEC1
-0014 C000 FFE5 02413         MOVFF   r0x03, POSTDEC1
-0018 C000 FFE5 02414         MOVFF   r0x04, POSTDEC1
-001C C000 FFE5 02415         MOVFF   r0x05, POSTDEC1
-0020 C000 FFE5 02416         MOVFF   r0x06, POSTDEC1
-0024 C000 FFE5 02417         MOVFF   r0x07, POSTDEC1
-0028 C000 FFE5 02418         MOVFF   r0x08, POSTDEC1
-002C 0E02      02419         MOVLW   0x02
-002E CFDB F000 02420         MOVFF   PLUSW2, r0x00
-0032 0E03      02421         MOVLW   0x03
-0034 CFDB F000 02422         MOVFF   PLUSW2, r0x01
-0038 0E04      02423         MOVLW   0x04
-003A CFDB F000 02424         MOVFF   PLUSW2, r0x02
-003E 0E05      02425         MOVLW   0x05
-0040 CFDB F000 02426         MOVFF   PLUSW2, r0x03
-0044 0E06      02427         MOVLW   0x06
-0046 CFDB F000 02428         MOVFF   PLUSW2, r0x04
-004A 0E07      02429         MOVLW   0x07
-004C CFDB F000 02430         MOVFF   PLUSW2, r0x05
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 46
+00C4 C000 FFEA 02377         MOVFF   r0x03, FSR0H
+00C8 0E30      02378         MOVLW   0x30
+00CA 6EEF      02379         MOVWF   INDF0
+               02380 ;       .line   128; timer.c    time_value[pos + 2] = '\0';
+00CC 2A00      02381         INCF    r0x00, F
+00CE 2A00      02382         INCF    r0x00, F
+00D0 6A00      02383         CLRF    r0x01
+00D2 BE00      02384         BTFSC   r0x00, 7
+00D4 6800      02385         SETF    r0x01
+00D6 0E00      02386         MOVLW   LOW(_time_value)
+00D8 2600      02387         ADDWF   r0x00, F
+00DA 0E00      02388         MOVLW   HIGH(_time_value)
+00DC 2200      02389         ADDWFC  r0x01, F
+00DE C000 FFE9 02390         MOVFF   r0x00, FSR0L
+00E2 C000 FFEA 02391         MOVFF   r0x01, FSR0H
+00E6 0E00      02392         MOVLW   0x00
+00E8 6EEF      02393         MOVWF   INDF0
+00EA 02394 _00124_DS_:
+00EA CFE4 F000 02395         MOVFF   PREINC1, r0x07
+00EE CFE4 F000 02396         MOVFF   PREINC1, r0x06
+00F2 CFE4 F000 02397         MOVFF   PREINC1, r0x05
+00F6 CFE4 F000 02398         MOVFF   PREINC1, r0x04
+00FA CFE4 F000 02399         MOVFF   PREINC1, r0x03
+00FE CFE4 F000 02400         MOVFF   PREINC1, r0x02
+0102 CFE4 F000 02401         MOVFF   PREINC1, r0x01
+0106 CFE4 F000 02402         MOVFF   PREINC1, r0x00
+010A CFE4 FFD9 02403         MOVFF   PREINC1, FSR2L
+010E 0012      02404         RETURN  
+               02405 
+               02406 ; ; Starting pCode block
+               02407 S_timer__CompleteHoursSetting   code
+0000 02408 _CompleteHoursSetting:
+               02409 ;       .line   110; timer.c    void CompleteHoursSetting() {
+0000 CFD9 FFE5 02410         MOVFF   FSR2L, POSTDEC1
+0004 CFE1 FFD9 02411         MOVFF   FSR1L, FSR2L
+               02412 ;       .line   111; timer.c    in_setting = MINUTES;
+0008 0E01      02413         MOVLW   0x01
+000A 0000      02414         BANKSEL _in_setting
+000C 6F00      02415         MOVWF   _in_setting, B
+               02416 ;       .line   112; timer.c    time_value[2] = ':'; // overwite '\0' added by ultoa when setting hours
+000E 0E3A      02417         MOVLW   0x3a
+0010 0000      02418         BANKSEL (_time_value + 2)
+0012 6F00      02419         MOVWF   (_time_value + 2), B
+0014 CFE4 FFD9 02420         MOVFF   PREINC1, FSR2L
+0018 0012      02421         RETURN  
+               02422 
+               02423 ; ; Starting pCode block
+               02424 S_timer__UpdateTimeValue        code
+0000 02425 _UpdateTimeValue:
+               02426 ;       .line   97; timer.c     void UpdateTimeValue(int* const value, int limit, int pos) {
+0000 CFD9 FFE5 02427         MOVFF   FSR2L, POSTDEC1
+0004 CFE1 FFD9 02428         MOVFF   FSR1L, FSR2L
+0008 C000 FFE5 02429         MOVFF   r0x00, POSTDEC1
+000C C000 FFE5 02430         MOVFF   r0x01, POSTDEC1
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 46
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-0050 0E08      02431         MOVLW   0x08
-0052 CFDB F000 02432         MOVFF   PLUSW2, r0x06
-               02433 ;       .line   98; timer.c     if (*value == limit) {
-0056 C000 FFE9 02434         MOVFF   r0x00, FSR0L
-005A C000 FFF3 02435         MOVFF   r0x01, PRODL
-005E 5000      02436         MOVF    r0x02, W
-0060 EC00 F000 02437         CALL    __gptrget2
-0064 6E00      02438         MOVWF   r0x07
-0066 CFF3 F000 02439         MOVFF   PRODL, r0x08
-006A 5000      02440         MOVF    r0x07, W
-006C 1800      02441         XORWF   r0x03, W
-006E E100      02442         BNZ     _00111_DS_
-0070 5000      02443         MOVF    r0x08, W
-0072 1800      02444         XORWF   r0x04, W
-0074 E000      02445         BZ      _00112_DS_
-0076 02446 _00111_DS_:
-0076 D000      02447         BRA     _00106_DS_
-0078 02448 _00112_DS_:
-               02449 ;       .line   99; timer.c     *value = 0;
-0078 0E00      02450         MOVLW   0x00
-007A 6EE5      02451         MOVWF   POSTDEC1
-007C 0E00      02452         MOVLW   0x00
-007E 6EF4      02453         MOVWF   PRODH
-0080 C000 FFE9 02454         MOVFF   r0x00, FSR0L
-0084 C000 FFF3 02455         MOVFF   r0x01, PRODL
-0088 5000      02456         MOVF    r0x02, W
-008A EC00 F000 02457         CALL    __gptrput2
-008E D000      02458         BRA     _00107_DS_
-0090 02459 _00106_DS_:
-               02460 ;       .line   101; timer.c    (*value)++;
-0090 2A00      02461         INCF    r0x07, F
-0092 B0D8      02462         BTFSC   STATUS, 0
-0094 2A00      02463         INCF    r0x08, F
-0096 C000 FFE5 02464         MOVFF   r0x07, POSTDEC1
-009A C000 FFF4 02465         MOVFF   r0x08, PRODH
-009E C000 FFE9 02466         MOVFF   r0x00, FSR0L
-00A2 C000 FFF3 02467         MOVFF   r0x01, PRODL
-00A6 5000      02468         MOVF    r0x02, W
-00A8 EC00 F000 02469         CALL    __gptrput2
-00AC 02470 _00107_DS_:
-               02471 ;       .line   103; timer.c    Int2String(*value, pos);
-00AC C000 FFE9 02472         MOVFF   r0x00, FSR0L
-00B0 C000 FFF3 02473         MOVFF   r0x01, PRODL
-00B4 5000      02474         MOVF    r0x02, W
-00B6 EC00 F000 02475         CALL    __gptrget2
-00BA 6E00      02476         MOVWF   r0x00
-00BC CFF3 F000 02477         MOVFF   PRODL, r0x01
-00C0 5000      02478         MOVF    r0x06, W
-00C2 6EE5      02479         MOVWF   POSTDEC1
-00C4 5000      02480         MOVF    r0x05, W
-00C6 6EE5      02481         MOVWF   POSTDEC1
-00C8 5000      02482         MOVF    r0x01, W
-00CA 6EE5      02483         MOVWF   POSTDEC1
-00CC 5000      02484         MOVF    r0x00, W
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 47
+0010 C000 FFE5 02431         MOVFF   r0x02, POSTDEC1
+0014 C000 FFE5 02432         MOVFF   r0x03, POSTDEC1
+0018 C000 FFE5 02433         MOVFF   r0x04, POSTDEC1
+001C C000 FFE5 02434         MOVFF   r0x05, POSTDEC1
+0020 C000 FFE5 02435         MOVFF   r0x06, POSTDEC1
+0024 C000 FFE5 02436         MOVFF   r0x07, POSTDEC1
+0028 C000 FFE5 02437         MOVFF   r0x08, POSTDEC1
+002C 0E02      02438         MOVLW   0x02
+002E CFDB F000 02439         MOVFF   PLUSW2, r0x00
+0032 0E03      02440         MOVLW   0x03
+0034 CFDB F000 02441         MOVFF   PLUSW2, r0x01
+0038 0E04      02442         MOVLW   0x04
+003A CFDB F000 02443         MOVFF   PLUSW2, r0x02
+003E 0E05      02444         MOVLW   0x05
+0040 CFDB F000 02445         MOVFF   PLUSW2, r0x03
+0044 0E06      02446         MOVLW   0x06
+0046 CFDB F000 02447         MOVFF   PLUSW2, r0x04
+004A 0E07      02448         MOVLW   0x07
+004C CFDB F000 02449         MOVFF   PLUSW2, r0x05
+0050 0E08      02450         MOVLW   0x08
+0052 CFDB F000 02451         MOVFF   PLUSW2, r0x06
+               02452 ;       .line   98; timer.c     if (*value == limit) {
+0056 C000 FFE9 02453         MOVFF   r0x00, FSR0L
+005A C000 FFF3 02454         MOVFF   r0x01, PRODL
+005E 5000      02455         MOVF    r0x02, W
+0060 EC00 F000 02456         CALL    __gptrget2
+0064 6E00      02457         MOVWF   r0x07
+0066 CFF3 F000 02458         MOVFF   PRODL, r0x08
+006A 5000      02459         MOVF    r0x07, W
+006C 1800      02460         XORWF   r0x03, W
+006E E100      02461         BNZ     _00111_DS_
+0070 5000      02462         MOVF    r0x08, W
+0072 1800      02463         XORWF   r0x04, W
+0074 E000      02464         BZ      _00112_DS_
+0076 02465 _00111_DS_:
+0076 D000      02466         BRA     _00106_DS_
+0078 02467 _00112_DS_:
+               02468 ;       .line   99; timer.c     *value = 0;
+0078 0E00      02469         MOVLW   0x00
+007A 6EE5      02470         MOVWF   POSTDEC1
+007C 0E00      02471         MOVLW   0x00
+007E 6EF4      02472         MOVWF   PRODH
+0080 C000 FFE9 02473         MOVFF   r0x00, FSR0L
+0084 C000 FFF3 02474         MOVFF   r0x01, PRODL
+0088 5000      02475         MOVF    r0x02, W
+008A EC00 F000 02476         CALL    __gptrput2
+008E D000      02477         BRA     _00107_DS_
+0090 02478 _00106_DS_:
+               02479 ;       .line   101; timer.c    (*value)++;
+0090 2A00      02480         INCF    r0x07, F
+0092 B0D8      02481         BTFSC   STATUS, 0
+0094 2A00      02482         INCF    r0x08, F
+0096 C000 FFE5 02483         MOVFF   r0x07, POSTDEC1
+009A C000 FFF4 02484         MOVFF   r0x08, PRODH
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 47
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-00CE 6EE5      02485         MOVWF   POSTDEC1
-00D0 EC00 F000 02486         CALL    _Int2String
-00D4 0E04      02487         MOVLW   0x04
-00D6 26E1      02488         ADDWF   FSR1L, F
-00D8 CFE4 F000 02489         MOVFF   PREINC1, r0x08
-00DC CFE4 F000 02490         MOVFF   PREINC1, r0x07
-00E0 CFE4 F000 02491         MOVFF   PREINC1, r0x06
-00E4 CFE4 F000 02492         MOVFF   PREINC1, r0x05
-00E8 CFE4 F000 02493         MOVFF   PREINC1, r0x04
-00EC CFE4 F000 02494         MOVFF   PREINC1, r0x03
-00F0 CFE4 F000 02495         MOVFF   PREINC1, r0x02
-00F4 CFE4 F000 02496         MOVFF   PREINC1, r0x01
-00F8 CFE4 F000 02497         MOVFF   PREINC1, r0x00
-00FC CFE4 FFD9 02498         MOVFF   PREINC1, FSR2L
-0100 0012      02499         RETURN  
-               02500 
-               02501 ; ; Starting pCode block
-0102 02502 __str_0:
-0102 6E45 6574 02503         DB      0x45, 0x6e, 0x74, 0x65, 0x72, 0x20, 0x74, 0x68, 0x65, 0x20, 0x74, 0x69
+009E C000 FFE9 02485         MOVFF   r0x00, FSR0L
+00A2 C000 FFF3 02486         MOVFF   r0x01, PRODL
+00A6 5000      02487         MOVF    r0x02, W
+00A8 EC00 F000 02488         CALL    __gptrput2
+00AC 02489 _00107_DS_:
+               02490 ;       .line   103; timer.c    Int2String(*value, pos);
+00AC C000 FFE9 02491         MOVFF   r0x00, FSR0L
+00B0 C000 FFF3 02492         MOVFF   r0x01, PRODL
+00B4 5000      02493         MOVF    r0x02, W
+00B6 EC00 F000 02494         CALL    __gptrget2
+00BA 6E00      02495         MOVWF   r0x00
+00BC CFF3 F000 02496         MOVFF   PRODL, r0x01
+00C0 5000      02497         MOVF    r0x06, W
+00C2 6EE5      02498         MOVWF   POSTDEC1
+00C4 5000      02499         MOVF    r0x05, W
+00C6 6EE5      02500         MOVWF   POSTDEC1
+00C8 5000      02501         MOVF    r0x01, W
+00CA 6EE5      02502         MOVWF   POSTDEC1
+00CC 5000      02503         MOVF    r0x00, W
+00CE 6EE5      02504         MOVWF   POSTDEC1
+00D0 EC00 F000 02505         CALL    _Int2String
+00D4 0E04      02506         MOVLW   0x04
+00D6 26E1      02507         ADDWF   FSR1L, F
+00D8 CFE4 F000 02508         MOVFF   PREINC1, r0x08
+00DC CFE4 F000 02509         MOVFF   PREINC1, r0x07
+00E0 CFE4 F000 02510         MOVFF   PREINC1, r0x06
+00E4 CFE4 F000 02511         MOVFF   PREINC1, r0x05
+00E8 CFE4 F000 02512         MOVFF   PREINC1, r0x04
+00EC CFE4 F000 02513         MOVFF   PREINC1, r0x03
+00F0 CFE4 F000 02514         MOVFF   PREINC1, r0x02
+00F4 CFE4 F000 02515         MOVFF   PREINC1, r0x01
+00F8 CFE4 F000 02516         MOVFF   PREINC1, r0x00
+00FC CFE4 FFD9 02517         MOVFF   PREINC1, FSR2L
+0100 0012      02518         RETURN  
+               02519 
+               02520 ; ; Starting pCode block
+0102 02521 __str_0:
+0102 6E45 6574 02522         DB      0x45, 0x6e, 0x74, 0x65, 0x72, 0x20, 0x74, 0x68, 0x65, 0x20, 0x74, 0x69
      2072 6874 
      2065 6974 
-010E 656D 003A 02504         DB      0x6d, 0x65, 0x3a, 0x00
-               02505 ; ; Starting pCode block
-0112 02506 __str_1:
-0112 2020 0020 02507         DB      0x20, 0x20, 0x20, 0x00
-               02508 ; ; Starting pCode block
-0116 02509 __str_2:
-0116 6E45 6574 02510         DB      0x45, 0x6e, 0x74, 0x65, 0x72, 0x20, 0x74, 0x68, 0x65, 0x20, 0x61, 0x77
+010E 656D 003A 02523         DB      0x6d, 0x65, 0x3a, 0x00
+               02524 ; ; Starting pCode block
+0112 02525 __str_1:
+0112 2020 0020 02526         DB      0x20, 0x20, 0x20, 0x00
+               02527 ; ; Starting pCode block
+0116 02528 __str_2:
+0116 6E45 6574 02529         DB      0x45, 0x6e, 0x74, 0x65, 0x72, 0x20, 0x74, 0x68, 0x65, 0x20, 0x61, 0x77
      2072 6874 
      2065 7761 
-0122 6B61 2065 02511         DB      0x61, 0x6b, 0x65, 0x20, 0x00
+0122 6B61 2065 02530         DB      0x61, 0x6b, 0x65, 0x20, 0x00
      0000      
-               02512 ; ; Starting pCode block
-0128 02513 __str_3:
-0128 6974 656D 02514         DB      0x74, 0x69, 0x6d, 0x65, 0x3a, 0x20, 0x00
-     203A 0000 
-               02515 ; ; Starting pCode block
-0130 02516 __str_4:
-0130 2020 2020 02517         DB      0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20
-     2020 2020 
-     2020 2020 
-013C 2020 2020 02518         DB      0x20, 0x20, 0x20, 0x20, 0x00
-     0000      
-               02519 ; ; Starting pCode block
-0142 02520 __str_5:
-0142 2020 2020 02521         DB      0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
-     2020 2020 
-     0020      
-               02522 
-               02523 
-               02524 ; Statistics:
-               02525 ; code size:     4064 (0x0fe0) bytes ( 3.10%)
-               02526 ;                2032 (0x07f0) words
-               02527 ; udata size:      46 (0x002e) bytes ( 1.20%)
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 48
+               02531 ; ; Starting pCode block
+0128 02532 __str_3:
+0128 6974 656D 02533         DB      0x74, 0x69, 0x6d, 0x65, 0x3a, 0x20, 0x00
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 48
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
  
-               02528 ; access size:     22 (0x0016) bytes
-               02529 
-               02530 
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 49
+     203A 0000 
+               02534 ; ; Starting pCode block
+0130 02535 __str_4:
+0130 2020 2020 02536         DB      0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20
+     2020 2020 
+     2020 2020 
+013C 2020 2020 02537         DB      0x20, 0x20, 0x20, 0x20, 0x00
+     0000      
+               02538 ; ; Starting pCode block
+0142 02539 __str_5:
+0142 2020 2020 02540         DB      0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
+     2020 2020 
+     0020      
+               02541 
+               02542 
+               02543 ; Statistics:
+               02544 ; code size:     4098 (0x1002) bytes ( 3.13%)
+               02545 ;                2049 (0x0801) words
+               02546 ; udata size:      46 (0x002e) bytes ( 1.20%)
+               02547 ; access size:     22 (0x0016) bytes
+               02548 
+               02549 
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 49
 
 
 SYMBOL TABLE
@@ -2859,7 +2878,7 @@ _00138_DS_                        00000020
 _00141_DS_                        000000A8
 _00146_DS_                        000000C2
 _00149_DS_                        00000092
-_00151_DS_                        00000122
+_00151_DS_                        00000144
 _00157_DS_                        000000AA
 _00159_DS_                        00000104
 _00167_DS_                        000000A8
@@ -2886,7 +2905,7 @@ _00242_DS_                        0000008C
 _00258_DS_                        00000012
 _00265_DS_                        0000005E
 _00267_DS_                        000000A6
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 50
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 50
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2946,7 +2965,7 @@ _CCP5CONbits                      00000000
 _CCPR1                            00000000
 _CCPR1H                           00000000
 _CCPR1L                           00000000
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 51
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 51
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -3006,7 +3025,7 @@ _ECCP1DELbits                     00000000
 _ECCP2AS                          00000000
 _ECCP2ASbits                      00000000
 _ECCP2CON                         00000000
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 52
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 52
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -3066,7 +3085,7 @@ _EPMCSL                           00000000
 _EPMM0                            00000000
 _EPMM1                            00000000
 _EPMM2                            00000000
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 53
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 53
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -3126,7 +3145,7 @@ _INDF1                            00000000
 _INDF2                            00000000
 _INTCON                           00000000
 _INTCON2                          00000000
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 54
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 54
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -3186,7 +3205,7 @@ _MACON4bits                       00000000
 _MAIPG                            00000000
 _MAIPGH                           00000000
 _MAIPGL                           00000000
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 55
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 55
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -3246,7 +3265,7 @@ _PORTEbits                        00000000
 _PORTF                            00000000
 _PORTFbits                        00000000
 _PORTG                            00000000
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 56
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 56
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -3306,7 +3325,7 @@ _SSP2CON2                         00000000
 _SSP2CON2bits                     00000000
 _SSP2STAT                         00000000
 _SSP2STATbits                     00000000
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 57
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 57
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -3366,7 +3385,7 @@ _TRISF                            00000000
 _TRISFbits                        00000000
 _TRISG                            00000000
 _TRISGbits                        00000000
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 58
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 58
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -3426,7 +3445,7 @@ r0x05                             00000005
 r0x06                             00000006
 r0x07                             00000007
 r0x08                             00000008
-gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  01:41:34         PAGE 59
+gpasm-0.13.7 beta               Objects/timer.asm11-28-2017  03:22:59         PAGE 59
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
