@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.4 #5595 (Nov 15 2017) (UNIX)
-; This file was generated Tue Nov 28 03:22:59 2017
+; This file was generated Tue Nov 28 18:32:49 2017
 ;--------------------------------------------------------
 ; PIC16 port for the Microchip 16-bit core micros
 ;--------------------------------------------------------
@@ -563,7 +563,7 @@ _main:
 	MOVLW	0x05
 	MOVWF	r0x02
 	CLRF	r0x03
-_00258_DS_:
+_00265_DS_:
 	MOVFF	r0x00, r0x04
 	MOVFF	r0x01, r0x05
 	MOVFF	r0x02, r0x06
@@ -580,39 +580,39 @@ _00258_DS_:
 	IORWF	r0x05, W
 	IORWF	r0x06, W
 	IORWF	r0x07, W
-	BNZ	_00258_DS_
+	BNZ	_00265_DS_
 ;	.line	397; timer.c	ConfigureRegisters();
 	CALL	_ConfigureRegisters
 ;	.line	398; timer.c	AssignDefaultValues();
 	CALL	_AssignDefaultValues
-_00277_DS_:
+_00284_DS_:
 	BANKSEL	(_flags + 6)
 ;	.line	401; timer.c	if (flags.half_sec) {               // routine executed every half second
 	MOVF	(_flags + 6), W, B
 	BANKSEL	(_flags + 7)
 	IORWF	(_flags + 7), W, B
 	BTFSC	STATUS, 2
-	BRA	_00271_DS_
+	BRA	_00278_DS_
 	BANKSEL	(_flags + 8)
 ;	.line	403; timer.c	if (flags.one_sec) {
 	MOVF	(_flags + 8), W, B
 	BANKSEL	(_flags + 9)
 	IORWF	(_flags + 9), W, B
-	BZ	_00265_DS_
+	BZ	_00272_DS_
 ;	.line	404; timer.c	UpdateClock();
 	CALL	_UpdateClock
-_00265_DS_:
+_00272_DS_:
 	BANKSEL	(_flags + 8)
 ;	.line	407; timer.c	if (flags.one_sec && flags.alarm) {
 	MOVF	(_flags + 8), W, B
 	BANKSEL	(_flags + 9)
 	IORWF	(_flags + 9), W, B
-	BZ	_00267_DS_
+	BZ	_00274_DS_
 	BANKSEL	(_flags + 10)
 	MOVF	(_flags + 10), W, B
 	BANKSEL	(_flags + 11)
 	IORWF	(_flags + 11), W, B
-	BZ	_00267_DS_
+	BZ	_00274_DS_
 ;	.line	408; timer.c	LATJbits.LATJ0 ^= 1;        // led0 blink
 	CLRF	r0x00
 	BTFSC	_LATJbits, 0
@@ -640,8 +640,8 @@ _00265_DS_:
 	ANDLW	0xfd
 	IORWF	PRODH, W
 	MOVWF	_LATJbits
-	BRA	_00268_DS_
-_00267_DS_:
+	BRA	_00275_DS_
+_00274_DS_:
 ;	.line	411; timer.c	LATJbits.LATJ0 ^= 1;        // led0 blink
 	CLRF	r0x00
 	BTFSC	_LATJbits, 0
@@ -655,7 +655,7 @@ _00267_DS_:
 	ANDLW	0xfe
 	IORWF	PRODH, W
 	MOVWF	_LATJbits
-_00268_DS_:
+_00275_DS_:
 	BANKSEL	(_flags + 8)
 ;	.line	414; timer.c	flags.one_sec = 0;
 	CLRF	(_flags + 8), B
@@ -666,13 +666,13 @@ _00268_DS_:
 	CLRF	(_flags + 6), B
 	BANKSEL	(_flags + 7)
 	CLRF	(_flags + 7), B
-_00271_DS_:
+_00278_DS_:
 	BANKSEL	_ints
 ;	.line	417; timer.c	if (ints.button1) {         // button 1 pressed
 	MOVF	_ints, W, B
 	BANKSEL	(_ints + 1)
 	IORWF	(_ints + 1), W, B
-	BZ	_00273_DS_
+	BZ	_00280_DS_
 	BANKSEL	_ints
 ;	.line	418; timer.c	ints.button1 = 0;
 	CLRF	_ints, B
@@ -680,14 +680,14 @@ _00271_DS_:
 	CLRF	(_ints + 1), B
 ;	.line	419; timer.c	HandleButton1Pressure();
 	CALL	_HandleButton1Pressure
-_00273_DS_:
+_00280_DS_:
 	BANKSEL	(_ints + 2)
 ;	.line	421; timer.c	if (ints.button2) {         // button 2 pressed
 	MOVF	(_ints + 2), W, B
 	BANKSEL	(_ints + 3)
 	IORWF	(_ints + 3), W, B
 	BTFSC	STATUS, 2
-	BRA	_00277_DS_
+	BRA	_00284_DS_
 	BANKSEL	(_ints + 2)
 ;	.line	422; timer.c	ints.button2 = 0;
 	CLRF	(_ints + 2), B
@@ -695,7 +695,7 @@ _00273_DS_:
 	CLRF	(_ints + 3), B
 ;	.line	423; timer.c	HandleButton2Pressure();
 	CALL	_HandleButton2Pressure
-	BRA	_00277_DS_
+	BRA	_00284_DS_
 	RETURN	
 
 ; ; Starting pCode block
@@ -757,21 +757,21 @@ _strlcpy:
 	MOVF	r0x06, W
 	IORWF	r0x07, W
 	BTFSC	STATUS, 2
-	BRA	_00326_DS_
+	BRA	_00333_DS_
 ;	.line	538; timer.c	while (--n != 0)
 	MOVFF	r0x03, r0x10
 	MOVFF	r0x04, r0x11
 	MOVFF	r0x05, r0x12
 	MOVFF	r0x06, r0x13
 	MOVFF	r0x07, r0x14
-_00322_DS_:
+_00329_DS_:
 	MOVLW	0xff
 	ADDWF	r0x13, F
 	BTFSS	STATUS, 0
 	DECF	r0x14, F
 	MOVF	r0x13, W
 	IORWF	r0x14, W
-	BZ	_00341_DS_
+	BZ	_00348_DS_
 ;	.line	540; timer.c	if ((*d++ = *s++) == '\0')
 	MOVFF	r0x10, FSR0L
 	MOVFF	r0x11, PRODL
@@ -794,8 +794,8 @@ _00322_DS_:
 	BTFSC	STATUS, 0
 	INCF	r0x02, F
 	MOVF	r0x15, W
-	BNZ	_00322_DS_
-_00341_DS_:
+	BNZ	_00329_DS_
+_00348_DS_:
 ;	.line	541; timer.c	break;
 	MOVFF	r0x10, r0x0b
 	MOVFF	r0x11, r0x0c
@@ -805,15 +805,15 @@ _00341_DS_:
 	MOVFF	r0x02, r0x0a
 	MOVFF	r0x13, r0x0e
 	MOVFF	r0x14, r0x0f
-_00326_DS_:
+_00333_DS_:
 ;	.line	546; timer.c	if (n == 0)
 	MOVF	r0x0e, W
 	IORWF	r0x0f, W
-	BNZ	_00333_DS_
+	BNZ	_00340_DS_
 ;	.line	548; timer.c	if (siz != 0)
 	MOVF	r0x06, W
 	IORWF	r0x07, W
-	BZ	_00340_DS_
+	BZ	_00347_DS_
 ;	.line	549; timer.c	*d = '\0';          /* NUL-terminate dst */
 	MOVLW	0x00
 	MOVWF	POSTDEC1
@@ -821,12 +821,12 @@ _00326_DS_:
 	MOVFF	r0x09, PRODL
 	MOVF	r0x0a, W
 	CALL	__gptrput1
-_00340_DS_:
+_00347_DS_:
 ;	.line	550; timer.c	while (*s++)
 	MOVFF	r0x0b, r0x00
 	MOVFF	r0x0c, r0x01
 	MOVFF	r0x0d, r0x02
-_00329_DS_:
+_00336_DS_:
 	MOVFF	r0x00, FSR0L
 	MOVFF	r0x01, PRODL
 	MOVF	r0x02, W
@@ -838,11 +838,11 @@ _00329_DS_:
 	BTFSC	STATUS, 0
 	INCF	r0x02, F
 	MOVF	r0x06, W
-	BNZ	_00329_DS_
+	BNZ	_00336_DS_
 	MOVFF	r0x00, r0x0b
 	MOVFF	r0x01, r0x0c
 	MOVFF	r0x02, r0x0d
-_00333_DS_:
+_00340_DS_:
 ;	.line	554; timer.c	return (s - src - 1);       /* count does not include NUL */
 	MOVF	r0x03, W
 	SUBWF	r0x0b, W
@@ -936,15 +936,15 @@ _DisplayString:
 ;	.line	483; timer.c	size_t      n = (l<max)?l:max;
 	MOVF	r0x05, W
 	SUBWF	r0x04, W
-	BNC	_00310_DS_
+	BNC	_00317_DS_
 	MOVFF	r0x05, r0x04
-_00310_DS_:
+_00317_DS_:
 	CLRF	r0x05
 ;	.line	485; timer.c	if (n != 0)
 	MOVF	r0x04, W
 	IORWF	r0x05, W
-	BZ	_00306_DS_
-_00302_DS_:
+	BZ	_00313_DS_
+_00309_DS_:
 ;	.line	486; timer.c	while (n-- != 0)*d++ = *s++;
 	MOVFF	r0x04, r0x08
 	MOVFF	r0x05, r0x09
@@ -954,7 +954,7 @@ _00302_DS_:
 	DECF	r0x05, F
 	MOVF	r0x08, W
 	IORWF	r0x09, W
-	BZ	_00306_DS_
+	BZ	_00313_DS_
 	MOVFF	r0x01, FSR0L
 	MOVFF	r0x02, PRODL
 	MOVF	r0x03, W
@@ -975,8 +975,8 @@ _00302_DS_:
 	INCF	r0x06, F
 	BTFSC	STATUS, 0
 	INCF	r0x07, F
-	BRA	_00302_DS_
-_00306_DS_:
+	BRA	_00309_DS_
+_00313_DS_:
 ;	.line	487; timer.c	LCDUpdate();
 	CALL	_LCDUpdate
 	MOVFF	PREINC1, r0x09
@@ -1032,7 +1032,7 @@ _DisplayWORD:
 	ADDWF	FSR1L, F
 ;	.line	447; timer.c	for(j = 0; j < strlen((char*)WDigit); j++)
 	CLRF	r0x01
-_00286_DS_:
+_00293_DS_:
 	MOVLW	HIGH(_DisplayWORD_WDigit_1_1)
 	MOVWF	r0x03
 	MOVLW	LOW(_DisplayWORD_WDigit_1_1)
@@ -1058,11 +1058,11 @@ _00286_DS_:
 	MOVF	r0x03, W
 	ADDLW	0x80
 	SUBWF	PRODL, W
-	BNZ	_00296_DS_
+	BNZ	_00303_DS_
 	MOVF	r0x02, W
 	SUBWF	r0x04, W
-_00296_DS_:
-	BC	_00289_DS_
+_00303_DS_:
+	BC	_00296_DS_
 ;	.line	449; timer.c	LCDText[LCDPos++] = WDigit[j];
 	MOVFF	r0x00, r0x02
 	INCF	r0x00, F
@@ -1085,18 +1085,18 @@ _00296_DS_:
 	MOVFF	r0x04, INDF0
 ;	.line	447; timer.c	for(j = 0; j < strlen((char*)WDigit); j++)
 	INCF	r0x01, F
-	BRA	_00286_DS_
-_00289_DS_:
+	BRA	_00293_DS_
+_00296_DS_:
 ;	.line	451; timer.c	if(LCDPos < 32u)
 	MOVFF	r0x00, r0x01
 	CLRF	r0x02
 	MOVLW	0x00
 	SUBWF	r0x02, W
-	BNZ	_00297_DS_
+	BNZ	_00304_DS_
 	MOVLW	0x20
 	SUBWF	r0x01, W
-_00297_DS_:
-	BC	_00285_DS_
+_00304_DS_:
+	BC	_00292_DS_
 ;	.line	452; timer.c	LCDText[LCDPos] = 0;
 	CLRF	r0x01
 	MOVLW	LOW(_LCDText)
@@ -1107,7 +1107,7 @@ _00297_DS_:
 	MOVFF	r0x01, FSR0H
 	MOVLW	0x00
 	MOVWF	INDF0
-_00285_DS_:
+_00292_DS_:
 ;	.line	453; timer.c	LCDUpdate();
 	CALL	_LCDUpdate
 	MOVFF	PREINC1, r0x05
@@ -1141,7 +1141,7 @@ _HighISR:
 	INCF	r0x00, F
 	MOVF	r0x00, W
 	XORLW	0x01
-	BNZ	_00237_DS_
+	BNZ	_00244_DS_
 ;	.line	374; timer.c	TMR1L             =     (0x10000 - EXTCLOCK_FREQ/2) & 0xff;    // timer1 reset
 	CLRF	_TMR1L
 ;	.line	375; timer.c	TMR1H             =     (0x10000 - EXTCLOCK_FREQ/2) >> 8;
@@ -1155,24 +1155,24 @@ _HighISR:
 	CLRF	(_flags + 7), B
 ;	.line	377; timer.c	if(!LATJbits.LATJ0)
 	BTFSC	_LATJbits, 0
-	BRA	_00235_DS_
+	BRA	_00242_DS_
 ;	.line	378; timer.c	flags.one_sec = 1;      // set a flag every second (i.e. every time led0 becomes high)
 	MOVLW	0x01
 	BANKSEL	(_flags + 8)
 	MOVWF	(_flags + 8), B
 	BANKSEL	(_flags + 9)
 	CLRF	(_flags + 9), B
-_00235_DS_:
+_00242_DS_:
 ;	.line	379; timer.c	PIR1bits.TMR1IF = 0;
 	BCF	_PIR1bits, 0
-_00237_DS_:
+_00244_DS_:
 ;	.line	381; timer.c	if(INTCON3bits.INT1F == 1) {    // button 2 ISR
 	CLRF	r0x00
 	BTFSC	_INTCON3bits, 0
 	INCF	r0x00, F
 	MOVF	r0x00, W
 	XORLW	0x01
-	BNZ	_00239_DS_
+	BNZ	_00246_DS_
 ;	.line	382; timer.c	ints.button2 = 1;           // set a flag for successive handling
 	MOVLW	0x01
 	BANKSEL	(_ints + 2)
@@ -1181,14 +1181,14 @@ _00237_DS_:
 	CLRF	(_ints + 3), B
 ;	.line	383; timer.c	INTCON3bits.INT1F = 0;
 	BCF	_INTCON3bits, 0
-_00239_DS_:
+_00246_DS_:
 ;	.line	385; timer.c	if (INTCON3bits.INT3F == 1) {   // button 1 ISR
 	CLRF	r0x00
 	BTFSC	_INTCON3bits, 2
 	INCF	r0x00, F
 	MOVF	r0x00, W
 	XORLW	0x01
-	BNZ	_00242_DS_
+	BNZ	_00249_DS_
 ;	.line	386; timer.c	ints.button1 = 1;           // set a flag for successive handling
 	MOVLW	0x01
 	BANKSEL	_ints
@@ -1197,7 +1197,7 @@ _00239_DS_:
 	CLRF	(_ints + 1), B
 ;	.line	387; timer.c	INTCON3bits.INT3F = 0;
 	BCF	_INTCON3bits, 2
-_00242_DS_:
+_00249_DS_:
 	MOVFF	PREINC1, r0x00
 	MOVFF	PREINC1, FSR2L
 	MOVFF	PREINC1, PCLATU
@@ -1315,7 +1315,7 @@ _UpdateClock:
 	MOVWF	(_time_value + 2), B
 _00201_DS_:
 	BANKSEL	(_flags + 10)
-;	.line	356; timer.c	if(!flags.alarm && (clock.minutes == timer.minutes) && (clock.hours == timer.hours))
+;	.line	356; timer.c	if(!flags.alarm && (clock.minutes == timer.minutes && clock.hours == timer.hours))
 	MOVF	(_flags + 10), W, B
 	BANKSEL	(_flags + 11)
 	IORWF	(_flags + 11), W, B
@@ -1324,28 +1324,28 @@ _00201_DS_:
 	MOVF	(_clock + 2), W, B
 	BANKSEL	(_timer + 2)
 	XORWF	(_timer + 2), W, B
-	BNZ	_00225_DS_
+	BNZ	_00228_DS_
 	BANKSEL	(_clock + 3)
 	MOVF	(_clock + 3), W, B
 	BANKSEL	(_timer + 3)
 	XORWF	(_timer + 3), W, B
-	BZ	_00226_DS_
-_00225_DS_:
+	BZ	_00229_DS_
+_00228_DS_:
 	BRA	_00207_DS_
-_00226_DS_:
+_00229_DS_:
 	BANKSEL	_clock
 	MOVF	_clock, W, B
 	BANKSEL	_timer
 	XORWF	_timer, W, B
-	BNZ	_00227_DS_
+	BNZ	_00230_DS_
 	BANKSEL	(_clock + 1)
 	MOVF	(_clock + 1), W, B
 	BANKSEL	(_timer + 1)
 	XORWF	(_timer + 1), W, B
-	BZ	_00228_DS_
-_00227_DS_:
+	BZ	_00231_DS_
+_00230_DS_:
 	BRA	_00207_DS_
-_00228_DS_:
+_00231_DS_:
 ;	.line	357; timer.c	flags.alarm = 1; // alarm activation
 	MOVLW	0x01
 	BANKSEL	(_flags + 10)
@@ -1354,7 +1354,7 @@ _00228_DS_:
 	CLRF	(_flags + 11), B
 _00207_DS_:
 	BANKSEL	(_flags + 10)
-;	.line	359; timer.c	if(flags.alarm && (clock.seconds > (30 + 1)))
+;	.line	359; timer.c	if(flags.alarm && (clock.seconds > (30 + 1) || clock.minutes != timer.minutes || clock.hours != timer.hours))
 	MOVF	(_flags + 10), W, B
 	BANKSEL	(_flags + 11)
 	IORWF	(_flags + 11), W, B
@@ -1363,14 +1363,38 @@ _00207_DS_:
 	MOVF	(_clock + 5), W, B
 	ADDLW	0x80
 	ADDLW	0x80
-	BNZ	_00229_DS_
+	BNZ	_00232_DS_
 	MOVLW	0x20
 	BANKSEL	(_clock + 4)
 	SUBWF	(_clock + 4), W, B
-_00229_DS_:
-	BNC	_00209_DS_
+_00232_DS_:
+	BC	_00208_DS_
+	BANKSEL	(_clock + 2)
+	MOVF	(_clock + 2), W, B
+	BANKSEL	(_timer + 2)
+	XORWF	(_timer + 2), W, B
+	BNZ	_00233_DS_
+	BANKSEL	(_clock + 3)
+	MOVF	(_clock + 3), W, B
+	BANKSEL	(_timer + 3)
+	XORWF	(_timer + 3), W, B
+	BZ	_00234_DS_
+_00233_DS_:
+	BRA	_00208_DS_
+_00234_DS_:
+	BANKSEL	_clock
+	MOVF	_clock, W, B
+	BANKSEL	_timer
+	XORWF	_timer, W, B
+	BNZ	_00208_DS_
+	BANKSEL	(_clock + 1)
+	MOVF	(_clock + 1), W, B
+	BANKSEL	(_timer + 1)
+	XORWF	(_timer + 1), W, B
+	BZ	_00209_DS_
+_00208_DS_:
 	BANKSEL	(_flags + 10)
-;	.line	360; timer.c	flags.alarm = 0;     // alarm deactivation after ~30 seconds
+;	.line	360; timer.c	flags.alarm = 0;     // alarm deactivation after ~30 seconds or after clock change
 	CLRF	(_flags + 10), B
 	BANKSEL	(_flags + 11)
 	CLRF	(_flags + 11), B
@@ -1380,12 +1404,12 @@ _00209_DS_:
 	MOVF	(_flags + 2), W, B
 	BANKSEL	(_flags + 3)
 	IORWF	(_flags + 3), W, B
-	BNZ	_00214_DS_
+	BNZ	_00216_DS_
 	BANKSEL	_flags
 	MOVF	_flags, W, B
 	BANKSEL	(_flags + 1)
 	IORWF	(_flags + 1), W, B
-	BNZ	_00214_DS_
+	BNZ	_00216_DS_
 ;	.line	362; timer.c	DisplayString(16, &time_value[0]);
 	MOVLW	HIGH(_time_value)
 	MOVWF	r0x01
@@ -1404,7 +1428,7 @@ _00209_DS_:
 	CALL	_DisplayString
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-_00214_DS_:
+_00216_DS_:
 	MOVFF	PREINC1, r0x02
 	MOVFF	PREINC1, r0x01
 	MOVFF	PREINC1, r0x00
@@ -2541,8 +2565,8 @@ __str_5:
 
 
 ; Statistics:
-; code size:	 4098 (0x1002) bytes ( 3.13%)
-;           	 2049 (0x0801) words
+; code size:	 4140 (0x102c) bytes ( 3.16%)
+;           	 2070 (0x0816) words
 ; udata size:	   46 (0x002e) bytes ( 1.20%)
 ; access size:	   22 (0x0016) bytes
 
