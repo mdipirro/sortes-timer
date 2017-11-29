@@ -26,7 +26,7 @@ enum setting_values {
     MINUTES
 } in_setting;
 
-// enum representing the actual display's state
+// enum representing the actual display state
 enum display_states {
     CLOCK_SETTING,
     TIMER_SETTING,
@@ -35,7 +35,7 @@ enum display_states {
 
 // various flags used to communicate from interrupts to the main
 struct flags {
-    int time_setting_procedure; // the user is setting the clock's time
+    int time_setting_procedure; // the user is setting the current time
     int awake_setting_procedure; // the user is setting the awake time
     int set; // initial set up completed
     int half_sec;
@@ -43,7 +43,7 @@ struct flags {
     int alarm;
 } flags;
 
-// struct representing the clock's time
+// struct representing the current time
 struct clock_time {
     int hours;
     int minutes;
@@ -56,7 +56,7 @@ struct awake_time {
     int minutes;
 } timer;
 
-// struct representing the new clock time's values
+// struct representing the new current time values
 struct setting_values {
     int hours;
     int minutes;
@@ -105,7 +105,7 @@ void UpdateTimeValue(int* const value, int limit, int pos) {
 }
 
 /**
- * Complete the hour's setting procedure and start the minutes' one. This 
+ * Complete the hours setting procedure and start the minutes one. This 
  * function set the `in_setting` flag to `MINUTES`.
  */
 void CompleteHoursSetting() {
@@ -151,7 +151,7 @@ void SetupCompleteTime() {
  * used to issue a clock's time modification.
  */
 void HandleButton1Pressure() {
-    if (flags.time_setting_procedure) { // setting clock's time
+    if (flags.time_setting_procedure) { // setting current time
         if (in_setting == HOURS) {
             CompleteHoursSetting(); // start minutes setting
         } else {
@@ -222,7 +222,7 @@ void UpdateProperTimeValue(int* const hours, int* const minutes) {
  * It is also used to issue a modification of the awake time.
  */
 void HandleButton2Pressure() {
-    if (flags.time_setting_procedure) { // setting the clock's time
+    if (flags.time_setting_procedure) { // setting the current time
         // update the values in the `setting` struct
         UpdateProperTimeValue(&setting.hours, &setting.minutes); 
     } else if (flags.awake_setting_procedure) { // setting the awake time
@@ -308,7 +308,7 @@ void AssignDefaultValues() {
     setting.minutes = 0;
     // set the display status
     UpdateDisplay(CLOCK_SETTING);
-    // no need to assign 0 to the clock's fields since they will be init for sure
+    // no need to assign 0 to the clock fields since they will be init for sure
     // after the setting procedure
 }
 

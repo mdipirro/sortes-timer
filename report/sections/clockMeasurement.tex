@@ -1,4 +1,4 @@
-\section{System clock frequency measurement}
+\section*{APPENDIX A: System clock frequency measurement}
 The clock frequency of the board that is being used (Olimex PIC-MAXI-WEB) is set at boot time by the tftp server. To know exactly at what frequency the board is running, a test routine has been performed with an ad-hoc software (\texttt{clkfreq.c}).
 
 To take the measurement another time reference is needed; the basic idea is to count how many execution clock ticks happen in a certain period and obtain the frequency from the inverse relationship.
@@ -29,6 +29,6 @@ A couple of final considerations on this method:
 	\item Being the number of overflows very high, the measurement uncertainty is quite low; even assuming an uncertainty equal to 50 overflows (12800 ticks!) the relative error is around 0.1\%.
 \end{itemize}
 
-\subsection{clkfreq.c listing}
-\texttt{clkfreq.c} is the C file containing the program measuring the clock frequency. Listing~\ref{lst:clkfreq} lists the code.
+\subsection*{A.1 \hspace{1.7mm} clkfreq.c listing}
+\texttt{clkfreq.c} is the C file containing the program measuring the clock frequency. Listing A.1 lists the code.
 \lstinputlisting[language=C,label=lst:clkfreq,style=CStyle]{../src/clkfreq.c}

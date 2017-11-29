@@ -87,8 +87,8 @@ void main(void) {
     LCDInit();
     DelayMs(100);
 
-	DisplayString(0, "T0 Overflows:");
-	DisplayString(16, "<please wait>");
+    DisplayString(0, "T0 Overflows:");
+    DisplayString(16, "<please wait>");
 	
     TimersConfig();
 	
