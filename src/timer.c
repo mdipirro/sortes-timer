@@ -148,7 +148,7 @@ void SetupCompleteTime() {
 /**
  * Handle the pressure of BUT1. This button is used to confirm the time 
  * values entered during the setting (or changing) procedure. It is also 
- * used to issue a clock's time modification.
+ * used to issue a current time modification.
  */
 void HandleButton1Pressure() {
     if (flags.time_setting_procedure) { // setting current time
@@ -338,8 +338,8 @@ void UpdateDisplay(enum display_states state) {
 }
 
 /**
- * This function represents a tick and should be called every time the clock
- * ticks. It updates the values in the `clock` structure according to the 
+ * This function represents a tick and should be called every second.
+ * It updates the values in the `clock` structure according to the 
  * conventional time rules:
  * -) seconds go from 0 to 59
  * -) minutes go from 0 to 59
@@ -438,8 +438,8 @@ void main(void) {
 *************************************************/
 void DisplayString(BYTE pos, char* text)
 {
-   BYTE        l = strlen(text);/*number of actual chars in the string*/
-   BYTE      max = 32-pos;    /*available space on the lcd*/
+   BYTE        l = strlen(text); /*number of actual chars in the string*/
+   BYTE      max = 32-pos;       /*available space on the lcd*/
    char       *d = (char*)&LCDText[pos];
    const char *s = text;
    size_t      n = (l<max)?l:max;
